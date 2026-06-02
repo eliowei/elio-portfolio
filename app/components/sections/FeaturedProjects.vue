@@ -27,6 +27,7 @@
               alt="Gaming Meetup Platform"
               class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzK1Qs83elE9wkldJQPCqtcGDeJTYm4wf6dHrHHVPHZDj_btdovnBXVsXB8O3wGE2kcSKz4BOzIj3Ph0_B60XAS0ncC4jzrfSm-Ay_1Dtm1wzLgFBQpu8UHYXrplK5vpVR9rnaQNPU16uhZbKySM8XQPTJB1g_qFapWDUlP6kOr9pBVAeX_G_tIERFJ9Kid9IV58Ro4UcjpxGJDQKHH5amD5rj9cV36cPHpDTJCS6xRsf2XrsPheO97eeX8ZidUft39QmVa-FTHZI"
+              @click="openLightbox(projectCard, 0)"
             />
           </div>
           <div class="p-8">
@@ -51,7 +52,7 @@
             <div class="flex gap-4">
               <a
                 class="font-label-mono text-primary flex items-center gap-1 hover:underline"
-                href="#"
+                href="https://eliowei.github.io/game-together/#/"
                 >DEMO
                 <span class="material-symbols-outlined text-sm"
                   >north_east</span
@@ -59,7 +60,7 @@
               >
               <a
                 class="font-label-mono text-primary flex items-center gap-1 hover:underline"
-                href="#"
+                href="https://github.com/eliowei/game-together"
                 >GITHUB
                 <span class="material-symbols-outlined text-sm">code</span></a
               >
@@ -76,7 +77,8 @@
               alt="Mario Web Game"
               class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGy18PRSb9iLOhQ1Jyj-4vYe_oVUsYLMvTYLi8HYYbVUZJwyzvuuBDKHbc_xSELqY-48JzVyyz6ReMg7YUKav9do_PwxrXTwg9HmJ8XQ5OeOnSvvV2hKfVQUhen_N3fiml982BTmftCFMbsZDbCOKOc0qPd93142p-aCHdbSf8c9v2c63iPcxNsrOAJuwPUlPube_1iLrCZ8vhGdhDrsWbQUs7IwL-JH4pQZGmQd90f6jXzOk3meXrHOUoVvSvu4v_lABywrIi0XY"
-            />
+              @click="openLightbox(projectCard, 0)"
+              />
           </div>
           <div class="p-8 flex-1 flex flex-col">
             <h3 class="text-xl font-headline-md mb-2">經典瑪利歐網頁版</h3>
@@ -139,7 +141,8 @@
               alt="Portfolio"
               class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWd9mCfE1oJsS2qnu_nQBnjpt1tLAkXmeghkUJ3tzyB0KnvhXBHfAzTF8awiGuvhlfYqb1LEwjkMvCXc8wgHeq9ySEowN1INvh1KLnLsv1U2nrrI7eDnaKvLI3yqEJ4LK7wWkQ4HT9INkfWAdZE3ZHP2kTR7JrH0PfA1jiA-cDg_hak58ZdbjyzaXFJMGISY2QkrlKeeQOEDuZ-cwYX9BBOWMxebJOwe_i1UjIOnwD5LCwzXEVi6dpIF-HAetoR0TibYvHeHGISjE"
-            />
+              @click="openLightbox(projectCard, 0)"
+              />
           </div>
         </div>
         <!-- Project 4: Medium Bento -->
@@ -173,6 +176,99 @@
           </div>
         </div>
       </div>
+
+
+      <!-- 燈箱modal -->
+      <div v-if="isLightbox" 
+      class="fixed inset-0 z-101 flex cursor-pointer items-center justify-center bg-black/90 transition-all duration-300"
+      @click="closeLightbox"
+      >
+        <!-- 關閉按鈕 -->
+        <button
+          class="absolute top-4 right-4 text-white transition-colors hover:text-gray-300"
+          @click="closeLightbox"
+        >
+          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <!-- 圖片容器 -->
+        <img
+          :src="currentImage"
+          :alt="currentCard?.title"
+          class="max-h-[90vh] max-w-[90vw] object-contain"
+          @click.stop
+        />
+
+        <!-- 導航按鈕 -->
+        <button
+          class="absolute left-4 text-white transition-colors hover:text-gray-300"
+          @click.stop="prevImage"
+        >
+          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+        <button
+          class="absolute right-4 text-white transition-colors hover:text-gray-300"
+          @click.stop="nextImage"
+        >
+          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
     </div>
   </section>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+const isLightbox = ref(false)
+const currentImage = ref('')
+const currentCard = ref(null)
+
+const projects = ref([
+  {
+    id: 1,
+    title: '遊戲社群揪團平台',
+    images: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBzK1Qs83elE9wkldJQPCqtcGDeJTYm4wf6dHrHHVPHZDj_btdovnBXVsXB8O3wGE2kcSKz4BOzIj3Ph0_B60XAS0ncC4jzrfSm-Ay_1Dtm1wzLgFBQpu8UHYXrplK5vpVR9rnaQNPU16uhZbKySM8XQPTJB1g_qFapWDUlP6kOr9pBVAeX_G_tIERFJ9Kid9IV58Ro4UcjpxGJDQKHH5amD5rj9cV36cPHpDTJCS6xRsf2XrsPheO97eeX8ZidUft39QmVa-FTHZI',
+      // 加入其他圖片 URL
+    ]
+  },
+])
+const openLightbox = (card, imageIndex = 0) => {
+  isLightbox.value = true
+  currentCard.value = card
+  currentImageIndex.value = imageIndex
+  currentImage.value = card.images[imageIndex]
+}
+
+const closeLightbox = () => {
+  isLightbox.value = false
+}
+
+const nextImage = () => {
+  if (!currentCard.value) return
+  currentImageIndex.value = (currentImageIndex.value + 1) % currentCard.value.images.length
+  currentImage.value = currentCard.value.images[currentImageIndex.value]
+}
+
+const prevImage = () => {
+  if (!currentCard.value) return
+  currentImageIndex.value =
+    (currentImageIndex.value - 1 + currentCard.value.images.length) % currentCard.value.images.length
+  currentImage.value = currentCard.value.images[currentImageIndex.value]
+}
+</script>
