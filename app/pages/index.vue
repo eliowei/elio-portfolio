@@ -5,7 +5,6 @@
     <AboutSection />
     <FeaturedProjects />
     <TechStack />
-    <ExperienceSection />
     <ContactSection />
   </div>
 </template>

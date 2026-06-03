@@ -68,33 +68,6 @@
 </section>
 </template>
 
-<style>
-  @keyframes marquee {
-    0% {
-      transform: translateX(0); 
-      }
-    100% {
-      transform: translateX(-50%);
-      }
-  }
-
-  @keyframes marquee-reverse {
-    0% {
-      transform: translateX(-50%); 
-      }
-    100% {
-      transform: translateX(0);
-      }
-  }
-
-  .animate-marquee {
-      animation: marquee 30s linear infinite;
-  }
-  .animate-marquee-reverse {
-      animation: marquee-reverse 30s linear infinite;
-  }
-</style>
-
 <script setup>
 const row = ['GAMING MEETUP PLATFORM', 'MARIO WEB GAME', 'PORTFOLIO WEBSITE', 'PET PLATFORM (COMING SOON)', 'LINE BOT']
 const row2 = ['Vue', '/', 'Nuxt', '/', 'Node.js', '/', 'MongoDB', '/', 'WebSocket', '/', 'TypeScript', '/']

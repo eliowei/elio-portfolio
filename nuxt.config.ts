@@ -2,19 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/ui'],
+  css: ['~/assets/css/main.css'],
   components: [
     {
       path: '~/components',
       pathPrefix: false
     }
   ],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
   app: {
     head: {
       link: [
