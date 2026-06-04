@@ -1,12 +1,40 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
-
+html {
+  scroll-behavior: smooth;
+}
 @theme {
+  /* Border */
   --color-outline-variant: #cfc4c5;
-  --color-secondary: #5e5e5e;
+
+  /* Text */
   --color-primary: #000000;
+  --color-secondary: #5e5e5e;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: rgba(255, 255, 255, 0.7);
   --color-on-surface-variant: #4c4546;
+
+  /* Surface */
   --color-surface: #fcf9f8;
+  --color-surface-container: #ffffff;
+  --color-surface-elevated: #f7f7f7;
+}
+
+.dark {
+  /* Border */
+  --color-outline-variant: #27272a;
+
+  /* Text */
+  --color-primary: #ffffff;
+  --color-secondary: #a1a1aa;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: rgba(255, 255, 255, 0.7);
+  --color-on-surface-variant: #71717a;
+
+  /* Surface */
+  --color-surface: #000000;
+  --color-surface-container: #111111;
+  --color-surface-elevated: #18181b;
 }
 
   @keyframes marquee {
@@ -33,3 +61,54 @@
   .animate-marquee-reverse {
       animation: marquee-reverse 30s linear infinite;
   }
+
+.footer-link {
+  @apply uppercase text-secondary transition-all;
+}
+
+.footer-link:hover {
+  @apply text-primary underline;
+}
+
+.nav-link {
+  @apply text-secondary text-base transition hover:text-primary;
+}
+
+.about-card {
+  @apply bg-surface-container border border-outline-variant p-8;
+}
+
+.project-card {
+  @apply relative bg-surface-container border border-outline-variant overflow-hidden flex flex-col;
+}
+
+.skill-item {
+  @apply flex justify-between items-center transition-all duration-200;
+}
+
+.skill-item:hover .skill-name {
+  @apply translate-x-2 text-primary;
+}
+
+.skill-item:hover .skill-degree {
+  @apply opacity-100;
+}
+
+.skill-name {
+  @apply text-secondary transition-transform duration-200;
+}
+
+.skill-degree {
+  @apply text-[10px] text-secondary opacity-0 transition-opacity duration-200;
+}
+.contact-link {
+  @apply text-on-primary-muted hover:text-on-primary transition-colors;
+}
+
+.cta-button {
+  @apply w-32 h-32 rounded-full
+         border border-on-primary/20
+         flex items-center justify-center
+         hover:bg-on-primary hover:text-primary
+         transition-all duration-500;
+}

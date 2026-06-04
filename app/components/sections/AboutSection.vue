@@ -1,14 +1,16 @@
 <template>
-  <section class="py-32 px-6 md:px-16 max-w-7xl mx-auto" id="about">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <section class="py-32 bg-surface " id="about">
+    <div class="px-6 md:px-16 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-      <template v-for="(item, index) in card" :key="index">
-        <div class="p-8 border border-outline-variant">
-          <span class="font-label-mono text-secondary mb-2 block">{{ item.headline }}</span>
-          <div class="text-4xl font-headline-md text-primary">{{ item.title }}</div>
-          <p class="mt-4 text-on-surface-variant">{{ item.description }}</p>
-        </div>
-      </template>
+        <template v-for="(item, index) in card" :key="index">
+          <div class="about-card">
+            <span class="font-label-mono text-secondary mb-2 block">{{ item.headline }}</span>
+            <div class="text-4xl font-headline-md text-primary">{{ item.title }}</div>
+            <p class="mt-4 text-secondary">{{ item.description }}</p>
+          </div>
+        </template>
+      </div>
     </div>
   </section>
 </template>

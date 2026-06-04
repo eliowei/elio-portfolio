@@ -1,60 +1,85 @@
 <template>
-    <UHeader>
-      <template #title>
-        <span class="text-lg font-bold tracking-tight">ELIO WEI</span>
-      </template>
+  <UHeader class="bg-surface border-b border-outline-variant">
 
-      <template #right>
-        <div class="flex items-center gap-1">
-          <UColorModeButton class="cursor-pointer"/>
+    <!-- TITLE -->
+    <template #title>
+      <span class="text-primary text-lg font-bold tracking-tight">
+        ELIO WEI
+      </span>
+    </template>
 
-          <template v-for="(item, index) in menus" :key="index">
-            <UButton
-              :label="item.label"
-              color="neutral"
-              :variant="item.variant || 'ghost'"
-              size="lg"
-              :to="item.to"
-              :aria-label="`${item.label}按鈕`"
-              :class="['text-base', item.UButtonClass]"
-            />
-          </template>
-        </div>
-      </template>
+    <!-- RIGHT -->
+    <template #right>
+      <div class="flex items-center gap-4">
 
-      <template #body>
-        <UNavigationMenu :items="menus" orientation="vertical" class="-mx-2.5" />
-      </template>
-    </UHeader>
+        <UColorModeButton />
+
+        <template v-for="item in menus" :key="item.label">
+
+          <!-- CTA -->
+          <UButton
+            v-if="item.type === 'primary'"
+            :label="item.label"
+            color="primary"
+            variant="solid"
+            size="lg"
+            :to="item.to"
+            class="hidden lg:inline-flex font-bold"
+          />
+
+          <!-- NAV LINK -->
+          <NuxtLink
+            v-else
+            :to="item.to"
+            class="nav-link hidden lg:inline-flex"
+          >
+            {{ item.label }}
+          </NuxtLink>
+
+        </template>
+
+      </div>
+    </template>
+
+    <!-- MOBILE MENU -->
+    <template #body>
+      <UNavigationMenu
+        :items="menus"
+        orientation="vertical"
+        class="-mx-2.5"
+      />
+    </template>
+
+  </UHeader>
 </template>
 
 <script setup>
+
 const menus = [
   {
     label: '作品集',
-    to: '#projects'
+    to: '#projects',
+    type: 'link'
   },
   {
     label: '關於我',
-    to: '#about'
+    to: '#about',
+    type: 'link'
   },
   {
     label: '技術棧',
-    to: '#stack'
-  },
-  {
-    label: '經歷',
-    to: '#experience'
+    to: '#stack',
+    type: 'link'
   },
   {
     label: '聯絡我',
-    to: '#contact'
+    to: '#contact',
+    type: 'link'
   },
   {
     label: '合作洽詢',
-    variant: 'solid',
     to: '#',
-    UButtonClass: 'font-bold'
+    type: 'primary'
   }
 ]
 

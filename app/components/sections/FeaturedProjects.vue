@@ -1,111 +1,124 @@
 <template>
-  <section
-    class="py-32 bg-surface px-6 md:px-16 border-y border-outline-variant"
-    id="projects"
-  >
+  <section class="py-32 bg-surface px-6 md:px-16 border-y border-outline-variant" id="projects">
+
     <div class="max-w-7xl mx-auto">
+
+      <!-- header -->
       <div class="flex justify-between items-end mb-16 reveal">
         <div>
-          <span class="font-label-mono text-secondary uppercase mb-2 block"
-            >Curated Works</span
-          >
-          <h2 class="font-headline-md text-primary text-5xl">精選作品</h2>
+          <span class="font-label-mono text-secondary uppercase mb-2 block">
+            Curated Works
+          </span>
+          <h2 class="font-headline-md text-primary text-5xl">
+            精選作品
+          </h2>
         </div>
+
         <div class="hidden md:block">
-          <p class="max-w-xs text-on-surface-variant">
+          <p class="max-w-xs text-secondary">
             一系列展現技術深度與解決問題能力的開發專案。
           </p>
         </div>
       </div>
+
+      <!-- grid -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
-        <template v-for="(item, index) in projects" :key="index">
-          <div :class="`md:col-span-${item.col}`" class="group relative bg-white border border-outline-variant overflow-hidden flex flex-col">
-            <div :class="[`${ item.aspect ? `aspect-${item.aspect}` : '' }`, `${item.order.img ? `${orderMap[item.order.img]}` : ''}`]" class="bg-surface-container overflow-hidden">
-              <img
-                :alt="item.title"
-                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105 cursor-pointer"
-                :src="item.images[0]"
-                @click="openLightbox(item, 0)"
-              />
+
+        <template v-for="item in project" :key="item.id">
+
+          <!-- CARD -->
+          <div :class="[colMap[item.col]]" class="group project-card">
+
+            <!-- IMAGE -->
+            <div
+              :class="[
+                aspectMap[item.aspect],
+                orderMap[item.order.img]
+              ]"
+              class="bg-surface-container overflow-hidden"
+            >
+             <NuxtLink :to="`/project/${item.slug}`">
+               <img
+                 :src="item.images[0]"
+                 :alt="item.title"
+                 class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 cursor-pointer"
+               />
+             </NuxtLink>
             </div>
-            <div :class="`${item.order.content ? `${orderMap[item.order.content]}`: ''}`" class="p-8 flex flex-col">
-              <div :class="`${item.order.tag ? `${orderMap[item.order.tag]}` : ''}`" class="flex gap-2 mb-4">
-                <span v-for="(tag, tagIndex) in item.tag" :key="tagIndex" class="px-3 py-1 border border-outline-variant font-label-mono text-[10px] uppercase">{{ tag }}</span>
+
+            <!-- CONTENT -->
+            <div
+              :class="orderMap[item.order.content]"
+              class="p-8 flex flex-col"
+            >
+
+              <!-- TAG -->
+              <div class="flex gap-2 mb-4">
+                <span
+                  v-for="(tag, i) in item.tag"
+                  :key="i"
+                  class="px-3 py-1 text-primary border border-outline-variant font-label-mono text-[10px] uppercase"
+                >
+                  {{ tag }}
+                </span>
               </div>
-              <h3 :class="`${item.order.title ? `${orderMap[item.order.title]}` : ''}` " class="text-2xl font-headline-md mb-2">{{ item.title }}</h3>
-              <p :class="`${item.order.description ? `${orderMap[item.order.description]}` : ''}` "class="text-on-surface-variant mb-6 max-w-lg">{{ item.description }}</p>
-              <div :class="`${item.order.link ? `${orderMap[item.order.link]}` : ''}`" class="flex gap-4">
-                <template v-for="(link, linkIndex) in item.link" :key="linkIndex">
-                  <a 
-                    class="font-label-mono text-primary flex items-center gap-1 hover:underline"
-                    :href="link.uri"
-                  >{{ link.name }}
-                    <span class="material-symbols-outlined text-sm">{{ link.icon }}</span>
-                  </a>
-                </template>
+
+              <!-- TITLE -->
+              <h3 class="text-2xl font-headline-md mb-2 text-primary">
+                {{ item.title }}
+              </h3>
+
+              <!-- DESC -->
+              <p class="text-secondary mb-6 max-w-lg">
+                {{ item.description }}
+              </p>
+
+              <!-- LINKS -->
+              <div class="flex gap-4">
+
+                <a
+                  v-for="(link, i) in item.link"
+                  :key="i"
+                  class="font-label-mono text-primary flex items-center gap-1 hover:underline"
+                  :href="link.uri"
+                >
+                  {{ link.name }}
+                  <span class="material-symbols-outlined text-sm">
+                    {{ link.icon }}
+                  </span>
+                </a>
+
               </div>
+
             </div>
           </div>
+
         </template>
+
       </div>
 
+      <!-- LIGHTBOX unchanged -->
+      <div v-if="isLightbox" class="fixed inset-0 z-101 flex items-center justify-center bg-black/90">
 
-      <!-- 燈箱modal -->
-      <div v-if="isLightbox" 
-      class="fixed inset-0 z-101 flex cursor-pointer items-center justify-center bg-black/90 transition-all duration-300"
-      @click="closeLightbox"
-      >
-        <!-- 關閉按鈕 -->
-        <button
-          class="absolute top-4 right-4 text-white transition-colors hover:text-gray-300"
-          @click="closeLightbox"
-        >
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <!-- 圖片容器 -->
+        <button class="absolute top-4 right-4 text-white" @click="closeLightbox">✕</button>
+
         <img
           :src="currentImage"
-          :alt="currentCard?.title"
           class="max-h-[90vh] max-w-[90vw] object-contain"
-          @click.stop
         />
 
-        <!-- 導航按鈕 -->
-        <button
-          class="absolute left-4 text-white transition-colors hover:text-gray-300"
-          @click.stop="prevImage"
-        >
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <button
-          class="absolute right-4 text-white transition-colors hover:text-gray-300"
-          @click.stop="nextImage"
-        >
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        <button class="absolute left-4 text-white" @click="prevImage">‹</button>
+        <button class="absolute right-4 text-white" @click="nextImage">›</button>
+
       </div>
+
     </div>
   </section>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { queryCollection } from '@nuxt/content/server';
 const isLightbox = ref(false)
 const currentImageIndex = ref(0)
 const currentImage = ref('')
@@ -118,16 +131,40 @@ const orderMap = {
   5: 'order-5',
   6: 'order-6',
 }
+const colMap = {
+  1: 'md:col-span-1',
+  2: 'md:col-span-2',
+  3: 'md:col-span-3',
+  4: 'md:col-span-4',
+  5: 'md:col-span-5',
+  6: 'md:col-span-6',
+  7: 'md:col-span-7',
+  8: 'md:col-span-8',
+  9: 'md:col-span-9',
+  10: 'md:col-span-10',
+  11: 'md:col-span-11',
+  12: 'md:col-span-12',
+}
 
-const projects = ref([
+const aspectMap = {
+  video: 'aspect-video',
+  square: 'aspect-square'
+}
+
+const { data: projects } = await useAsyncData(() =>
+  queryCollection('projects').all()
+)
+
+const project = ref([
   {
     id: 1,
+    slug: 'game-together',
+    title: '遊戲社群揪團平台',
     col: '8',
     order: {
       content: 2,
       img: 1
     },
-    title: '遊戲社群揪團平台',
     aspect: 'video',
     images: [
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBzK1Qs83elE9wkldJQPCqtcGDeJTYm4wf6dHrHHVPHZDj_btdovnBXVsXB8O3wGE2kcSKz4BOzIj3Ph0_B60XAS0ncC4jzrfSm-Ay_1Dtm1wzLgFBQpu8UHYXrplK5vpVR9rnaQNPU16uhZbKySM8XQPTJB1g_qFapWDUlP6kOr9pBVAeX_G_tIERFJ9Kid9IV58Ro4UcjpxGJDQKHH5amD5rj9cV36cPHpDTJCS6xRsf2XrsPheO97eeX8ZidUft39QmVa-FTHZI',
