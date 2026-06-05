@@ -1,3 +1,43 @@
+<template>
+    <main v-if="project" class="bg-surface" >
+      <div class="max-w-7xl mx-auto px-16 pt-16 pb-32 ">
+        <ProjectHero
+          :order="project.order"
+          :title="project.title"
+          :description="project.description"
+          :highlights="project.highlights"
+          :year="project.year"
+          :category="project.category"
+          :tags="project.tags"
+          :github="project.github"
+          :demo="project.demo"
+          :cover="project.cover"
+        />
+
+        <ProjectOverview
+          :overview="project.overview"
+          :responsibilities="project.responsibilities"
+        />
+
+        <ProjectTechStack
+          :tech-stack="project.techStack"
+        />
+
+        <FeatureShowcase
+          :showcase="project.showcase"
+        />
+
+        <ProjectChallenges
+          :challenges="project.challenges"
+        />
+
+        <ProjectGallery
+          :gallery="project.gallery"
+        />
+      </div>
+    </main> 
+</template>
+
 <script setup>
 const route = useRoute()
 
@@ -9,38 +49,3 @@ const { data: project } = await useAsyncData(
       .first()
 )
 </script>
-
-<template>
-    <main v-if="project" class="max-w-7xl mx-auto px-16 pt-16 pb-32" >
-      <ProjectHero
-        :order="project.order"
-        :title="project.title"
-        :description="project.description"
-        :tags="project.tags"
-        :github="project.github"
-        :demo="project.demo"
-        :cover="project.cover"
-      />
-
-      <ProjectOverview
-        :overview="project.overview"
-        :responsibilities="project.responsibilities"
-      />
-
-      <ProjectTechStack
-        :tech-stack="project.techStack"
-      />
-
-      <ProjectRoles
-        :roles="project.roles"
-      />
-
-      <ProjectChallenges
-        :challenges="project.challenges"
-      />
-
-      <ProjectGallery
-        :images="project.gallery"
-      />
-    </main> 
-</template>

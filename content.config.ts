@@ -11,7 +11,12 @@ export default defineContentConfig({
         slug: z.string(),
 
         description: z.string(),
+        highlights: z.array(
+          z.string()
+        ),
         order: z.number(),
+        year: z.string(),
+        category: z.string(),
         cover: z.string(),
 
         tags: z.array(
@@ -39,10 +44,11 @@ export default defineContentConfig({
           database: z.array(z.string())
         }),
 
-        roles: z.array(
+        showcase: z.array(
           z.object({
             title: z.string(),
-            description: z.string()
+            description: z.string(),
+            features: z.array(z.string())
           })
         ),
 
@@ -63,8 +69,28 @@ export default defineContentConfig({
         ),
 
         gallery: z.array(
-          z.string()
-        )
+          z.object({
+            title: z.string(),
+            image: z.string()
+          })
+        ),
+        layout: z.object({
+          col: z.number(),
+
+          aspect: z.enum([
+            'video',
+            'square'
+          ]),
+
+          order: z.object({
+            content: z.number(),
+            img: z.number()
+          })
+        }),
+        card: z.object({
+          title: z.string(),
+          description: z.string()
+        })
       })
     })
 

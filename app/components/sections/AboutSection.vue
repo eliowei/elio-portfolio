@@ -1,5 +1,5 @@
 <template>
-  <section class="py-32 bg-surface " id="about">
+  <section class="py-32 bg-surface" id="about">
     <div class="px-6 md:px-16 max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 

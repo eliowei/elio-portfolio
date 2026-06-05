@@ -3,7 +3,7 @@
     <HeroSection />
     <ProjectsMarquee />
     <AboutSection />
-    <FeaturedProjects />
+    <FeaturedProjects :projects="projects" />
     <TechStack />
     <ContactSection />
   </div>
@@ -15,4 +15,10 @@ useSeoMeta({
   description: 'Frontend Engineer'
 })
 
+const { data } = await useAsyncData(
+  'projects',
+  () => queryCollection('projects').order('order', 'ASC').all()
+)
+
+const projects = computed(() => data.value)
 </script>

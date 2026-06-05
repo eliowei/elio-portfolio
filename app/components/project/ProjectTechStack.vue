@@ -1,13 +1,13 @@
 <template>
-  <section class="mb-32" id="tech-stack">
+  <section class="mb-32 bg-surface" id="tech-stack">
     <div class="mb-12">
       <h2 class="text-[13px] uppercase tracking-widest text-secondary border-l-2 border-primary pl-4">Tech Stack</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
 
-      <div v-for="(data, index) in techStack" :key="index" class="p-8 bg-surface border border-outline-variant group hover:border-primary transition-colors">
-        <span class="material-symbols-outlined text-4xl mb-6"> {{ icon[index] }}</span>
-        <h3 class="text-[13px] font-bold mb-4">{{ index }}</h3>
+      <div v-for="(data, index) in techStack" :key="index" class="p-8 bg-surface border border-outline-variant group hover:border-primary transition-colors tech-card">
+        <span class="material-symbols-outlined text-4xl mb-6 text-primary"> {{ icon[index] }}</span> 
+        <h3 class="text-[13px] font-bold mb-4 text-primary">{{ index }}</h3>
         <p class="text-xs text-secondary">{{ data.join(' , ') }}</p>
       </div>
     </div>
@@ -15,21 +15,27 @@
 </template>
 
 <script setup lang="ts">
+const { fadeUp } = useReveal()
+
 interface TechSack {
   frontend: string[],
   backend: string[],
-  database: string[]
+  database: string[],
+  Deploy: string[]
 }
 
 const icon = {
-  frontend: 'terminal',
+  frontend: 'layers',
   backend: 'terminal',
   database: 'database',
-  cloud_upload: 'cloud_upload'
+  Deploy: 'cloud_upload'
 }
 
 defineProps<{
   techStack: TechSack;
 }>()
 
+onMounted(() => {
+  fadeUp('.tech-card', '#tech-stack')
+})
 </script>

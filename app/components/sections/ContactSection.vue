@@ -3,7 +3,7 @@
     <div class="max-w-7xl px-6 md:px-16 mx-auto">
 
       <!-- card -->
-      <div class="relative overflow-hidden bg-zinc-950 text-white p-12 md:p-20">
+      <div class="relative overflow-hidden bg-zinc-950 text-white border border-outline-variant p-12 md:p-20">
 
         <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
 
