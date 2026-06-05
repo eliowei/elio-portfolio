@@ -27,7 +27,7 @@
 
           <!-- CARD -->
           <div :class="[colMap[item.layout.col]]" class="group project-card">
-
+            <NuxtLink :to="`/projects/${item.slug}`">
             <!-- IMAGE -->
             <div
               :class="[
@@ -36,13 +36,12 @@
               ]"
               class="bg-surface-container overflow-hidden"
             >
-             <NuxtLink :to="`/projects/${item.slug}`">
                <img
                  :src="item.cover"
                  :alt="item.title"
                  class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 cursor-pointer"
                />
-             </NuxtLink>
+
             </div>
 
             <!-- CONTENT -->
@@ -71,7 +70,6 @@
               <p class="text-secondary mb-6 max-w-lg">
                 {{ item.card.description }}
               </p>
-
               <!-- LINKS -->
               <div class="flex gap-4">
                 <a v-if="item.demo" :href="item.demo" class="text-primary flex items-center gap-1 hover:underline">
@@ -83,8 +81,8 @@
                   <span class="material-symbols-outlined text-sm">code</span>
                 </a>
               </div>
-
             </div>
+          </NuxtLink>
           </div>
 
         </template>

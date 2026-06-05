@@ -69,7 +69,7 @@ onMounted(() => {
       trigger: '.hero-image',
       start: 'top 80%',
       end: 'bottom 20%',
-      markers: true,
+      markers: false,
     }
   })
 })
