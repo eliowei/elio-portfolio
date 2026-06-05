@@ -9,7 +9,7 @@
           :year="project.year"
           :category="project.category"
           :tags="project.tags"
-          :github="project.github"
+          :github="project.github" 
           :demo="project.demo"
           :cover="project.cover"
         />
