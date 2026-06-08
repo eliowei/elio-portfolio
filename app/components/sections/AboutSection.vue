@@ -16,6 +16,10 @@
 </template>
 
 <script setup>
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger)
+
 const card = [
   {
     headline: '專業開發',
@@ -38,4 +42,17 @@ const card = [
     description: '具備 Node.js 與 MongoDB 開發經驗，能獨立完成前後端整合專案。'
   }
 ]
+
+onMounted(() => {
+  gsap.from('.about-card', {
+    y: 40,
+    opacity: 0,
+    stagger: 0.15,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: '#about',
+      start: 'top 75%'
+    }
+  })
+})
 </script>

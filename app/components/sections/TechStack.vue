@@ -16,7 +16,7 @@
 
         <template v-for="(item, index) in skills" :key="index">
 
-          <div>
+          <div class="skill-group">
 
             <h4 class="font-label-mono text-secondary uppercase mb-6 border-b border-outline-variant pb-2">
               {{ item.type }}
@@ -54,6 +54,10 @@
 </template>
 
 <script setup>
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger)
+
 const skills = [
   {
     type: '前端開發',
@@ -119,5 +123,19 @@ const skills = [
     ]
   }
 ]
+
+onMounted(() => {
+  gsap.from('.skill-group', {
+    y: 30,
+    opacity: 0,
+    stagger: 0.2,
+    duration: 0.8,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#stack',
+      start: 'top 75%'
+    }
+  })
+})
 
 </script>

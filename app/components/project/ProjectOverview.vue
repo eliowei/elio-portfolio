@@ -6,7 +6,7 @@
   <div class="md:col-span-8 overview-content">
     <p class="text-4xl mb-8 leading-tight text-primary">{{ overview.title }}</p>
     <p class="font-body-lg text-body-lg text-secondary mb-12">{{ overview.content}}</p>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter pt-12 border-t border-outline-variant">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-outline-variant">
       <div v-for="(data, index) in responsibilities" :key="index" class="overview-stack">
         <h4 class="text-[13px] font-bold mb-4 text-primary">{{ index }}</h4>
           

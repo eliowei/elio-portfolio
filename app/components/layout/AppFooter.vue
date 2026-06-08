@@ -9,7 +9,7 @@
         </span>
 
         <span class="font-label-mono uppercase text-secondary">
-          © 2024 ELIO WEI. ENGINEERED WITH PRECISION.
+          © 2026 ELIO WEI. ENGINEERED WITH PRECISION.
         </span>
       </div>
 

@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto">
 
       <!-- header -->
-      <div class="flex justify-between items-end mb-16 reveal">
+      <div class="flex justify-between items-end mb-16 projects-header">
         <div>
           <span class="font-label-mono text-secondary uppercase mb-2 block">
             Curated Works
@@ -23,11 +23,11 @@
       <!-- grid -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
 
-        <template v-for="(item,index) in projects" :key="index">
+        <template v-for="(item) in projects" :key="item.slug">
 
           <!-- CARD -->
-          <div :class="[colMap[item.layout.col]]" class="group project-card">
-            <NuxtLink :to="`/projects/${item.slug}`">
+          <div :class="[colMap[item.layout.col]]" class="group project-card relative">
+            <NuxtLink :to="`/projects/${item.slug}`" class="absolute inset-0 z-10" aria-label="project detail"></NuxtLink>
             <!-- IMAGE -->
             <div
               :class="[
@@ -62,7 +62,7 @@
               </div>
 
               <!-- TITLE -->
-              <h3 class="text-2xl font-headline-md mb-2 text-primary">
+              <h3 class="text-2xl font-headline-md mb-2 text-primary group-hover:translate-x-1 transition-transform">
                 {{ item.card.title }}
               </h3>
 
@@ -72,17 +72,16 @@
               </p>
               <!-- LINKS -->
               <div class="flex gap-4">
-                <a v-if="item.demo" :href="item.demo" class="text-primary flex items-center gap-1 hover:underline">
+                <a v-if="item.demo" :href="item.demo" class="text-primary flex items-center gap-1 hover:underline relative z-20">
                   DEMO
                   <span class="material-symbols-outlined text-sm">north_east</span>
                 </a>
-                <a v-if="item.demo" :href="item.github" class="text-primary flex items-center gap-1 hover:underline">
+                <a v-if="item.demo" :href="item.github" class="text-primary flex items-center gap-1 hover:underline relative z-20">
                   GITHUB
                   <span class="material-symbols-outlined text-sm">code</span>
                 </a>
               </div>
             </div>
-          </NuxtLink>
           </div>
 
         </template>
@@ -93,10 +92,14 @@
 </template>
 
 <script setup>
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger)
 
 const { projects } = defineProps({
   projects: Array
 })
+
 
 const orderMap = {
   1: 'order-1',
@@ -125,4 +128,31 @@ const aspectMap = {
   video: 'aspect-video',
   square: 'aspect-square'
 }
+
+onMounted(() => {
+  gsap.from('.projects-header', {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: '#projects',
+      start: 'top 75%'
+    }
+  })
+
+  const cards = gsap.utils.toArray('.project-card')
+
+  cards.forEach((card, index) => {
+    gsap.from(card, {
+      x: index % 2 === 0 ? -40 : 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 80%'
+      }
+    })
+  })
+})
 </script>

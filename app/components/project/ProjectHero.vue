@@ -45,7 +45,7 @@ defineProps({
   cover: String,
   title: String,
   description: String,
-  highlights: String,
+  highlights: Array,
   year: String,
   category: String,
   tags: Array,

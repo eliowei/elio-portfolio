@@ -1,5 +1,5 @@
 <template>
-  <UHeader class="bg-surface border-b border-outline-variant">
+  <UHeader class="bg-surface/90 border-b border-outline-variant backdrop-blur-sm">
 
     <!-- TITLE -->
     <template #title>
@@ -58,22 +58,22 @@
 const menus = [
   {
     label: '作品集',
-    to: '#projects',
+    to: '/#projects',
     type: 'link'
   },
   {
     label: '關於我',
-    to: '#about',
+    to: '/#about',
     type: 'link'
   },
   {
     label: '技術棧',
-    to: '#stack',
+    to: '/#stack',
     type: 'link'
   },
   {
     label: '聯絡我',
-    to: '#contact',
+    to: '/#contact',
     type: 'link'
   },
   {

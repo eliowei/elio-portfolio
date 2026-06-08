@@ -3,7 +3,7 @@
     <div class="max-w-7xl px-6 md:px-16 mx-auto">
 
       <!-- card -->
-      <div class="relative overflow-hidden bg-zinc-950 text-white border border-outline-variant p-12 md:p-20">
+      <div class="relative overflow-hidden bg-zinc-950 text-white border border-outline-variant p-12 md:p-20 contact-content">
 
         <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
 
@@ -20,10 +20,10 @@
 
             <div class="flex flex-wrap justify-center md:justify-start gap-8">
 
-              <a class="contact-link" href="mailto:contact@eliowei.com">EMAIL</a>
-              <a class="contact-link" href="#">GITHUB</a>
-              <a class="contact-link" href="#">LINKEDIN</a>
-              <a class="contact-link" href="#">LINE</a>
+              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="mailto:contact@eliowei.com">EMAIL</a>
+              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="#">GITHUB</a>
+              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="#">LINKEDIN</a>
+              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="#">LINE</a>
 
             </div>
 
@@ -45,7 +45,7 @@
           class="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2
                  w-96 h-96 rounded-full
                  border border-on-primary/10
-                 pointer-events-none"
+                 pointer-events-none contact-circle"
         ></div>
 
       </div>
@@ -53,3 +53,32 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  gsap.from('.contact-content', {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#contact',
+      start: 'top 80%'
+    }
+  })
+
+  gsap.from('.contact-circle', {
+    scale: 0.8,
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: '#contact',
+      start: 'top 80%'
+    }
+  })
+})
+</script>
