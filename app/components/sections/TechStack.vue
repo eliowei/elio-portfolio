@@ -54,9 +54,7 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger)
+const { reveal } = useReveal()
 
 const skills = [
   {
@@ -125,17 +123,7 @@ const skills = [
 ]
 
 onMounted(() => {
-  gsap.from('.skill-group', {
-    y: 30,
-    opacity: 0,
-    stagger: 0.2,
-    duration: 0.8,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '#stack',
-      start: 'top 75%'
-    }
-  })
+  reveal({ selector: '.skill-group', trigger: '#stack', y: 30, stagger: 0.2, start: 'top 50%', stagger: 0.15 })
 })
 
 </script>

@@ -92,9 +92,7 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger)
+const { revealProjects } = useProjects()
 
 const { projects } = defineProps({
   projects: Array
@@ -130,29 +128,6 @@ const aspectMap = {
 }
 
 onMounted(() => {
-  gsap.from('.projects-header', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: '#projects',
-      start: 'top 75%'
-    }
-  })
-
-  const cards = gsap.utils.toArray('.project-card')
-
-  cards.forEach((card, index) => {
-    gsap.from(card, {
-      x: index % 2 === 0 ? -40 : 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 80%'
-      }
-    })
-  })
+  revealProjects()
 })
 </script>

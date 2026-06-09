@@ -1,5 +1,5 @@
 <template>
-<section class="mb-32 bg-surface">
+<section ref="heroRef" class="mb-32 bg-surface">
   <div class="grid grid-cols-1 md:grid-cols-12 gap-8">    
     <div class="md:col-span-8">
       <span class="text-[13px] text-secondary mb-4 block hero-reveal">CASE STUDY / {{ formatIndex(order!) }}</span>
@@ -35,10 +35,9 @@
 </template>
 
 <script setup lang="ts">
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { formatIndex } from '~/utils/format'
-gsap.registerPlugin(ScrollTrigger)
+const heroRef = ref<HTMLElement>()
+const { playProjectHero } = useHero()
 
 defineProps({
   order: Number,
@@ -54,23 +53,8 @@ defineProps({
 })
 
 onMounted(() => {
-  gsap.from('.hero-reveal', {
-  y: 40,
-  opacity: 0,
-  duration: 0.8,
-  stagger: 0.15,
-  })
-
-  gsap.from('.hero-image', {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    scrollTrigger: {
-      trigger: '.hero-image',
-      start: 'top 80%',
-      end: 'bottom 20%',
-      markers: false,
-    }
-  })
+  if (!heroRef.value) return
+  
+  playProjectHero(heroRef.value)
 })
 </script>

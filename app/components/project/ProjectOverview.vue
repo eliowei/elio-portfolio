@@ -20,9 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger)
+
+const { reveal } = useReveal()
 
 interface Overview {
   title: string;
@@ -41,33 +40,8 @@ defineProps<{
 }>();
 
 onMounted(() => {
-  gsap.from('.overview-label', {
-    x: -30,
-    opacity: 0,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: '#overview',
-      start: 'top 75%',
-    },
-  })
-  gsap.from('.overview-content', {
-    y: 40,
-    opacity: 0,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: '#overview',
-      start: 'top 75%',
-    },
-  })
-  gsap.from('.overview-stack', {
-    y: 20,
-    opacity: 0,
-    stagger: 0.15,
-    duration: 0.5,
-    scrollTrigger: {
-      trigger: '#overview',
-      start: 'top 70%',
-    },
-  })
+  reveal({ selector: '.overview-label', trigger: '#overview', x: -30 })
+  reveal({ selector: '.overview-content', trigger: '#overview', y: 40 })
+  reveal({ selector: '.overview-stack', trigger: '#overview', y: 20, duration: 0.5, start: 'top 70%', stagger: 0.15 })
 })
 </script>

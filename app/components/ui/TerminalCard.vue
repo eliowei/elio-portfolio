@@ -33,67 +33,44 @@
 </template>
 
 <script setup lang="ts">
-import gsap from 'gsap'
 
 const cursor = ref()
 const displayLines = ref<string[]>([])
 const played = useState('terminalPlayed', () => false)
 
+const { playBootAnimation, blinkCursor } = useTerminal()
+
+const finalLines = [
+  '$ whoami',
+  'Elio Wei',
+  '',
+  'Frontend Engineer',
+  '',
+  'Current Focus:',
+  '- Vue 3',
+  '- Nuxt 3',
+  '- TypeScript',
+  '- LINE Bot',
+  '',
+  'Currently Building:',
+  '- Personal Website',
+  '- Pet Platform'
+]
+
+
 onMounted(() => {
-
-  const bootLines = [
-    '$ booting...',
-    '$ loading profile...',
-    '$ loading projects...',
-    '$ success'
-  ]
-
-  const finalLines = [
-    '$ whoami',
-    'Elio Wei',
-    '',
-    'Frontend Engineer',
-    '',
-    'Current Focus:',
-    '- Vue 3',
-    '- Nuxt 3',
-    '- TypeScript',
-    '- LINE Bot',
-    '',
-    'Currently Building:',
-    '- Personal Website',
-    '- Pet Platform'
-  ]
-
-
   if (played.value) {
     displayLines.value = finalLines
   } else {
     played.value = true
 
-    const tl = gsap.timeline()
+    playBootAnimation(displayLines, finalLines)
 
-    bootLines.forEach((line) => {
-      tl.call(() => {
-        displayLines.value.push(line)
-      })
+    if (cursor.value) {
+      blinkCursor(cursor.value)
+    }
 
-      tl.to({}, {
-        duration: 0.8
-      })
-    })
-
-    tl.call(() => {
-      displayLines.value = finalLines
-    })
   }
-
-  gsap.to(cursor.value, {
-    opacity: 0,
-    duration: 0.5,
-    repeat: -1,
-    yoyo: true
-  })
 })
 
 </script>

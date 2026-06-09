@@ -16,9 +16,7 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger)
+const { reveal } = useReveal()
 
 const card = [
   {
@@ -44,15 +42,6 @@ const card = [
 ]
 
 onMounted(() => {
-  gsap.from('.about-card', {
-    y: 40,
-    opacity: 0,
-    stagger: 0.15,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: '#about',
-      start: 'top 75%'
-    }
-  })
+  reveal({ selector: '.about-card', trigger: '#about', y: 40, stagger: 0.15 })
 })
 </script>

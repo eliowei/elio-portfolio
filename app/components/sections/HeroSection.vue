@@ -7,21 +7,21 @@
         <!-- LEFT -->
         <div>
 
-          <h1 class="text-primary text-6xl font-bold hero-title">
+          <h1 ref="titleRef" class="text-primary text-6xl font-bold">
             Elio Wei
           </h1>
 
-          <h2 class="mt-4 text-2xl text-secondary hero-subtitle">
+          <h2 ref="subtitleRef" class="mt-4 text-2xl text-secondary">
             Frontend Engineer<br>
             Building Digital Products.
           </h2>
 
-          <p class="mt-6 text-lg text-secondary hero-desc">
+          <p ref="descRef" class="mt-6 text-lg text-secondary">
             專注於 Vue、Nuxt、Node.js與產品開發。
           </p>
 
           <!-- CTA -->
-          <div class="mt-6 flex gap-3 hero-cta">
+          <div ref="ctaRef" class="mt-6 flex gap-3">
 
             <UButton
               label="查看作品集"
@@ -54,30 +54,19 @@
 </template>
 
 <script setup>
-import gsap from 'gsap';
+const titleRef = ref()
+const subtitleRef = ref()
+const descRef = ref()
+const ctaRef = ref()
+
+const { playLandingHero } = useHero()
 
 onMounted(() => {
-  const tl = gsap.timeline()
-
-  tl.from('.hero-title', {
-    y: 20,
-    opacity: 0,
-    duration: 0.6
+  playLandingHero({
+    title: titleRef.value,
+    subtitle: subtitleRef.value,
+    desc: descRef.value,
+    cta: ctaRef.value
   })
-    .from('.hero-subtitle', {
-      y: 15,
-      opacity: 0,
-      duration: 0.5
-    }, '-=0.3')
-    .from('.hero-desc', {
-      y: 15,
-      opacity: 0,
-      duration: 0.5
-    }, '-=0.3')
-    .from('.hero-cta', {
-      y: 10,
-      opacity: 0,
-      duration: 0.4
-    }, '-=0.2')
 })
 </script>

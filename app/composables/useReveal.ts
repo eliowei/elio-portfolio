@@ -3,22 +3,59 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger)
 
+interface RevealOptions {
+  selector: string
+  trigger: string
+
+  y?: number
+  x?: number
+  scale?: number
+
+  opacity?: number
+
+  duration?: number
+  stagger?: number
+
+  start?: string
+  ease?: string
+  once?: boolean
+}
+
 export const useReveal = () => {
-  const fadeUp = (
-    selector: string,
-    trigger: string,
-    stagger = 0.15
-  ) => {
+  
+  const reveal = ({
+    selector,
+    trigger,
+
+    x = 0,
+    y = 0,
+    scale,
+
+    opacity = 0,
+
+    duration = 0.8,
+    stagger = 0,
+
+    start = 'top 75%',
+    once = true,
+    ease = 'power2.out'
+  }: RevealOptions) => {
     gsap.from(selector, {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
+      x,
+      y,
+      scale,
+
+      opacity,
+
+      duration,
       stagger,
-      ease: 'power2.out',
+      ease,
+      
       scrollTrigger: {
         trigger,
-        start: 'top 75%',
-      },
+        start,
+        once
+      }
     })
   }
 
@@ -79,7 +116,7 @@ export const useReveal = () => {
   }
 
   return {
-    fadeUp,
+    reveal,
     revealChallenge
   }
 }

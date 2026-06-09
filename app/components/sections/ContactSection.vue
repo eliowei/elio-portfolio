@@ -55,30 +55,11 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger)
+
+const { reveal } = useReveal()
 
 onMounted(() => {
-  gsap.from('.contact-content', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '#contact',
-      start: 'top 80%'
-    }
-  })
-
-  gsap.from('.contact-circle', {
-    scale: 0.8,
-    opacity: 0,
-    duration: 1,
-    scrollTrigger: {
-      trigger: '#contact',
-      start: 'top 80%'
-    }
-  })
+  reveal({ selector: '.contact-content', trigger: '#contact', y: 40, start: 'top 60%' })
+  reveal({ selector: '.contact-circle', trigger: '#contact', y: 0, scale: 0.8, duration: 1, start: 'top 80%'})
 })
 </script>

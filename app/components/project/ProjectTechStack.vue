@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-const { fadeUp } = useReveal()
+const { reveal } = useReveal()
 
 interface TechSack {
   frontend: string[],
@@ -36,6 +36,6 @@ defineProps<{
 }>()
 
 onMounted(() => {
-  fadeUp('.tech-card', '#tech-stack')
+  reveal({ selector:'.tech-card', trigger:'#tech-stack', y: 40, stagger: 0.15 })
 })
 </script>

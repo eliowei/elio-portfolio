@@ -36,7 +36,7 @@
 const isLightbox = ref(false)
 const currentImageIndex = ref(0)
 import { formatIndex } from '~/utils/format'
-const { fadeUp } = useReveal()
+const { reveal } = useReveal()
 
 interface GalleryItem  {
   title: string
@@ -90,10 +90,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
 
-  fadeUp(
-  '.gallery-item',
-  '#gallery'
-  )
+  reveal({ selector:'.gallery-item', trigger:'#gallery', y: 40, stagger: 0.15 })
 })
 
 onUnmounted(() => {

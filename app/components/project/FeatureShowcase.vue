@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { formatIndex } from '~/utils/format'
-const { fadeUp } = useReveal()
+const { reveal } = useReveal()
 
 interface Showcase {
   title: string
@@ -42,7 +42,7 @@ defineProps<{
 }>()
 
 onMounted(() => {
-  fadeUp('.feature-card', '#showcase')
+  reveal({ selector:'.feature-card', trigger:'#showcase', y: 40, stagger: 0.15 })
 })
 
 </script>
