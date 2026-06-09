@@ -1,6 +1,6 @@
 ---
 
-title: Game Together
+title: 遊戲社群揪團平台
 slug: game-together
 order: 01
 year: 2025

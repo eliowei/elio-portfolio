@@ -1,6 +1,6 @@
 ---
 
-title: Clock & Snake
+title: 時鐘與貪食蛇
 slug: clock-snake
 order: 05
 year: 2023

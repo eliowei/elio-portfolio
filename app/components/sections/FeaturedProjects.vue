@@ -27,7 +27,10 @@
 
           <!-- CARD -->
           <div :class="[colMap[item.layout.col]]" class="group project-card relative">
-            <NuxtLink :to="`/projects/${item.slug}`" class="absolute inset-0 z-10" aria-label="project detail"></NuxtLink>
+            <div
+              class="absolute inset-0 z-10 cursor-pointer"
+              @click="handleNavigate(item)"
+            ></div>
             <!-- IMAGE -->
             <div
               :class="[
@@ -98,6 +101,11 @@ const { projects } = defineProps({
   projects: Array
 })
 
+const { navigate } = usePageNavigation()
+
+const handleNavigate = async (item) => {
+  await navigate(`/projects/${item.slug}`, item.title)
+}
 
 const orderMap = {
   1: 'order-1',

@@ -1,6 +1,6 @@
 ---
 
-title: Weather Bike Bot
+title: 天氣 Bike 小幫手
 slug: weather-bike-bot
 order: 03
 year: 2024

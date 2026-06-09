@@ -65,11 +65,9 @@ onMounted(() => {
     played.value = true
 
     playBootAnimation(displayLines, finalLines)
-
-    if (cursor.value) {
-      blinkCursor(cursor.value)
-    }
-
+  }
+  if (cursor.value) {
+    blinkCursor(cursor.value)
   }
 })
 
