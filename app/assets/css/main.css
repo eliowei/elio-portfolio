@@ -107,9 +107,6 @@ body {
 .skill-degree {
   @apply text-[10px] text-secondary opacity-0 transition-opacity duration-200;
 }
-.contact-link {
-  @apply text-on-primary-muted hover:text-on-primary transition-colors;
-}
 
 .cta-button {
   @apply w-32 h-32 rounded-full

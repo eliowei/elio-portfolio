@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-surface">
+  <section class="bg-surface" id="hero">
     <div class="mx-auto flex min-h-[80vh] max-w-7xl items-center px-8">
 
       <div class="grid w-full gap-12 max-[1023px]:my-12 lg:grid-cols-2">

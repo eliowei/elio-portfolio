@@ -1,17 +1,28 @@
 <template>
   <div
     ref="overlayRef"
-    class="fixed inset-0 bg-black backdrop-blur-sm z-9999 pointer-events-none"
+    class="fixed inset-0 bg-black backdrop-blur-sm z-9999"
   >
     <div
       class="absolute inset-0 flex items-center justify-center"
     >
-      <h2
+      <div
         ref="titleRef"
-        class="text-white text-5xl font-bold tracking-widest opacity-0"
+        class="opacity-0"
       >
-        {{ transitionTitle }}
-      </h2>
+        <img
+          v-if="transitionTitle === 'ELIO WEI'"
+          src="/images/logo.png"
+          alt="Logo"
+          class="min-[600px]:w-100 w-50 invert"
+        >
+        <h2
+          v-else
+          class="text-white text-5xl font-bold tracking-widest text-center"
+        >
+          {{ transitionTitle }}
+        </h2>
+      </div>
     </div>
   </div>
 </template>

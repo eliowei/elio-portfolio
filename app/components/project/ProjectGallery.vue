@@ -22,8 +22,53 @@
       :src="currentImage"
       class="max-h-[85vh] max-w-[90vw] object-contain"
     />
-    <button class="bg-black/50 absolute left-30 w-10 h-10 rounded-full text-white text-3xl cursor-pointer" @click="prevImage">‹</button>
-    <button class="bg-black/50 absolute right-30 w-10 h-10 rounded-full text-white text-3xl cursor-pointer" @click="nextImage">›</button>
+      <div
+        class="
+          absolute
+          bottom-16
+          left-1/2
+          -translate-x-1/2
+          flex
+          gap-4
+
+          md:top-1/2
+          md:left-0
+          md:right-0
+          md:bottom-auto
+          md:-translate-y-1/2
+          md:translate-x-0
+          md:px-8
+          md:justify-between
+        "
+      >
+        <button
+          class="
+            bg-black/50
+            w-10 h-10
+            rounded-full
+            text-white
+            text-3xl
+            cursor-pointer
+          "
+          @click="prevImage"
+        >
+          ‹
+        </button>
+
+        <button
+          class="
+            bg-black/50
+            w-10 h-10
+            rounded-full
+            text-white
+            text-3xl
+            cursor-pointer
+          "
+          @click="nextImage"
+        >
+          ›
+        </button>
+      </div>
     <div class="absolute bottom-5 text-gray-300 bg-black/50 rounded-2xl px-10 py-1 text-sm">
       {{ formatIndex(currentImageIndex) }} / {{ formatIndex(gallery.length - 1) }}
     </div>

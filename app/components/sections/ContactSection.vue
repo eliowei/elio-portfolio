@@ -15,17 +15,8 @@
             </h2>
 
             <p class="text-lg mb-8">
-              目前開放接案、合作開發與技術交流。
+              目前提供企業形象網站、活動網站、Landing Page 建置，以及 LINE Bot 解決方案。
             </p>
-
-            <div class="flex flex-wrap justify-center md:justify-start gap-8">
-
-              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="mailto:contact@eliowei.com">EMAIL</a>
-              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="#">GITHUB</a>
-              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="#">LINKEDIN</a>
-              <a class="contact-link hover:translate-x-1 transition-all duration-200" href="#">LINE</a>
-
-            </div>
 
           </div>
 
@@ -33,7 +24,7 @@
           <div>
             <a class="cta-button group" href="mailto:contact@eliowei.com">
               <span class="group-hover:scale-110 transition-transform duration-300 group-hover:text-black">
-                TALK
+                 Start a Project
               </span>
             </a>
           </div>

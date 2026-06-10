@@ -15,10 +15,8 @@
 
       <!-- RIGHT LINKS -->
       <div class="flex gap-8">
-        <a class="footer-link" href="#">GitHub</a>
         <a class="footer-link" href="#">LinkedIn</a>
-        <a class="footer-link" href="#">Twitter</a>
-        <a class="footer-link" href="#">Read.cv</a>
+        <a class="footer-link" href="mailto:contact@zxc160604@gmail.com">EMAIL</a>
       </div>
 
     </div>
