@@ -48,4 +48,13 @@ const { data: project } = await useAsyncData(
       .path(`/projects/${route.params.slug}`)
       .first()
 )
+
+useSeoMeta({
+  title: () => `${project.value?.title ?? ''} | Elio Wei`,
+  description: () => project.value?.description,
+  ogTitle: () => project.value?.title,
+  ogDescription: () => project.value?.description,
+  ogImage: () => project.value?.cover
+})
+
 </script>

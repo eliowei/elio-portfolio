@@ -11,8 +11,8 @@
 
 <script setup>
 useSeoMeta({
-  title: 'Elio Wei',
-  description: 'Frontend Engineer'
+  title: 'Elio Wei | Frontend Engineer',
+  description: '專注於 Vue、Nuxt、TypeScript 與產品開發。'
 })
 
 const { data } = await useAsyncData(

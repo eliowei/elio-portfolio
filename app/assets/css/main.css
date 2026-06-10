@@ -1,8 +1,14 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
 html {
   scroll-behavior: smooth;
 }
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
 @theme {
   /* Border */
   --color-outline-variant: #cfc4c5;

@@ -2,17 +2,15 @@
       <UHeader class="bg-surface/90 border-b border-outline-variant backdrop-blur-sm">
 
         <!-- TITLE -->
-        <template #title>
-          <span class="text-primary text-lg font-bold tracking-tight" @click="handleNavigate('/#')">
-            ELIO WEI
-          </span>
+        <template #left>
+            <img alt="Logo" class="h-9 w-auto cursor-pointer" src="/images/logo.png" @click.prevent="handleNavigate('/#')"/>
         </template>
 
         <!-- RIGHT -->
         <template #right>
           <div class="flex items-center gap-4">
 
-            <UColorModeButton />
+            <UColorModeButton class="cursor-pointer"/>
 
             <template v-for="item in menus" :key="item.label">
 
@@ -24,7 +22,7 @@
                 variant="solid"
                 size="lg"
                 :to="item.to"
-                class="hidden lg:inline-flex font-bold"
+                class="hidden lg:inline-flex font-bold cursor-pointer"
               />
 
               <!-- NAV LINK -->
@@ -40,7 +38,7 @@
               <button
                 v-else
                 @click="handleNavigate(item.to)"
-                class="nav-link hidden lg:inline-flex"
+                class="nav-link hidden lg:inline-flex cursor-pointer"
               >
                 {{ item.label }}
               </button>

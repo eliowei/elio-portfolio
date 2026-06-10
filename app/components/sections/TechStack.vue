@@ -115,7 +115,7 @@ const skills = [
         degree: '設計'
       },
       {
-        name: 'GitPage / Cloudflare / Render',
+        name: 'GitPage / Cloudflare / Render / Vercel',
         degree: '部署'
       },
     ]
