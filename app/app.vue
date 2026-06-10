@@ -39,12 +39,15 @@ useHead({
     }
   ]
 })
+const config = useRuntimeConfig()
 
 useSeoMeta({
   ogType: 'website',
   ogSiteName: 'Elio Wei',
-  ogImage: 'images/og-image.png',
-  twitterCard: 'images/og-image.png'
+  ogImage: `${config.public.siteUrl}/og-image.png`,
+
+  twitterCard: 'summary_large_image',
+  twitterImage: `${config.public.siteUrl}/og-image.png`
 })
 const { leave } = usePageTransition()
 const nuxtApp = useNuxtApp()

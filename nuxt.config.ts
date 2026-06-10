@@ -19,5 +19,10 @@ export default defineNuxtConfig({
         }
       ]
     }
+  },
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://elioflowra.com'
+    }
   }
 })
