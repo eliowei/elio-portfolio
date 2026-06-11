@@ -52,6 +52,24 @@ export default defineContentConfig({
           })
         ),
 
+        industries: z.array(
+          z.string()
+        ),
+
+        customizations: z.array(
+          z.string()
+        ),
+
+        implementation: z
+          .array(
+            z.object({
+              title: z.string(),
+              subtitle: z.string(),
+              description: z.string()
+            })
+          )
+          .optional(),
+        
         challenges: z.array(
           z.object({
             title: z.string(),
@@ -66,7 +84,21 @@ export default defineContentConfig({
               z.string()
             )
           })
-        ),
+        ).optional(),
+
+        systemDesign: z.array(
+          z.object({
+            title: z.string(),
+
+            subtitle: z.string(),
+
+            description: z.string(),
+
+            technologies: z.array(
+              z.string()
+            )
+          })
+        ).optional(),
 
         gallery: z.array(
           z.object({

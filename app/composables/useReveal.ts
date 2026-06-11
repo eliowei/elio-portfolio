@@ -112,8 +112,48 @@ export const useReveal = () => {
 
   }
 
+  const revealSystemDesign = (
+    itemSelector = '.challenge-item'
+  ) => {
+    gsap.utils.toArray(itemSelector).forEach((item: any) => {
+      const title =
+        item.querySelector('.challenge-title')
+
+      const content =
+        item.querySelector('.system-content')
+
+      if (title) {
+        gsap.from(title, {
+          y: 20,
+          opacity: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 70%',
+            toggleActions: 'play none none none'
+          }
+        })
+      }
+
+      if (content) {
+        gsap.from(content, {
+          x: 40,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.1,
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 70%',
+            toggleActions: 'play none none none'
+          }
+        })
+      }
+    })
+  }
+
   return {
     reveal,
-    revealChallenge
+    revealChallenge,
+    revealSystemDesign
   }
 }

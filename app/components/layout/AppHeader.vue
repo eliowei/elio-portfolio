@@ -25,7 +25,7 @@
             color="primary"
             variant="solid"
             size="lg"
-            :to="item.to"
+            @click="handleNavigate(item.to)"
             class="hidden lg:inline-flex font-bold cursor-pointer"
           />
 
@@ -68,8 +68,12 @@
   const { navigate } = usePageNavigation()
   const route = useRoute()
 
-  const handleNavigate = async (to) => {
-    await navigate(to)
+const handleNavigate = async (to) => {
+    if (to === '/contact') {
+      await navigate(to, '合作洽詢')
+    } else {
+      await navigate(to)
+    }
   }
 
   const menus = [
@@ -95,7 +99,7 @@
     },
     {
       label: '合作洽詢',
-      to: '/#',
+      to: '/contact',
       type: 'primary'
     }
   ]

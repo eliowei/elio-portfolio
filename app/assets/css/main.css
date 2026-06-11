@@ -24,6 +24,10 @@ body {
   --color-surface: #fcf9f8;
   --color-surface-container: #ffffff;
   --color-surface-elevated: #f7f7f7;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f6f3f2;
+
+  --color-secondary-fixed-dim: #c7c6c6;
 }
 
 .dark {

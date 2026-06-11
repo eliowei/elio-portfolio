@@ -2,7 +2,7 @@
 
 title: 遊戲社群揪團平台
 slug: game-together
-order: 01
+order: 03
 year: 2025
 category: Full Stack Project
 
@@ -214,8 +214,8 @@ layout:
   aspect: video
 
   order:
-    content: 2
-    img: 1
+    content: 1
+    img: 2
 
 ---
 

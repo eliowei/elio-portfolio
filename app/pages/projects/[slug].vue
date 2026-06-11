@@ -23,12 +23,28 @@
           :tech-stack="project.techStack"
         />
 
-        <FeatureShowcase
+        <ProjectShowcase
           :showcase="project.showcase"
         />
 
+        <ProjectImplementation
+          v-if="project.implementation?.length"
+          :implementation="project.implementation"
+        />
+
+        <ProjectIndustries
+          v-if="project.industries?.length"
+          :sections="project.industries"
+        />
+
         <ProjectChallenges
+          v-if="project.challenges?.length"
           :challenges="project.challenges"
+        />
+
+        <ProjectSystemDesign
+          v-if="project.systemDesign?.length"
+          :systemDesign="project.systemDesign"
         />
 
         <ProjectGallery

@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="mt-32 hero-image">
-    <img :alt="`${title}圖片`" class="w-full h-150 object-cover filter" :data-alt="`${title}圖片`" :src="cover"/>
+    <img :alt="`${title}圖片`" class="w-full h-full object-cover filter" :data-alt="`${title}圖片`" :src="cover"/>
   </div>
 </section>
 </template>

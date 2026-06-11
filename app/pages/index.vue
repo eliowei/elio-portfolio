@@ -12,7 +12,7 @@
 <script setup>
 useSeoMeta({
   title: 'Elio Wei | Frontend Engineer',
-  description: '專注於 Vue、Nuxt、TypeScript 與產品開發。'
+  description: '專注於 Vue、Nuxt 與現代 Web 開發，提供企業形象網站、活動網站、Landing Page 與 LINE Bot 解決方案。'
 })
 
 const { data } = await useAsyncData(

@@ -22,7 +22,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: 'https://elioflowra.com'
+      siteUrl: 'https://elioflowra.com',
+      emailServiceId: '',
+      emailTemplateId: '',
+      emailPublicKey: ''
     }
   }
 })

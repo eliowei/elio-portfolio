@@ -156,10 +156,10 @@ gallery:
   image: /images/projects/personal-website/03.png
 
 layout:
-  col: 7
+  col: 6
   aspect: video
 
   order:
-    content: 1
-    img: 2
+    content: 2
+    img: 1
 ------

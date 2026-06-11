@@ -1,6 +1,11 @@
 <template>
   <section class="py-32 bg-surface" id="about">
     <div class="px-6 md:px-16 max-w-7xl mx-auto">
+    <div class="mb-16">
+      <span class="text-secondary uppercase mb-2 block">Services</span>
+      <h2 class="text-primary text-5xl">提供服務</h2>
+    </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
         <template v-for="(item, index) in card" :key="index">
@@ -20,24 +25,24 @@ const { reveal } = useReveal()
 
 const card = [
   {
-    headline: '專業開發',
-    title: '職人精神',
-    description: '重視程式碼可維護性與開發體驗，在功能實作之外，也關注長期維護成本。'
+    headline: '01',
+    title: '企業形象網站',
+    description: '協助企業建立品牌形象網站，提升品牌信任度與線上曝光。'
   },
   {
-    headline: '專案實績',
-    title: '多樣化',
-    description: '從企業內部系統到個人 Side Project，持續累積不同類型的開發經驗。'
+    headline: '02',
+    title: '活動網站',
+    description: '打造活動宣傳與報名網站，適用於展覽、講座與品牌活動。'
   },
   {
-    headline: '核心技術',
-    title: '前端開發',
-    description: '以 Vue 生態系為核心，持續學習 Nuxt、TypeScript 與現代前端架構。'
+    headline: '03',
+    title: 'Landing Page',
+    description: '聚焦單一產品或服務，提升轉換率與潛在客戶詢問。'
   },
   {
-    headline: '開發廣度',
-    title: '全端思維',
-    description: '具備 Node.js 與 MongoDB 開發經驗，能獨立完成前後端整合專案。'
+    headline: '04',
+    title: 'LINE Bot 解決方案',
+    description: '整合 LINE 官方帳號、內容管理與自動化互動流程。'
   }
 ]
 

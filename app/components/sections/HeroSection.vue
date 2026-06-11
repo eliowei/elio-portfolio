@@ -17,7 +17,7 @@
           </h2>
 
           <p ref="descRef" class="mt-6 text-lg text-secondary">
-            專注於 Vue、Nuxt、Node.js與產品開發。
+            專注於 Vue、Nuxt 與現代 Web 開發，提供企業形象網站、活動網站、Landing Page 與 LINE Bot 解決方案。
           </p>
 
           <!-- CTA -->

@@ -22,9 +22,10 @@
 
           <!-- right CTA -->
           <div>
-            <a class="cta-button group" href="mailto:contact@eliowei.com">
+
+            <a class="cta-button group" href="/contact" @click.prevent="handleContact">
               <span class="group-hover:scale-110 transition-transform duration-300 group-hover:text-black">
-                 Start a Project
+                 合作洽詢
               </span>
             </a>
           </div>
@@ -48,6 +49,11 @@
 <script setup>
 
 const { reveal } = useReveal()
+const { navigate } = usePageNavigation()
+
+const handleContact = async () => {
+  await navigate('/contact', '合作洽詢')
+}
 
 onMounted(() => {
   reveal({ selector: '.contact-content', trigger: '#contact', y: 40, start: 'top 60%' })
