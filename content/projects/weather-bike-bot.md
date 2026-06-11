@@ -24,22 +24,22 @@ highlights:
 cover: /images/projects/weather-bike-bot/cover.png
 
 tags:
-
 - Node.js
 - Line Bot
 
 github: https://github.com/eliowei/linebot
 
 overview:
-  title: 在聊天視窗中快速取得生活資訊。
+  title: 在 LINE 中快速查詢天氣與 YouBike 資訊
 
   content: >
-    Weather Bike Bot 是一個建構於 LINE 平台上的聊天機器人，
-    整合 YouBike 即時資訊與中央氣象署天氣資料。
+    使用者查詢 YouBike 與天氣資訊時，
+    通常需要在不同 App 與網站之間切換，
+    增加查詢成本與操作步驟。
 
-    使用者可透過關鍵字、功能選單與位置分享，
-    快速查詢附近 YouBike 站點與天氣預報，
-    降低資訊查找成本並提升使用便利性。
+    本專案透過 LINE Bot 整合 YouBike 即時站點資訊與中央氣象署天氣資料，
+    讓使用者能在熟悉的聊天介面中快速取得資訊，
+    減少切換成本並提升查詢效率。
 
 responsibilities:
   backend:
@@ -70,14 +70,14 @@ techStack:
 
 showcase:
   - title: YouBike Lookup
-    description: 查詢附近站點資訊。
+    description: 透過位置資訊快速取得附近 YouBike 站點，包含可借車輛與剩餘停車格。
     features:
       - 站點查詢
       - 車輛數量
       - 多城市支援
 
   - title: Weather Forecast
-    description: 提供天氣預報。
+    description: 查詢即時天氣與未來天氣預報，協助使用者規劃通勤與外出行程。
     features:
       - 即時天氣
       - 3小時預報
@@ -85,22 +85,24 @@ showcase:
       - 1週預報
 
   - title: Chat Experience
-    description: 聊天式操作體驗。
+    description: 利用 LINE Flex Message 提供視覺化資訊呈現，降低閱讀負擔並提升操作體驗。
     features:
       - 關鍵字觸發
       - 功能選單
       - Flex Message
 
 challenges:
-  - title: 多來源 API 整合
+  - title: 整合多個第三方 API
     subtitle: Data Integration
 
     problem: >
-      需整合不同來源的資料格式。
+      YouBike 與中央氣象署 API 提供的資料格式與欄位定義不同，若直接使用將增加後續維護成本，同時也需要考量 API 請求失敗或資料異常的情況。
 
     solution: >
-      統一資料處理流程，
-      將資料轉換成 Bot 可用格式。
+      統一資料結構，
+      設計資料轉換層與錯誤處理機制，
+      讓 Bot 能以一致的格式回傳資訊，
+      提升系統穩定性與維護性。
 
     technologies:
       - Node.js
@@ -140,7 +142,7 @@ gallery:
   image: /images/projects/weather-bike-bot/07.png
 
 layout:
-  col: 8
+  col: 5
   aspect: video
 
   order:

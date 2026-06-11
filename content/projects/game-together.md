@@ -39,12 +39,13 @@ demo: https://eliowei.github.io/game-together
 overview:
   title: 為玩家打造更有效率的揪團體驗。
   content: >
-    Game Together 是一個整合搜尋、揪團管理、
-    留言互動與即時聊天室的社群平台。
+    玩家在尋找遊戲夥伴時，經常需要透過社群貼文、
+    即時通訊群組與不同平台反覆搜尋資訊，
+    不僅效率低落，也難以管理活動與參與狀態。
 
-    玩家可以透過遊戲類型、地區、日期等條件快速找到隊友，
-    並透過即時聊天與留言系統完成活動協調，
-    提升揪團效率與社群互動品質。
+    本專案整合揪團管理、活動報名、即時聊天室與留言互動功能，
+    讓玩家能在單一平台完成從發起活動到交流互動的完整流程，
+    提升揪團效率與社群參與體驗。
 
 responsibilities:
   frontend:
@@ -173,6 +174,22 @@ challenges:
     - MongoDB
     - Express
 
+- title: 資料關聯設計
+  subtitle: Data Modeling
+
+  problem: >
+    活動、使用者、聊天室與留言之間存在多層資料關聯，
+    若結構設計不佳容易造成查詢複雜度提升。
+
+  solution: >
+    透過 Mongoose Schema 建立資料關聯結構，
+    並依照使用情境進行資料拆分與引用設計，
+    兼顧查詢效率與維護性。
+
+  technologies:
+    - MongoDB
+    - Mongoose
+
 gallery:
 - title: 揪團首頁
   image: /images/projects/game-together/03.png
@@ -180,11 +197,20 @@ gallery:
 - title: 搜尋功能
   image: /images/projects/game-together/01.png
 
-- title: 揪團頁面
+- title: 揪團詳情
   image: /images/projects/game-together/02.png
 
+- title: 聊天室
+  image: /images/projects/game-together/04.png
+
+- title: 主辦揪團管理
+  image: /images/projects/game-together/05.png
+
+- title: 個人資料管理
+  image: /images/projects/game-together/06.png
+
 layout:
-  col: 8
+  col: 7
   aspect: video
 
   order:

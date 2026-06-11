@@ -28,7 +28,9 @@ const icon = {
   frontend: 'layers',
   backend: 'terminal',
   database: 'database',
-  Deploy: 'cloud_upload'
+  Deploy: 'cloud_upload',
+  animation: 'animation',
+  content: 'web_asset'
 }
 
 defineProps<{

@@ -17,11 +17,11 @@
         <span v-for="(tag, index) in tags" class="px-3 py-1 border border-outline-variant text-[13px] uppercase text-primary" :key="index">{{ tag }}</span>
       </div>
       <div class="flex gap-4">
-        <a class="flex items-center gap-2 text-[13px] text-primary hover:underline hero-reveal" :href="demo">
+        <a v-if="demo" class="flex items-center gap-2 text-[13px] text-primary hover:underline hero-reveal" :href="demo">
           <span class="material-symbols-outlined">terminal</span>
           LIVE_DEMO
         </a>
-        <a class="flex items-center gap-2 text-[13px] text-primary hover:underline hero-reveal" :href="github">
+        <a v-if="github" class="flex items-center gap-2 text-[13px] text-primary hover:underline hero-reveal" :href="github">
           <span class="material-symbols-outlined">code</span>
           SOURCE_CODE
         </a>
