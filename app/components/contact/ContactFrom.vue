@@ -10,8 +10,8 @@
           <ul class="space-y-2 text-secondary font-body-md">
             <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 企業官網</li>
             <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 活動網站</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> LINE Bot 模板方案</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 客製化 LINE 整合</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> LINE OA 公版方案</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> LINE OA 功能擴充評估</li>
           </ul>
         </div>
         <div class="p-8 bg-surface-container-low border border-outline-variant rounded-lg">
@@ -199,11 +199,11 @@ const projectOptions = [
   },
   {
     label: 'LINE OA 公版方案',
-    value: 'line_oa'
+    value: 'line_oa_template'
   },
   {
-    label: 'LINE OA 客製化功能',
-    value: 'line_oa_custom'
+    label: 'LINE OA 進階整合需求',
+    value: 'line_oa_advanced'
   },
   {
     label: '專案諮詢',
