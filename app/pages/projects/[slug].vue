@@ -64,6 +64,15 @@ const { data: project } = await useAsyncData(
       .path(`/projects/${route.params.slug}`)
       .first()
 )
+
+if (!project.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Project Not Found',
+    fatal: true
+  })
+}
+
 const config = useRuntimeConfig()
 
 useSeoMeta({

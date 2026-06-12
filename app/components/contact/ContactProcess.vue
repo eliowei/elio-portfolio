@@ -72,6 +72,8 @@
             hidden
             lg:block
             text-outline
+            text-secondary
+            opacity-50
           "
         >
           arrow_forward
@@ -123,6 +125,8 @@
             hidden
             lg:block
             text-outline
+            text-secondary
+            opacity-50
           "
         >
           arrow_forward

@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-surface">
+  <section class="bg-surface-container">
     <div class="max-w-7xl mx-auto px-16 py-32 contact-form">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- Branding/Context Sidebar (Swiss Style) -->
@@ -103,7 +103,7 @@
                 v-model="state.message"
                 :rows="6"
                 placeholder="請簡短描述您的專案目標、需求或想法。"
-                class="w-full cursor-pointer"
+                class="w-full"
                 :ui="fieldUi"
               />
             </UFormField>
@@ -283,5 +283,13 @@ onMounted(() => {
     y: 40,
     duration: 0.8
   })
+
+  reveal({
+    selector: '.sticky',
+    trigger: '.contact-form',
+    x: -20,
+    duration: 0.8
+  })
 })
+
 </script>
