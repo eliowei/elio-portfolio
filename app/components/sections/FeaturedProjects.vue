@@ -54,7 +54,7 @@
             >
 
               <!-- TAG -->
-              <div class="flex gap-2 mb-4">
+              <div class="flex gap-2 mb-4 flex-wrap">
                 <span
                   v-for="(tag, i) in item.tags"
                   :key="i"
