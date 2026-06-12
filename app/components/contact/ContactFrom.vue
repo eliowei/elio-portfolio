@@ -1,6 +1,6 @@
 <template>
   <section class="bg-surface">
-    <div class="max-w-7xl mx-auto px-16 py-32">
+    <div class="max-w-7xl mx-auto px-16 py-32 contact-form">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- Branding/Context Sidebar (Swiss Style) -->
       <div class="hidden lg:block lg:col-span-4">
@@ -72,7 +72,7 @@
                 :items="projectOptions"
                 placeholder="請選擇服務項目"
                 size="xl"
-                class="w-full"
+                class="w-full cursor-pointer"
                 :ui="fieldUi"
               />
             </UFormField>
@@ -88,7 +88,7 @@
                 :items="budgetOptions"
                 placeholder="請選擇預算"
                 size="xl"
-                class="w-full"
+                class="w-full cursor-pointer"
                 :ui="fieldUi"
               />
             </UFormField>
@@ -103,7 +103,7 @@
                 v-model="state.message"
                 :rows="6"
                 placeholder="請簡短描述您的專案目標、需求或想法。"
-                class="w-full"
+                class="w-full cursor-pointer"
                 :ui="fieldUi"
               />
             </UFormField>
@@ -116,7 +116,7 @@
                 md:flex-row
                 items-center
                 justify-between
-                gap-gutter
+                gap-8
                 pt-4
               "
             >
@@ -134,9 +134,12 @@
                   min-w-45
                   justify-center
                   font-semibold
+                  cursor-pointer
+                  px-12 py-4
                 "
               >
                 發送諮詢
+              <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
               </UButton>
             </div>
 
@@ -152,6 +155,7 @@ import * as z from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 
 const { sendMail } = useContact()
+const { reveal } = useReveal()
 
 const fieldUi = {
   base: 'ring-outline-variant bg-surface-container-lowest placeholder:text-secondary-fixed-dim focus-visible:ring-1 p-4 hover:bg-surface',
@@ -271,4 +275,13 @@ async function onSubmit(
     loading.value = false
   }
 }
+
+onMounted(() => {
+  reveal({
+    selector: '.contact-form',
+    trigger: '.contact-form',
+    y: 40,
+    duration: 0.8
+  })
+})
 </script>
