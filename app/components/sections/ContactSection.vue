@@ -15,7 +15,7 @@
             </h2>
 
             <p class="text-lg mb-8">
-              目前提供企業形象網站、活動網站、Landing Page 建置，以及 LINE Bot 解決方案。
+              目前提供企業形象網站、活動網站、Landing Page 建置，以及 LINE OA 解決方案。
             </p>
 
           </div>

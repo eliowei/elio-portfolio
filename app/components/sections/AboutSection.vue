@@ -41,7 +41,7 @@ const card = [
   },
   {
     headline: '04',
-    title: 'LINE Bot 解決方案',
+    title: 'LINE OA 解決方案',
     description: '整合 LINE 官方帳號、內容管理與自動化互動流程。'
   }
 ]
