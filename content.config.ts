@@ -6,123 +6,224 @@ export default defineContentConfig({
       type: 'page',
       source: 'projects/**/*.md',
       schema: z.object({
+
+      // ==========================================================================
+      // Basic Information
+      // 基本資訊
+      // ==========================================================================
+
+      title: z.string(),
+      slug: z.string(),
+      type: z.enum([
+        'project',
+        'product'
+      ]).default('project'),
+
+      description: z.string(),
+      highlights: z.array(z.string()),
+
+      order: z.number(),
+      year: z.number(),
+      category: z.string(),
+      cover: z.string(),
+      tags: z.array(z.string()),
+
+      github: z.string().optional(),
+      demo: z.string().optional(),
+
+      // ==========================================================================
+      // Card Information
+      // 卡片資訊
+      // ==========================================================================
+
+      card: z.object({
         title: z.string(),
+        description: z.string()
+      }),
 
-        slug: z.string(),
+      // ==========================================================================
+      // Overview
+      // 專案概述
+      // ==========================================================================
 
+      overview: z.object({
+        title: z.string(),
+        content: z.string()
+      }),
+
+      // ==========================================================================
+      // Problem
+      // 商業痛點（Product）
+      // ==========================================================================
+
+      problem: z.object({
+        title: z.string(),
         description: z.string(),
-        highlights: z.array(
-          z.string()
-        ),
-        order: z.number(),
-        year: z.string(),
-        category: z.string(),
-        cover: z.string(),
-
-        tags: z.array(
-          z.string()
-        ),
-
-        github: z.string().optional(),
-
-        demo: z.string().optional(),
-
-        overview: z.object({
-          title: z.string(),
-          content: z.string()
-        }),
-
-        responsibilities: z.object({
-          frontend: z.array(z.string()),
-          backend: z.array(z.string()),
-          database: z.array(z.string())
-        }),
-
-        techStack: z.object({
-          frontend: z.array(z.string()),
-          backend: z.array(z.string()),
-          database: z.array(z.string())
-        }),
-
-        showcase: z.array(
+        items: z.array(
           z.object({
             title: z.string(),
-            description: z.string(),
-            features: z.array(z.string())
+            description: z.string()
           })
-        ),
+        )
+      }).optional(),
 
-        industries: z.array(
-          z.string()
-        ),
+      // ==========================================================================
+      // Feature Showcase
+      // 功能展示
+      // ==========================================================================
 
-        customizations: z.array(
-          z.string()
-        ),
+      showcase: z.array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          features: z.array(z.string())
+      })
+      ),
 
-        implementation: z
-          .array(
-            z.object({
-              title: z.string(),
-              subtitle: z.string(),
-              description: z.string()
-            })
-          )
+      // ==========================================================================
+      // Responsibilities
+      // 負責內容
+      // ==========================================================================
+
+        responsibilities: z.record(
+          z.string(),
+          z.array(z.string()))
           .optional(),
-        
-        challenges: z.array(
-          z.object({
-            title: z.string(),
 
-            subtitle: z.string(),
+      // ==========================================================================
+      // Tech Stack
+      // 技術架構
+      // ==========================================================================
 
-            problem: z.string(),
-
-            solution: z.string(),
-
-            technologies: z.array(
-              z.string()
-            )
-          })
+      techStack: z.record(
+        z.string(),
+        z.array(
+        z.string())
         ).optional(),
 
-        systemDesign: z.array(
-          z.object({
-            title: z.string(),
+      // ==========================================================================
+      // Industries
+      // 適用產業 / 擴充功能
+      // ==========================================================================
 
-            subtitle: z.string(),
+      industries: z.array(
+      z.object({
+        title: z.string(),
+        subtitle: z.string(),
+        items: z.array(
+          z.string()
+        )
+      })).optional(),
 
-            description: z.string(),
+      // ==========================================================================
+      // Implementation
+      // 導入流程
+      // ==========================================================================
 
-            technologies: z.array(
-              z.string()
-            )
-          })
-        ).optional(),
+      implementation: z.array(
+      z.object({
+        title: z.string(),
+        subtitle: z.string(),
+        description: z.string()
+      })
+      ).optional(),
 
-        gallery: z.array(
-          z.object({
-            title: z.string(),
-            image: z.string()
-          })
-        ),
-        layout: z.object({
-          col: z.number(),
+      // ==========================================================================
+      // Engineering Challenges
+      // 技術挑戰
+      // ==========================================================================
 
-          aspect: z.enum([
-            'video',
-            'square'
-          ]),
+      challenges: z.array(
+      z.object({
+        title: z.string(),
+        subtitle: z.string(),
+        problem: z.string(),
+        solution: z.string(),
+        technologies: z.array(
+          z.string()
+        )
+      })).optional(),
 
-          order: z.object({
-            content: z.number(),
-            img: z.number()
-          })
-        }),
-        card: z.object({
-          title: z.string(),
-          description: z.string()
+      // ==========================================================================
+      // System Design
+      // 系統設計
+      // ==========================================================================
+
+      systemDesign: z.array(
+      z.object({
+        title: z.string(),
+        subtitle: z.string(),
+        description: z.string(),
+        technologies: z.array(z.string())
+      })).optional(),
+
+      // ==========================================================================
+      // Product Information
+      // 產品資訊
+      // ==========================================================================
+
+      product: z.object({
+
+      pricing: z.array(
+        z.object({
+          name: z.string(),
+          price: z.number(),
+          description: z.string().optional()
         })
+      ).optional(),
+
+      delivery: z.object({
+        days: z.number(),
+        label: z.string().optional(),
+        support: z.array(
+          z.string()
+        )
+      }).optional(),
+
+      faq: z.array(
+        z.object({
+          question: z.string(),
+          answer: z.string()
+        })
+      ).optional(),
+
+      cta: z.object({
+        title: z.string(),
+        button: z.string(),
+        link: z.string()
+      }).optional()
+
+      }).optional(),
+
+      // ==========================================================================
+      // Gallery
+      // 圖片展示
+      // ==========================================================================
+
+      gallery: z.array(
+        z.object({
+          title: z.string(),
+          image: z.string()
+        })
+      ),
+
+      // ==========================================================================
+      // Layout
+      // 畫廊版型
+      // ==========================================================================
+
+      layout: z.object({
+        col: z.number(),
+        aspect: z.enum([
+          'video',
+          'square'
+        ]),
+        order: z.object({
+          content: z.number(),
+          img: z.number()
+        })
+      })
+
       })
     })
 

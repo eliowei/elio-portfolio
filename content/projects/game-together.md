@@ -1,14 +1,16 @@
 ---
+# ============================================================================
+# Basic Information
+# 基本資訊
+# ============================================================================
 
 title: 遊戲社群揪團平台
 slug: game-together
-order: 03
-year: 2025
+type: project
 category: Full Stack Project
 
-card:
-  title: 遊戲社群揪團平台
-  description: 為玩家打造的揪團平台。整合即時聊天。
+year: 2025
+order: 03
 
 description: >
   一個專為玩家打造的即時社群揪團平台，
@@ -25,109 +27,147 @@ highlights:
 cover: /images/projects/game-together/cover.png
 
 tags:
-
-- Vue 3
-- Vuetify
-- Node.js
-- MongoDB
-- WebSocket
+  - Vue 3
+  - Vuetify
+  - Node.js
+  - MongoDB
+  - WebSocket
 
 github: https://github.com/eliowei/game-together
-
 demo: https://eliowei.github.io/game-together
+
+# ============================================================================
+# Card Information
+# 卡片資訊（首頁列表）
+# ============================================================================
+
+card:
+  title: 遊戲社群揪團平台
+  description: 為玩家打造的揪團平台，整合即時聊天與活動管理功能。
+
+# ============================================================================
+# Overview
+# 專案概述
+# ============================================================================
 
 overview:
   title: 為玩家打造更有效率的揪團體驗。
+
   content: >
-    玩家在尋找遊戲夥伴時，經常需要透過社群貼文、
-    即時通訊群組與不同平台反覆搜尋資訊，
+    玩家在尋找遊戲夥伴時，
+    經常需要透過社群貼文、即時通訊群組與不同平台反覆搜尋資訊，
     不僅效率低落，也難以管理活動與參與狀態。
 
     本專案整合揪團管理、活動報名、即時聊天室與留言互動功能，
     讓玩家能在單一平台完成從發起活動到交流互動的完整流程，
     提升揪團效率與社群參與體驗。
 
-responsibilities:
-  frontend:
-  - Vue 3 Options API
-  - Vue Router
-  - Pinia 狀態管理
-  - Vuetify UI
-  - Responsive Design
-
-  backend:
-  - RESTful API
-  - Socket.IO
-  - JWT Authentication
-  - MVC Architecture
-
-
-  database:
-  - MongoDB Schema Design
-  - 搜尋條件設計
-  - 聊天紀錄儲存
-
-techStack:
-  frontend:
-    - Vue 3
-    - Vuetify
-    - Pinia
-    - Axios
-
-  backend:
-    - Node.js
-    - Express
-    - Socket.IO
-    - JWT
-
-  database:
-    - MongoDB
-    - Mongoose
-
-  Deploy:
-    - GitHub Actions
-    - Render
+# ============================================================================
+# Feature Showcase
+# 功能展示
+# ============================================================================
 
 showcase:
 
-- title: Search System 
+- title: 揪團搜尋系統
   description: >
     提供多條件搜尋與排序功能，
     協助玩家快速找到符合需求的揪團活動。
 
-  features: 
-    - 關鍵字搜尋
-    - 地區搜尋
-    - 標籤搜尋
-    - 日期搜尋
-    - 排序功能
+  features:
 
-- title: Group Management
+  - 關鍵字搜尋
+  - 地區搜尋
+  - 標籤搜尋
+  - 日期搜尋
+  - 排序功能
+
+- title: 揪團管理功能
   description: >
     建立完整的揪團建立、參與與管理流程，
     讓主辦者與參加者能有效協作。
 
   features:
-    - 建立揪團
-    - 編輯揪團
-    - 收藏功能
-    - 留言板
-    - 參加申請管理
+  - 建立揪團
+  - 編輯揪團
+  - 收藏功能
+  - 留言板
+  - 參加申請管理
 
-- title: Realtime Chat
+- title: 即時聊天室
   description: >
     透過 WebSocket 即時通訊，
     提升活動前後的互動與協調效率。
 
   features:
+
+  - Socket.IO
+  - 即時訊息同步
+  - 聊天紀錄保存
+  - 獨立聊天室
+
+# ============================================================================
+# Responsibilities
+# 負責內容
+# ============================================================================
+
+responsibilities:
+
+  frontend:
+    - Vue 3 Options API
+    - Vue Router
+    - Pinia 狀態管理
+    - Vuetify UI
+    - Responsive Design
+
+  backend:
+    - RESTful API
     - Socket.IO
-    - 即時訊息同步
-    - 聊天紀錄保存
-    - 獨立聊天室
+    - JWT Authentication
+
+  architecture:
+    - MVC Architecture
+    - 搜尋條件設計
+
+  database:
+    - MongoDB Schema Design
+    - 聊天紀錄儲存
+
+# ============================================================================
+# Tech Stack
+# 技術架構
+# ============================================================================
+
+techStack:
+  frontend:
+  - Vue 3
+  - Vuetify
+  - Pinia
+  - Axios
+
+  backend:
+  - Node.js
+  - Express
+  - Socket.IO
+  - JWT
+
+  database:
+  - MongoDB
+  - Mongoose
+
+  tools:
+  - GitHub Actions
+  - Render
+
+# ============================================================================
+# Engineering Challenges
+# 技術挑戰
+# ============================================================================
 
 challenges:
+
 - title: WebSocket 連線管理
-  subtitle: 即時聊天室
+  subtitle: Realtime Communication
 
   problem: >
     若使用者頻繁切換頁面，
@@ -151,7 +191,7 @@ challenges:
 
   solution: >
     使用 Passport JWT 驗證，
-    並於 API Middleware 中驗證 Token 與使用者身份，
+    並於 Middleware 中驗證 Token 與使用者身份，
     確保受保護資源僅能由授權使用者存取。
 
   technologies:
@@ -162,8 +202,7 @@ challenges:
   subtitle: Search Experience
 
   problem: >
-    玩家通常會依照遊戲類型、地區、日期等條件尋找活動，
-    單一搜尋方式無法滿足不同需求。
+    玩家通常會依照遊戲類型、地區、日期等條件尋找活動。
 
   solution: >
     設計多條件搜尋與排序機制，
@@ -190,6 +229,11 @@ challenges:
     - MongoDB
     - Mongoose
 
+# ============================================================================
+# Gallery
+# 圖片展示
+# ============================================================================
+
 gallery:
 - title: 揪團首頁
   image: /images/projects/game-together/03.png
@@ -209,6 +253,11 @@ gallery:
 - title: 個人資料管理
   image: /images/projects/game-together/06.png
 
+# ============================================================================
+# Layout
+# 畫廊版型設定
+# ============================================================================
+
 layout:
   col: 7
   aspect: video
@@ -218,44 +267,3 @@ layout:
     img: 2
 
 ---
-
-# 專案介紹
-
-Game Together 是一個提供玩家快速揪團的平台。
-
-使用者可以依照遊戲、地區、日期等條件搜尋揪團資訊，並透過留言與聊天室功能進行即時互動。
-
-# 核心功能
-
-## 會員系統
-
-- 註冊與登入
-- JWT 驗證
-- 個人資料編輯
-
-## 揪團系統
-
-- 建立揪團
-- 編輯揪團
-- 收藏揪團
-- 搜尋揪團
-
-## 即時聊天室
-
-- WebSocket 雙向通訊
-- 儲存聊天紀錄
-- 每個揪團獨立聊天室
-
-# 開發心得
-
-本專案最大的挑戰在於聊天室與權限管理。
-
-除了前端介面設計之外，也需要考量資料庫結構、API 設計與即時通訊的生命週期管理。
-
-# 未來規劃
-
-- TypeScript 重構
-- Nuxt 版本重構
-- Docker 部署
-- CI/CD 流程導入
-- Redis 快取機制

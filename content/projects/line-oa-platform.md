@@ -1,14 +1,16 @@
 ---
+# ============================================================================
+# Basic Information
+# 基本資訊
+# ============================================================================
 
 title: LINE OA 商家管理平台
 slug: line-oa-platform
-order: 01
-year: 2026
+type: product
 category: Product Platform
 
-card:
-  title: LINE OA 商家管理平台
-  description: 提供商家自行管理 LINE 官方帳號內容的後台管理平台。
+year: 2026
+order: 01
 
 description: >
   一套專為中小型商家打造的 LINE 官方帳號管理平台，
@@ -31,6 +33,20 @@ tags:
   - MongoDB
   - LINE Messaging API
 
+# ============================================================================
+# Card Information
+# 卡片資訊（首頁列表）
+# ============================================================================
+
+card:
+  title: LINE OA 商家管理平台
+  description: 提供商家自行管理 LINE 官方帳號內容的後台管理平台。
+
+# ============================================================================
+# Overview
+# 專案/產品概述
+# ============================================================================
+
 overview:
   title: 讓商家無需依賴工程師，也能自行維護 LINE 官方帳號內容。
 
@@ -44,42 +60,45 @@ overview:
     圖文選單與會員管理功能，
     讓商家可自行維護內容並即時同步至 LINE 官方帳號。
 
-responsibilities:
-  frontend:
-  - Vue 3
-  - PrimeVue
-  - Pinia
-  - Responsive Design
+# ============================================================================
+# Problem
+# 商業痛點（Product 專用）
+# ============================================================================
 
-  backend:
-  - RESTful API
-  - JWT Authentication
-  - Role Permission
+problem:
+  title: 貓咪產業常見經營痛點
 
-  database:
-  - MongoDB
-  - Mongoose
-  - Multi Tenant Design
+  description: >
+    貓舍、寵物旅館與寵物美容店
+    經常透過 LINE 官方帳號與客戶互動，
+    但大量重複詢問與內容維護成本，
+    往往消耗許多時間。
 
-techStack:
-  frontend:
-  - Vue 3
-  - PrimeVue
-  - Pinia
+  items:
+    - title: 重複回答相同問題
+      description: >
+        每天都需要回答房型價格、
+        營業時間與預約方式。
 
-  backend:
-  - Node.js
-  - Express
-  - JWT
+    - title: 貓咪資訊更新困難
+      description: >
+        新增貓咪或更新照片時，
+        需要重新建立訊息與圖片。
 
-  database:
-  - MongoDB
-  - Mongoose
+    - title: 公告資訊容易過期
+      description: >
+        活動公告與優惠資訊缺乏統一管理，
+        容易造成資訊不一致。
 
-  line:
-  - Messaging API
-  - Rich Menu API
-  - Flex Message
+    - title: 無法了解客戶興趣
+      description: >
+        不知道哪些貓咪最受歡迎、
+        哪個房型最常被瀏覽。
+
+# ============================================================================
+# Feature Showcase
+# 功能展示
+# ============================================================================
 
 showcase:
 
@@ -122,6 +141,62 @@ showcase:
   - 管理員帳號
   - 會員管理
 
+# ============================================================================
+# Responsibilities
+# 負責內容（Project 偏向）
+# ============================================================================
+
+responsibilities:
+
+  frontend:
+    - Vue 3
+    - PrimeVue
+    - Pinia
+    - Responsive Design
+
+  backend:
+    - RESTful API
+    - JWT Authentication
+    - Role Permission
+
+  architecture:
+    - Multi Tenant Design
+    - Role Permission Design
+
+  database:
+    - MongoDB
+    - Mongoose
+
+# ============================================================================
+# Tech Stack
+# 技術架構
+# ============================================================================
+
+techStack:
+  frontend:
+  - Vue 3
+  - PrimeVue
+  - Pinia
+
+  backend:
+  - Node.js
+  - Express
+  - JWT
+
+  database:
+  - MongoDB
+  - Mongoose
+
+  line:
+  - Messaging API
+  - Rich Menu API
+  - Flex Message
+
+# ============================================================================
+# Industries
+# 適用產業 / 可擴充功能
+# ============================================================================
+
 industries:
 
   - title: 適用產業
@@ -147,6 +222,11 @@ industries:
       - Google Sheet 串接
       - 第三方 API 串接
       - 資料同步整合
+
+# ============================================================================
+# Implementation
+# 導入流程
+# ============================================================================
 
 implementation:
 
@@ -188,6 +268,67 @@ implementation:
     description: >
       可依需求擴充預約系統、Google Calendar
 
+# ============================================================================
+# Engineering Challenges
+# 技術挑戰
+# ============================================================================
+
+# challenges:
+
+# ============================================================================
+# System Design
+# 系統設計
+# ============================================================================
+
+# systemDesign:
+
+# ============================================================================
+# Product Information
+# 產品資訊（Product 專用）
+# ============================================================================
+
+product:
+
+  # Pricing Plans
+  # 價格方案
+  pricing:
+    - name: Early Bird
+      price: 18000
+      description: 限前五間店家
+
+    - name: Regular
+      price: 20000
+
+  # Delivery Information
+  # 交付資訊
+  delivery:
+    days: 3
+    label: 最快 3 個工作天完成導入
+    support:
+      - 30天售後支援
+      - LINE OA 設定協助
+
+  # Frequently Asked Questions
+  # 常見問題
+  faq:
+    - question: 需要月費嗎？
+      answer: 目前無強制月費。
+
+    - question: 需要提供 LINE OA 嗎？
+      answer: 需要提供官方帳號資訊。
+
+  # Call To Action
+  # 行動呼籲
+  cta:
+    title: 想了解是否適合您的店家？
+    button: 立即諮詢
+    link: /contact
+
+# ============================================================================
+# Gallery
+# 圖片展示
+# ============================================================================
+
 gallery:
 - title: LINE 官方帳號首頁
   image: /images/projects/line-oa-platform/01.jpeg
@@ -200,6 +341,11 @@ gallery:
 
 - title: 公告管理
   image: /images/projects/line-oa-platform/04.png
+
+# ============================================================================
+# Layout
+# 畫廊版型設定
+# ============================================================================
 
 layout:
   col: 6

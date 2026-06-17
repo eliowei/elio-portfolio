@@ -1,6 +1,6 @@
 <template>
   <section class="bg-surface-container py-32 process-section">
-    <div class="max-w-7xl mx-auto px-margin-page">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
 
       <!-- Header -->
       <div class="text-center mb-24">

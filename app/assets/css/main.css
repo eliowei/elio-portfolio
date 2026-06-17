@@ -11,6 +11,9 @@ body {
 }
 
 @theme {
+  --text-display-xl: 4.5rem;
+  --text-display-lg: 3.75rem;
+
   /* Border */
   --color-outline-variant: #cfc4c5;
 

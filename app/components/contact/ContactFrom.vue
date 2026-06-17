@@ -1,6 +1,6 @@
 <template>
   <section class="bg-surface-container">
-    <div class="max-w-7xl mx-auto px-16 py-32 contact-form">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-32 contact-form">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- Branding/Context Sidebar (Swiss Style) -->
       <div class="hidden lg:block lg:col-span-4">
