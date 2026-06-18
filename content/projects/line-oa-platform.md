@@ -4,7 +4,9 @@
 # 基本資訊
 # ============================================================================
 
-title: LINE OA 商家管理平台
+title: |
+ LINE OA 
+ 商家管理平台
 slug: line-oa-platform
 type: product
 category: Product Platform
@@ -12,17 +14,16 @@ category: Product Platform
 year: 2026
 order: 01
 
-description: >
-  一套專為中小型商家打造的 LINE 官方帳號管理平台，
-  提供內容管理、圖文選單管理、權限管理與多店家管理功能，
-  協助商家快速維護 LINE 官方帳號內容並提升營運效率。
+description: |
+  讓店家不用找工程師
+  自己就能更新 LINE 官方帳號
+
+  專為貓舍、寵物旅館與寵物美容打造
 
 highlights:
-  - 商家自主內容管理
-  - LINE OA 內容同步
-  - 多店家管理
-  - 權限管理
-  - 數據分析儀表板
+  - 商家自主更新
+  - 多店管理
+  - 最快 3 天完成導入
 
 cover: /images/projects/line-oa-platform/cover.jpeg
 
@@ -66,34 +67,38 @@ overview:
 # ============================================================================
 
 problem:
-  title: 貓咪產業常見經營痛點
+  title: 商家常見經營痛點
 
   description: >
-    貓舍、寵物旅館與寵物美容店
-    經常透過 LINE 官方帳號與客戶互動，
-    但大量重複詢問與內容維護成本，
-    往往消耗許多時間。
+    管理 LINE OA 時，您是否也遇過這些問題？
 
   items:
     - title: 重複回答相同問題
       description: >
-        每天都需要回答房型價格、
-        營業時間與預約方式。
+        客服訊息不斷湧入，其中 80% 都是詢問價格、地點或預約方式等重複問題。
 
     - title: 貓咪資訊更新困難
       description: >
-        新增貓咪或更新照片時，
-        需要重新建立訊息與圖片。
+        個體資訊繁瑣且異動頻繁，難以在通訊軟體中即時且結構化呈現。
 
     - title: 公告資訊容易過期
       description: >
-        活動公告與優惠資訊缺乏統一管理，
-        容易造成資訊不一致。
+        重要公告常淹沒在訊息流中，客戶難以即時掌握最新優惠或休假資訊。
 
     - title: 無法了解客戶興趣
       description: >
-        不知道哪些貓咪最受歡迎、
-        哪個房型最常被瀏覽。
+        不知道客戶點擊了哪些服務，缺乏數據支持來優化經營策略或精準行銷。
+
+# ============================================================================
+# Implementation Benefits
+# 導入成效
+# ============================================================================
+benefits:
+  - 節省每日客服回覆時間
+  - 快速更新所有 LINE 內容
+  - 降低 LINE OA 維護成本
+  - 提升客戶查詢效率
+  - 建立商家資料中心
 
 # ============================================================================
 # Feature Showcase
@@ -102,44 +107,35 @@ problem:
 
 showcase:
 
-- title: 後台內容管理
+- title: 內容管理
   description: >
-    提供商家自行維護公告、
-    FAQ、價格與服務內容。
+    包含 FAQ、公告、價目表等基礎內容，皆可透過後台自由編輯，無需工程開發。
 
-  features:
+  # features:
   
-  - 我要看貓貓 管理
-  - 價位表管理
-  - 店址交通管理
-  - 公告管理
-  - FAQ 管理
-  - 排序管理
+  # - 我要看貓貓 管理
+  # - 價位表管理
+  # - 店址交通管理
+  # - 公告管理
+  # - FAQ 管理
+  # - 排序管理
 
 - title: LINE OA 整合
   description: >
     將後台內容同步至 LINE 官方帳號，
     提供一致且即時的資訊體驗。
 
-  features:
-  - 圖文選單管理
-  - Flex Message
-  - 自動回覆
-  - 推播訊息
-  - 內容同步
-
 - title: 多店家與權限管理
   description: >
-    支援多店家與多角色權限管理，
-    提升平台擴充與管理效率。
+    專為連鎖品牌設計，可個別調整分店專屬的服務與資料。
+
+- title: 數據分析
 
   features:
-
-  - 店家管理
-  - Bot 綁定
-  - 角色權限
-  - 管理員帳號
-  - 會員管理
+    - 追蹤圖文選單點擊紀錄
+    - 熱門內容排行
+    - 使用者行為分析
+    - 點擊成效統計
 
 # ============================================================================
 # Responsibilities
@@ -212,14 +208,13 @@ industries:
     subtitle: EXTENSIONS
 
     items:
-      - 預約系統
-      - 預約表單設計
-      - Google Calendar 串接
+      - 線上預約系統
+      - Google Calendar 同步
+      - Google Sheet 報表串接
       - 預約通知推播
       - 圖文選單客製化
       - Flex Message 客製化
       - 自動回覆流程設計
-      - Google Sheet 串接
       - 第三方 API 串接
       - 資料同步整合
 
@@ -292,36 +287,85 @@ product:
   # Pricing Plans
   # 價格方案
   pricing:
-    - name: Early Bird
-      price: 18000
-      description: 限前五間店家
 
-    - name: Regular
-      price: 20000
+    title: 方案價格
 
-  # Delivery Information
-  # 交付資訊
-  delivery:
-    days: 3
-    label: 最快 3 個工作天完成導入
-    support:
-      - 30天售後支援
-      - LINE OA 設定協助
+    description: 平台建置導入方案，不含 LINE 官方帳號費用
+
+    plans:
+
+      - name: 標準導入方案
+
+        subtitle: 適合單店快速上線
+
+        price: 28,800
+
+        suffix: 起
+
+        featured: true
+
+        button:
+          text: 立即預約諮詢
+          link: /contact
+
+        features:
+          - LINE OA 串接設定
+          - 平台帳號開通
+          - 商家資料建置
+          - 後台操作教學
+          - 30 天技術支援
+          - 初始資料建置
+
+      - name: 客製化方案
+
+        subtitle: 依需求客製開發
+
+        priceText: 依需求報價
+
+        button:
+          text: 預約需求討論
+          link: /contact
+
+        featured: true
+
+        features:
+          - 線上預約系統
+          - Google Calendar 整合
+          - LINE Login 會員登入
+          - Google Sheet 同步
+          - 第三方 API 串接
+          - 長期維護方案
 
   # Frequently Asked Questions
   # 常見問題
   faq:
-    - question: 需要月費嗎？
-      answer: 目前無強制月費。
 
-    - question: 需要提供 LINE OA 嗎？
-      answer: 需要提供官方帳號資訊。
+    title: 常見問題
+
+    items:
+
+      - question: 不懂 LINE OA 怎麼辦？
+        answer: 可以協助您完成設定。
+
+      - question: 可以自己修改內容嗎？
+        answer: 可以，後台可自行管理。
+
+      - question: 導入需要多久？
+        answer: 最快3個工作天
+
+      - question: 有客製需求怎麼辦？
+        answer: 可另外評估報價
 
   # Call To Action
   # 行動呼籲
   cta:
-    title: 想了解是否適合您的店家？
+
+    title: 準備開始經營 LINE 官方帳號了嗎？
+
+    description: 歡迎與我討論您的需求，最快 3 個工作天完成導入
+
     button: 立即諮詢
+
     link: /contact
 
 # ============================================================================

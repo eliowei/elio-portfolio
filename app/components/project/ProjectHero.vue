@@ -1,6 +1,6 @@
 <template>
 <section ref="heroRef" class="mb-32 bg-surface">
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-8">    
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
     <div class="md:col-span-8">
       <span class="text-[13px] text-secondary mb-4 block hero-reveal">CASE STUDY / {{ formatIndex(order!) }}</span>
       <h1 class="text-4xl md:text-7xl text-primary mb-8 leading-none hero-reveal">{{ title }}</h1>

@@ -68,6 +68,13 @@ export default defineContentConfig({
       }).optional(),
 
       // ==========================================================================
+      // Implementation Benefits
+      // 導入成效
+      // ==========================================================================
+
+      benefits: z.array(z.string()).optional(),
+
+      // ==========================================================================
       // Feature Showcase
       // 功能展示
       // ==========================================================================
@@ -164,34 +171,70 @@ export default defineContentConfig({
 
       product: z.object({
 
-      pricing: z.array(
-        z.object({
-          name: z.string(),
-          price: z.number(),
-          description: z.string().optional()
-        })
-      ).optional(),
+        pricing: z.object({
 
-      delivery: z.object({
-        days: z.number(),
-        label: z.string().optional(),
-        support: z.array(
-          z.string()
-        )
-      }).optional(),
+          title: z.string(),
 
-      faq: z.array(
-        z.object({
-          question: z.string(),
-          answer: z.string()
-        })
-      ).optional(),
+          description: z.string().optional(),
 
-      cta: z.object({
-        title: z.string(),
-        button: z.string(),
-        link: z.string()
-      }).optional()
+          plans: z.array(
+            z.object({
+
+              name: z.string(),
+
+              subtitle: z.string(),
+
+              price: z.number().optional(),
+
+              priceText: z.string().optional(),
+
+              suffix: z.string().optional(),
+
+              featured: z.boolean().optional(),
+
+              button: z.object({
+                text: z.string(),
+                link: z.string()
+              }),
+
+              features: z.array(
+                z.string()
+              )
+
+            })
+          )
+
+        }).optional(),
+
+        faq: z.object({
+
+          title: z.string().optional(),
+
+          description: z.string().optional(),
+
+          items: z.array(
+            z.object({
+
+              question: z.string(),
+
+              answer: z.string()
+
+            })
+          )
+
+        }).optional(),
+
+        cta: z.object({
+
+          title: z.string(),
+
+          description: z.string().optional(),
+
+          button: z.string(),
+
+          link: z.string()
+
+        }).optional()
 
       }).optional(),
 

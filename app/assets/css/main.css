@@ -11,8 +11,13 @@ body {
 }
 
 @theme {
+  /* Typography */
   --text-display-xl: 4.5rem;
   --text-display-lg: 3.75rem;
+
+  /* Layout */
+  --spacing-section: 8rem;
+  --spacing-gutter: 2rem;
 
   /* Border */
   --color-outline-variant: #cfc4c5;
