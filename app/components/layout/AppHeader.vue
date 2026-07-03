@@ -1,5 +1,6 @@
 <template>
   <UHeader
+    v-model:open="open"
     :ui="{
       root: 'bg-surface/90 border-b border-outline-variant backdrop-blur-sm',
       content: 'bg-surface'
@@ -67,14 +68,18 @@
 <script setup>
   const { navigate } = usePageNavigation()
   const route = useRoute()
+  const open = ref(false)
 
-const handleNavigate = async (to) => {
-    if (to === '/contact') {
-      await navigate(to, '合作洽詢')
-    } else {
-      await navigate(to)
+  const handleNavigate = async (to) => {
+
+  open.value = false
+   
+      if (to === '/contact') {
+        await navigate(to, '合作洽詢')
+      } else {
+        await navigate(to)
+      }
     }
-  }
 
   const menus = [
     {
