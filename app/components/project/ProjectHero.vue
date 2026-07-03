@@ -29,7 +29,13 @@
     </div>
   </div>
   <div class="mt-32 hero-image">
-    <img :alt="`${title}圖片`" class="w-full h-full object-cover filter" :data-alt="`${title}圖片`" :src="cover"/>
+    <NuxtImg
+      :src="cover"
+      :alt="`${title}圖片`"
+      format="webp"
+      :data-alt="`${title}圖片`"
+      class="w-full h-full object-cover filter"
+    />
   </div>
 </section>
 </template>

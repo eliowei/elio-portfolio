@@ -8,7 +8,14 @@
     <template  v-for="(item, index) in gallery" :key="index">
       <div class="flex flex-col gallery-item group">
         <div class="aspect-video bg-surface-container-low border border-outline-variant rounded overflow-hidden p-2 mb-2">
-          <img :alt="`圖片-${item.title}`" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer" :data-alt="`圖片-${index}`" :src="item.image" @click="openLightbox(index)"/>
+        <NuxtImg
+          :src="item.image" 
+          :alt="`圖片-${item.title}`"
+          format="webp"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
+          :data-alt="`圖片-${index}`" 
+          @click="openLightbox(index)"
+        />
         </div>
         <p class="text-center font-label-mono text-[10px] font-bold uppercase tracking-widest text-primary group-hover:translate-y-0.5 transition-transform duration-500">{{ item.title }}</p>
       </div>
@@ -19,8 +26,10 @@
   <div v-if="isLightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85">
     <button class="absolute top-4 right-5 text-white cursor-pointer" @click="closeLightbox">✕</button>
 
-    <img
+    <NuxtImg
       :src="currentImage"
+      :alt="`圖片-${currentImageIndex}`"
+      format="webp"
       class="max-h-[85vh] max-w-[90vw] object-contain"
     />
       <div

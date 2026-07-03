@@ -117,6 +117,6 @@
 </template>
 
 <script setup>
-const row = ['GAMING MEETUP PLATFORM', 'MARIO WEB GAME', 'PORTFOLIO WEBSITE', 'PET PLATFORM (COMING SOON)', 'LINE BOT']
+const row = ['LINE OA MANAGEMENT PLATFORM', 'GAMING MEETUP PLATFORM', 'PORTFOLIO WEBSITE', 'PET PLATFORM (COMING SOON)', 'WEATHER & YOUBIKE LINE BOT']
 const row2 = ['Vue', '/', 'Nuxt', '/', 'Node.js', '/', 'MongoDB', '/', 'WebSocket', '/', 'TypeScript', '/']
 </script>

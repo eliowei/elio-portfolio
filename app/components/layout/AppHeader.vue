@@ -8,7 +8,13 @@
   >
     <!-- TITLE -->
     <template #left>
-        <img alt="Logo" class="h-9 w-auto cursor-pointer dark:invert" src="/images/logo.png" @click.prevent="handleLogoClick"/>
+        <NuxtImg
+          src="/images/logo.png"
+          alt="Logo"
+          format="webp"
+          class="h-9 w-auto cursor-pointer dark:invert"
+          @click.prevent="handleLogoClick"
+        />
     </template>
 
     <!-- RIGHT -->

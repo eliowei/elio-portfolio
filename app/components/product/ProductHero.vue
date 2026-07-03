@@ -35,7 +35,12 @@
   </div>
   <div class="col-span-12 md:col-span-5 relative mt-12 md:mt-0">
       <div class="mt-32 hero-image w-full aspect-4/3">
-        <img :alt="`${title}圖片`" class="w-full h-full object-cover filter" :data-alt="`${title}圖片`" :src="cover"/>
+        <NuxtImg
+          :src="cover"
+          :alt="`${title}圖片`"
+          format="webp"
+          class="w-full h-full object-cover filter"
+        />
     </div>
   </div>
 </section>

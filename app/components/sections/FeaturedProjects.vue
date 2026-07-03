@@ -39,12 +39,12 @@
               ]"
               class="bg-surface-container overflow-hidden"
             >
-               <img
-                 :src="item.cover"
-                 :alt="item.title"
-                 class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 cursor-pointer"
-               />
-
+              <NuxtImg
+                :src="item.cover"
+                :alt="item.title"
+                format="webp"
+                class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 cursor-pointer"
+              />
             </div>
 
             <!-- CONTENT -->
