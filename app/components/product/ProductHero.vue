@@ -58,7 +58,7 @@ defineProps({
   title: String,
   description: String,
   highlights: Array,
-  year: String,
+  year: Number,
   category: String,
   tags: Array,
   github: String,
