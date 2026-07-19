@@ -50,5 +50,9 @@ export default defineNuxtConfig({
       emailTemplateId: '',
       emailPublicKey: ''
     }
+  },
+  site: {
+    url: 'https://elioflowra.com',
+    name: 'Elio Wei',
   }
 })
