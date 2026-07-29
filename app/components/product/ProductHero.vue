@@ -1,6 +1,6 @@
 <template>
-<section ref="heroRef" class="pt-24 mb-section grid grid-cols-12 gap-gutter items-center transition-all duration-700 opacity-100 translate-y-0">
-  <div class="col-span-12 md:col-span-7">
+<section ref="heroRef" class="mb-section grid grid-cols-12 gap-gutter items-center transition-all duration-700 opacity-100 translate-y-0">
+  <div class="col-span-10 sm:col-span-12 md:col-span-7">
     <span class="text-[13px] text-secondary mb-4 block hero-reveal">CASE STUDY / {{ formatIndex(order!) }}</span>
     <h1 class="font-display-lg-mobile whitespace-pre-line md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8 leading-tight text-primary hero-reveal">
       {{ title }}
@@ -33,7 +33,7 @@
       />
     </div>
   </div>
-  <div class="col-span-12 md:col-span-5 relative mt-12 md:mt-0">
+  <div class="col-span-10 sm:col-span-12  md:col-span-5 relative md:mt-0">
       <div class="mt-32 hero-image w-full aspect-4/3">
         <NuxtImg
           :src="cover"
