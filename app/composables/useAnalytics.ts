@@ -6,12 +6,14 @@ type ProjectAnalytics = {
 type ContactSource = | 'navbar' | 'home' | 'product_page' | 'footer'
 
 export const useAnalytics = () => {
+  const { proxy } = useScriptGoogleTagManager()
+
   const push = (
     event: string,
     params: Record<string, unknown> = {}
   ) => {
     if (import.meta.client) {
-      window.dataLayer?.push({
+      proxy.dataLayer?.push({
         event,
         ...params
       })
@@ -42,7 +44,7 @@ export const useAnalytics = () => {
     })
   }
 
-  const trackContactClick = (source: ContactSource) =>  sendContactEvent('contact_click', source)
+  const trackContactClick = (source: ContactSource) => sendContactEvent('contact_click', source)
   const trackContactSubmit = (projectType: string, budget: string) => {
     push('contact_submit', {
       project_type: projectType,

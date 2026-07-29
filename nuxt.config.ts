@@ -54,5 +54,12 @@ export default defineNuxtConfig({
   site: {
     url: 'https://elioflowra.com',
     name: 'Elio Wei',
+  },
+  scripts: {
+    registry: {
+      googleTagManager: {
+        id: 'GTM-NXZZT98P'
+      }
+    }
   }
 })
