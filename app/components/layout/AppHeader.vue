@@ -75,17 +75,18 @@
   const { navigate } = usePageNavigation()
   const route = useRoute()
   const open = ref(false)
+  const { trackContactClick } = useAnalytics()
 
   const handleNavigate = async (to) => {
+    open.value = false
 
-  open.value = false
-   
-      if (to === '/contact') {
-        await navigate(to, '合作洽詢')
-      } else {
-        await navigate(to)
-      }
+    if (to === '/contact') {
+      trackContactClick('navbar')
+      await navigate(to, '合作洽詢')
+    } else {
+      await navigate(to)
     }
+  }
 
   const menus = [
     {

@@ -156,6 +156,7 @@ import type { FormSubmitEvent } from '#ui/types'
 
 const { sendMail } = useContact()
 const { reveal } = useReveal()
+const { trackContactSubmit } = useAnalytics()
 
 const fieldUi = {
   base: 'ring-outline-variant bg-surface-container-lowest placeholder:text-secondary-fixed-dim focus-visible:ring-1 p-4 hover:bg-surface',
@@ -247,6 +248,7 @@ async function onSubmit(
 
   try {
     await sendMail(event.data)
+    trackContactSubmit(state.projectType,state.budget)
 
     useToast().add({
       title: '送出成功',

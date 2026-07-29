@@ -50,8 +50,10 @@
 
 const { reveal } = useReveal()
 const { navigate } = usePageNavigation()
+const { trackContactClick } = useAnalytics()
 
 const handleContact = async () => {
+  trackContactClick('home')
   await navigate('/contact', '合作洽詢')
 }
 

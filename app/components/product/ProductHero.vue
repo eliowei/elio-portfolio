@@ -11,7 +11,7 @@
         <span class="material-symbols-outlined">check_circle</span>{{ item }}
       </div>
     </div>
-    <div class="flex flex-col sm:flex-row gap-4 mb-16">
+    <div class="flex flex-col sm:flex-row gap-4 mb-16 hero-reveal">
       <UButton
         label="立即預約諮詢"
         color="primary"
@@ -52,8 +52,10 @@ import { formatIndex } from '~/utils/format'
 const heroRef = ref<HTMLElement>()
 const { playProjectHero } = useHero()
 const { navigate } = usePageNavigation()
+const { trackContactClick } = useAnalytics()
 
 const handleContact = async () => {
+  trackContactClick('product_page')
   await navigate('/contact', '合作洽詢')
 }
 

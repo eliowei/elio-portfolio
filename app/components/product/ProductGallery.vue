@@ -1,5 +1,5 @@
 <template>
-<section class="mb-section transition-all duration-700 opacity-100 translate-y-0e">
+<section class="mb-section transition-all duration-700 opacity-100" id="gallery">
 <div class="mb-16">
 <h2 class="text-4xl mb-2 text-primary">畫面展示</h2>
 <p class="font-body-md text-secondary">以下皆為實際後台操作畫面</p>

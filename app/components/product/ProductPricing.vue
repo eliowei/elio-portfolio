@@ -66,8 +66,10 @@
 <script setup>
 const { revealPrices } = usePrices()
 const { navigate } = usePageNavigation()
+const { trackContactClick } = useAnalytics()
 
 const handleContact = async (link) => {
+  trackContactClick('product_page')
   await navigate(link, '合作洽詢')
 }
 

@@ -75,11 +75,11 @@
               </p>
               <!-- LINKS -->
               <div class="flex gap-4">
-                <a v-if="item.demo" :href="item.demo" class="text-primary flex items-center gap-1 hover:underline relative z-20">
+                <a v-if="item.demo" :href="item.demo" @click="handleDemoClick(item)" class="text-primary flex items-center gap-1 hover:underline relative z-20">
                   DEMO
                   <span class="material-symbols-outlined text-sm">north_east</span>
                 </a>
-                <a v-if="item.demo" :href="item.github" class="text-primary flex items-center gap-1 hover:underline relative z-20">
+                <a v-if="item.demo" :href="item.github" @click="handleGithubClick(item)" class="text-primary flex items-center gap-1 hover:underline relative z-20">
                   GITHUB
                   <span class="material-symbols-outlined text-sm">code</span>
                 </a>
@@ -102,9 +102,29 @@ const { projects } = defineProps({
 })
 
 const { navigate } = usePageNavigation()
+const { trackProjectView, trackProjectDemoClick, trackProjectGithubClick } = useAnalytics()
 
 const handleNavigate = async (item) => {
+  trackProjectView({
+    id: item.slug,
+    title: item.card.title
+  })
+
   await navigate(`/projects/${item.slug}`, item.title)
+}
+
+const handleDemoClick = (item) => {
+  trackProjectDemoClick({
+    id: item.slug,
+    title: item.card.title
+  })
+}
+
+const handleGithubClick = (item) => {
+  trackProjectGithubClick({
+    id: item.slug,
+    title: item.card.title
+  })
 }
 
 const orderMap = {

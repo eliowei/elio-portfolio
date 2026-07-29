@@ -15,10 +15,14 @@
 
       <!-- RIGHT LINKS -->
       <div class="flex gap-8">
-        <a class="footer-link" href="#">LinkedIn</a>
-        <a class="footer-link" href="mailto:contact@zxc160604@gmail.com">EMAIL</a>
+        <a class="footer-link" href="#" @click="trackSocialClick('linkedin')">LinkedIn</a>
+        <a class="footer-link" href="mailto:contact@zxc160604@gmail.com" @click="trackSocialClick('email')">EMAIL</a>
       </div>
 
     </div>
   </footer>
 </template>
+
+<script setup>
+const { trackSocialClick } = useAnalytics()
+</script>
