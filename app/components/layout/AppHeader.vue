@@ -80,6 +80,8 @@
   const handleNavigate = async (to) => {
     open.value = false
 
+    if (route.path === to) return
+
     if (to === '/contact') {
       trackContactClick('navbar')
       await navigate(to, '合作洽詢')
