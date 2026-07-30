@@ -79,7 +79,7 @@
                   DEMO
                   <span class="material-symbols-outlined text-sm">north_east</span>
                 </a>
-                <a v-if="item.demo" :href="item.github" @click="handleGithubClick(item)" class="text-primary flex items-center gap-1 hover:underline relative z-20">
+                <a v-if="item.github" :href="item.github" @click="handleGithubClick(item)" class="text-primary flex items-center gap-1 hover:underline relative z-20">
                   GITHUB
                   <span class="material-symbols-outlined text-sm">code</span>
                 </a>
