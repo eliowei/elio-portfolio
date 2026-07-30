@@ -38,7 +38,38 @@ useSeoMeta({
   description: () => project.value?.description,
   ogTitle: () => project.value?.title,
   ogDescription: () => project.value?.description,
-  ogImage: () => `${config.public.siteUrl}${project.value?.cover}`
+  ogUrl: () => `${config.public.siteUrl}/projects/${route.params.slug}`,
+  ogType: 'article',
+  ogSiteName: 'Elio Wei',
+  ogImage: () => `${config.public.siteUrl}${project.value?.cover}`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => project.value?.title,
+  twitterDescription: () => project.value?.description,
+  twitterImage: () => `${config.public.siteUrl}${project.value?.cover}`
 })
-
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: `${config.public.siteUrl}/projects/${route.params.slug}`
+    }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: project.value?.title,
+        description: project.value?.description,
+        url: `${config.public.siteUrl}/projects/${route.params.slug}`,
+        image: `${config.public.siteUrl}${project.value?.cover}`,
+        author: {
+          '@type': 'Person',
+          name: 'Elio Wei'
+        }
+      })
+    }
+  ]
+})
 </script>
