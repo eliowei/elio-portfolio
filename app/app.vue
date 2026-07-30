@@ -1,6 +1,9 @@
 <template>
   <ClientOnly>
     <PageOverlay />
+    <Transition name="cookie">
+      <CookieBanner v-if="show" @accept="onAccept"  @reject="onReject" />
+    </Transition>
   </ClientOnly>
 
   <NuxtLoadingIndicator color="var(--color-primary)" :height="3"/>
@@ -13,6 +16,9 @@
 
 <script setup>
 const config = useRuntimeConfig()
+const { accept, reject, getConsent, loadGTM } = useConsent()
+const show = ref(false)
+const ENABLE_COOKIE_BANNER = false
 
 useSeoMeta({
   ogType: 'website',
@@ -25,6 +31,16 @@ useSeoMeta({
 const { leave } = usePageTransition()
 const nuxtApp = useNuxtApp()
 const loading = useLoadingIndicator()
+
+const onAccept = () => {
+  accept()
+  show.value = false
+}
+
+const onReject = () => {
+  reject()
+  show.value = false
+}
 
 const isNavigating = useState(
   'isNavigating',
@@ -47,5 +63,24 @@ nuxtApp.hook('page:finish', async () => {
   await leave()
 
   isNavigating.value = false
+})
+
+const initializeAnalytics = () => {
+  if (!ENABLE_COOKIE_BANNER) {
+    loadGTM()
+    return
+  }
+
+  const consent = getConsent()
+
+  show.value = consent === null
+
+  if (consent?.analytics) {
+    loadGTM()
+  }
+}
+
+onMounted(() => {
+  initializeAnalytics()
 })
 </script>

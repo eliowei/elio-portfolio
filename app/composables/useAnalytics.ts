@@ -11,12 +11,20 @@ export const useAnalytics = () => {
     event: string,
     params: Record<string, unknown> = {}
   ) => {
-    if (import.meta.client) {
-      window.dataLayer?.push({
-        event,
-        ...params
-      })
-    }
+    if (!import.meta.client) return
+
+    const consent = localStorage.getItem('cookie-consent')
+
+    if (!consent) return
+
+    const { analytics } = JSON.parse(consent)
+
+    if (!analytics) return
+  
+    window.dataLayer?.push({
+      event,
+      ...params
+    })
   }
 
   const sendProjectEvent = (event: string, project: ProjectAnalytics) => {
