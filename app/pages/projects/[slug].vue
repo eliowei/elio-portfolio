@@ -14,6 +14,7 @@
 
 <script setup>
 const route = useRoute()
+const config = useRuntimeConfig()
 
 const { data: project } = await useAsyncData(
   route.params.slug,
@@ -30,8 +31,6 @@ if (!project.value) {
     fatal: true
   })
 }
-
-const config = useRuntimeConfig()
 
 useSeoMeta({
   title: () => `${project.value?.title ?? ''} | Elio Wei`,
