@@ -6,14 +6,13 @@ type ProjectAnalytics = {
 type ContactSource = | 'navbar' | 'home' | 'product_page' | 'footer'
 
 export const useAnalytics = () => {
-  const { proxy } = useScriptGoogleTagManager()
 
   const push = (
     event: string,
     params: Record<string, unknown> = {}
   ) => {
     if (import.meta.client) {
-      proxy.dataLayer?.push({
+      window.dataLayer?.push({
         event,
         ...params
       })

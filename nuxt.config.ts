@@ -48,18 +48,12 @@ export default defineNuxtConfig({
       siteUrl: 'https://elioflowra.com',
       emailServiceId: '',
       emailTemplateId: '',
-      emailPublicKey: ''
+      emailPublicKey: '',
+      gtmId: 'GTM-NXZZT98P'
     }
   },
   site: {
     url: 'https://elioflowra.com',
     name: 'Elio Wei',
-  },
-  scripts: {
-    registry: {
-      googleTagManager: {
-        id: 'GTM-NXZZT98P'
-      }
-    }
   }
 })
