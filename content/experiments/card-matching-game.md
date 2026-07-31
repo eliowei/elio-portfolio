@@ -1,9 +1,10 @@
 ---
 
 title: 卡牌配對遊戲
+updatedAt: 2026-07-31
 slug: card-matching-game
 order: 04
-year: 2023
+year: 2024
 category: Frontend Game
 
 card:

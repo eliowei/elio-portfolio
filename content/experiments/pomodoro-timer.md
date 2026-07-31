@@ -1,6 +1,7 @@
 ---
 
 title: 番茄鐘管理工具
+updatedAt: 2026-07-31
 slug: pomodoro-timer
 order: 02
 year: 2024

@@ -5,6 +5,7 @@
 # ============================================================================
 
 title: 遊戲社群揪團平台
+updatedAt: 2026-07-31
 slug: game-together
 type: project
 category: Full Stack Project

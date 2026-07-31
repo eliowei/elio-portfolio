@@ -7,6 +7,7 @@
 title: |
  LINE OA 
  商家管理平台
+updatedAt: 2026-07-31
 slug: line-oa-platform
 type: product
 category: Product Platform

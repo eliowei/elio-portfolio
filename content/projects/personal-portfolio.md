@@ -6,6 +6,7 @@
 # ============================================================================
 
 title: 個人品牌網站
+updatedAt: 2026-07-31
 slug: personal-portfolio
 type: project
 category: Portfolio Website

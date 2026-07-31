@@ -13,6 +13,7 @@ export default defineContentConfig({
       // ==========================================================================
 
       title: z.string(),
+      updatedAt: z.string().optional(),
       slug: z.string(),
       type: z.enum([
         'project',

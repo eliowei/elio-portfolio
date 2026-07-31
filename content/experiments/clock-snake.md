@@ -1,9 +1,10 @@
 ---
 
 title: 時鐘與貪食蛇
+updatedAt: 2026-07-31
 slug: clock-snake
 order: 05
-year: 2023
+year: 2024
 category: Frontend Project
 
 card:

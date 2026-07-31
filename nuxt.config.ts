@@ -55,5 +55,10 @@ export default defineNuxtConfig({
   site: {
     url: 'https://elioflowra.com',
     name: 'Elio Wei',
+  },
+  sitemap: {
+    sources: [
+      '/api/__sitemap__/urls'
+    ]
   }
 })

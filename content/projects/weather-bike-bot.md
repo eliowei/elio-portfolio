@@ -6,6 +6,7 @@
 # ============================================================================
 
 title: 天氣 Bike 小幫手
+updatedAt: 2026-07-31
 slug: weather-bike-bot
 type: project
 category: LINE Bot Project
