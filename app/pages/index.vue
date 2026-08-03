@@ -2,10 +2,10 @@
   <div>
     <HeroSection />
     <ProjectsMarquee />
-    <AboutSection />
-    <FeaturedProjects :projects="projects" />
-    <TechStack />
-    <ContactSection />
+    <LazyAboutSection />
+    <LazyFeaturedProjects  :projects="projects" />
+    <LazyTechStack  />
+    <LazyContactSection  />
   </div>
 </template>
 

@@ -43,7 +43,8 @@
                 :src="item.cover"
                 :alt="item.title"
                 format="webp"
-                sizes="(max-width: 768px) 100vw, 704px"
+                quality="80"
+                sizes="100vw md:50vw lg:704px"
                 class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 cursor-pointer"
               />
             </div>
