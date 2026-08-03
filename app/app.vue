@@ -81,6 +81,8 @@ const initializeAnalytics = () => {
 }
 
 onMounted(() => {
-  initializeAnalytics()
+  requestIdleCallback(() => {
+    initializeAnalytics()
+  })
 })
 </script>

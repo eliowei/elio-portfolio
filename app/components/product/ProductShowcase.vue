@@ -6,7 +6,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter text-primary">
       <template v-for="(item, index) in showcase" : key="index">
         <div class="p-8 border border-outline-variant group hover:bg-primary hover:drop-shadow dark:hover:bg-white dark:hover:text-zinc-950 hover:text-on-primary transition-all cursor-default group">
-          <span class="material-symbols-outlined text-3xl mb-6 group-hover:scale-[1.1] transition-all">{{ showcase_icon_list[index] }}</span>
+          <UIcon :name="showcase_icon_list[index]" class="text-2xl mb-4 group-hover:scale-[1.1] transition-all"/>
           <h3 class="font-headline-md text-2xl mb-4">{{ item.title }}</h3>
           <p class="text-sm opacity-70 leading-relaxed">{{ item.description }}</p>
           <div v-for="(feature, featureIndex) in item.features" :key="featureIndex" class="flex items-center gap-2">
@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-const showcase_icon_list = ['inventory_2', 'integration_instructions', 'storefront', 'query_stats']
+const showcase_icon_list = ['material-symbols:inventory-2-outline', 'material-symbols:integration-instructions-outline', 'material-symbols:storefront-outline', 'material-symbols:query-stats']
 
 defineProps({
   showcase: Object

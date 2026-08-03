@@ -8,7 +8,8 @@
       <p class="text-lg text-secondary max-w-2xl mb-10 hero-reveal">{{ description }}</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-2xl hero-reveal">
         <div v-for="(item, index) in highlights" :key="index" class="flex items-center gap-1 text-primary">
-          <span class="material-symbols-outlined">check_circle</span>{{ item }}
+          <UIcon name="material-symbols:check-circle-outline" class="size-6 text-primary"/>
+          {{ item }}
         </div>
       </div>
     </div>
@@ -18,11 +19,12 @@
       </div>
       <div class="flex gap-4">
         <a v-if="demo" class="flex items-center gap-2 text-[13px] text-primary hover:underline hero-reveal" :href="demo">
-          <span class="material-symbols-outlined">terminal</span>
+          <UIcon name="material-symbols:terminal" class="size-6 text-primary"/>
+
           LIVE_DEMO
         </a>
         <a v-if="github" class="flex items-center gap-2 text-[13px] text-primary hover:underline hero-reveal" :href="github">
-          <span class="material-symbols-outlined">code</span>
+          <UIcon name="material-symbols:code" class="size-6 text-primary"/>
           SOURCE_CODE
         </a>
       </div>

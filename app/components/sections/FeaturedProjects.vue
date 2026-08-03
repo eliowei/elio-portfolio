@@ -43,6 +43,7 @@
                 :src="item.cover"
                 :alt="item.title"
                 format="webp"
+                sizes="(max-width: 768px) 100vw, 704px"
                 class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 cursor-pointer"
               />
             </div>
@@ -77,11 +78,11 @@
               <div class="flex gap-4">
                 <a v-if="item.demo" :href="item.demo" @click="handleDemoClick(item)" class="text-primary flex items-center gap-1 hover:underline relative z-20">
                   DEMO
-                  <span class="material-symbols-outlined text-sm">north_east</span>
+                  <UIcon name="material-symbols:north-east" class="text-xl"/>
                 </a>
                 <a v-if="item.github" :href="item.github" @click="handleGithubClick(item)" class="text-primary flex items-center gap-1 hover:underline relative z-20">
                   GITHUB
-                  <span class="material-symbols-outlined text-sm">code</span>
+                  <UIcon name="material-symbols:code" class="text-xl"/>
                 </a>
               </div>
             </div>

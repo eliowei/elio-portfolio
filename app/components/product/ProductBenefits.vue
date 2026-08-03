@@ -6,7 +6,7 @@
   <div class="grid grid-cols-1 md:grid-cols-5 gap-gutter text-primary">
     <template v-for="(item, index) in benefits" :key="index">
       <div class="p-6 border border-outline-variant bg-surface-container-low benefits-card">
-        <span class="material-symbols-outlined text-primary mb-4">{{ benefits_icon_list[index] }}</span>
+        <UIcon :name="benefits_icon_list[index]" class="size-6 text-primary mb-2"/>
         <p class="font-body-md font-bold">{{ item }}</p>
       </div>
     </template>
@@ -17,7 +17,7 @@
 <script setup>
 const { reveal } = useReveal()
 
-const benefits_icon_list = [ 'forum', 'speed', 'search_check', 'analytics', 'savings']
+const benefits_icon_list = [ 'material-symbols:forum-outline', 'material-symbols:speed-outline', 'material-symbols:search-check', 'material-symbols:analytics-outline', 'material-symbols:savings-outline']
 
 defineProps({
   benefits: Array

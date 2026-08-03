@@ -5,7 +5,7 @@
       <h2 class="text-4xl mb-8">{{ industries[0].title }}</h2>
       <div class="grid grid-cols-2 gap-4">
         <div v-for="(data, dataIndex) in industries[0].items" :key="dataIndex" class="flex items-center gap-3 p-4 bg-surface-container-low border border-outline-variant">
-          <span class="material-symbols-outlined text-primary">{{ industries_icon_list[dataIndex] }}</span>
+          <UIcon :name="industries_icon_list[dataIndex]" class="size-6 text-primary"/>
           <span class="font-body-md font-bold">{{ data }}</span>
         </div>
       </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-const industries_icon_list = [ 'house', 'hotel', 'content_cut', 'directions_car']
+const industries_icon_list = [ 'material-symbols:house-outline', 'material-symbols:hotel-outline', 'material-symbols:content-cut', 'material-symbols:directions-car-outline']
 
 
 defineProps({

@@ -65,20 +65,7 @@
         </div>
 
         <!-- Arrow -->
-        <span
-          class="
-            process-arrow
-            material-symbols-outlined
-            hidden
-            lg:block
-            text-outline
-            text-secondary
-            opacity-50
-          "
-        >
-          arrow_forward
-        </span>
-
+        <UIcon name="material-symbols:arrow-forward" class="size-6 process-arrow hidden lg:block text-secondary opacity-50" />
         <!-- Step 02 -->
         <div
           class="
@@ -118,19 +105,7 @@
         </div>
 
         <!-- Arrow -->
-        <span
-          class="
-            process-arrow
-            material-symbols-outlined
-            hidden
-            lg:block
-            text-outline
-            text-secondary
-            opacity-50
-          "
-        >
-          arrow_forward
-        </span>
+        <UIcon name="material-symbols:arrow-forward" class="size-6 process-arrow hidden lg:block text-secondary opacity-50" />
 
         <!-- Step 03 -->
         <div

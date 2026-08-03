@@ -8,7 +8,7 @@
       <template v-for="(item, index) in problem.items" :key="index">
         <div class="p-8 bg-surface-container-low border border-outline-variant text-center space-y-6 problem-card">
           <div class="w-16 h-16 mx-auto rounded-full bg-surface flex items-center justify-center">
-            <span class="material-symbols-outlined text-3xl">{{ problem_icon_list[index] }}</span>
+            <UIcon :name="problem_icon_list[index]" class="size-6 text-3xl"/>
           </div>
           <h3 class="font-label-mono font-bold uppercase text-caption">{{ item.title }}</h3>
           <p class="font-body-md text-secondary text-sm">{{ item.description }}</p>
@@ -26,7 +26,7 @@ defineProps({
   problem: Object
 })
 
-const problem_icon_list = ['chat_error', 'pets', 'campaign' , 'person_search']
+const problem_icon_list = ['material-symbols:chat-error-outline', 'material-symbols:pets', 'material-symbols:campaign-outline' , 'material-symbols:person-search-outline']
 
 onMounted(() => {
   reveal({ selector:'.problem-card', trigger:'#problem', y: 40, stagger: 0.15 })

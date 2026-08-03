@@ -139,7 +139,7 @@
                 "
               >
                 發送諮詢
-              <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+              <UIcon name="material-symbols:arrow-forward" class="size-6" />
               </UButton>
             </div>
 

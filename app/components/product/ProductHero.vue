@@ -8,7 +8,8 @@
     <p class="text-xl whitespace-pre-line text-secondary mb-6 leading-relaxed hero-reveal">{{ description }}</p>
     <div class="grid grid-cols-1 gap-x-8 gap-y-3 max-w-2xl hero-reveal mb-6">
       <div v-for="(item, index) in highlights" :key="index" class="flex items-center gap-1 text-primary">
-        <span class="material-symbols-outlined">check_circle</span>{{ item }}
+        <UIcon name="material-symbols:check-circle-outline" class="size-6"/>
+        {{ item }}
       </div>
     </div>
     <div class="flex flex-col sm:flex-row gap-4 mb-16 hero-reveal">

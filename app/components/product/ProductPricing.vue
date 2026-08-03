@@ -19,7 +19,7 @@
       <ul v-if="price.plans[0].featured" class="space-y-6 mb-16 grow border-t border-outline-variant pt-12">
         <template v-for="(item, index) in price?.plans[0].features" :key="index">
           <li class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-primary">check_circle</span>
+            <UIcon name="material-symbols:check-circle-outline" class="size-6 text-primary"/>
             <span class="text-sm font-body-md">{{ item }}</span>
           </li>
         </template>
@@ -45,7 +45,7 @@
 
   <ul v-if="price.plans[1].featured" class="space-y-6 mb-16 grow border-t border-outline-variant pt-12">
     <li v-for="(item, index) in price?.plans[1].features" :key="index" class="flex items-start gap-3">
-    <span class="material-symbols-outlined text-primary">add</span>
+    <UIcon name="material-symbols:add" class="size-6 text-primary"/>
     <span class="text-sm font-body-md">{{ item }}</span>
     </li>
   </ul>

@@ -12,6 +12,8 @@
           src="/images/logo.png"
           alt="Logo"
           format="webp"
+          width="180"
+          height="36"
           class="h-9 w-auto cursor-pointer dark:invert"
           @click.prevent="handleLogoClick"
         />
