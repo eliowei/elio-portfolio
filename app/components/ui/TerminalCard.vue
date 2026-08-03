@@ -11,7 +11,7 @@
     </div>
 
     <div
-      class="text-sm text-neutral-300 p-5 space-y-2"
+      class="text-sm text-neutral-300 p-5 space-y-2 min-h-95"
     >
     <div>
       <template
@@ -59,6 +59,7 @@ const finalLines = [
 
 
 onMounted(() => {
+  const isMobile = window.matchMedia('(max-width: 1023px)').matches
   if (played.value) {
     displayLines.value = finalLines
   } else {

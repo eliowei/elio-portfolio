@@ -81,8 +81,14 @@ const initializeAnalytics = () => {
 }
 
 onMounted(() => {
-  requestIdleCallback(() => {
-    initializeAnalytics()
-  })
+  const run = () => initializeAnalytics()
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(run, {
+      timeout: 3000
+    })
+  } else {
+    setTimeout(run, 1000)
+  }
 })
 </script>
