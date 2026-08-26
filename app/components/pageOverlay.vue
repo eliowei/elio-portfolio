@@ -10,11 +10,10 @@
         ref="titleRef"
         class="opacity-0"
       >
-        <NuxtImg
+        <img
           v-if="transitionTitle === 'ELIO WEI'"
           src="/images/logo.png"
           alt="Logo"
-          format="webp"
           class="min-[600px]:w-100 w-50 invert"
         />
         <h2

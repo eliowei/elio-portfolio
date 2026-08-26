@@ -27,10 +27,17 @@
 
           <!-- CARD -->
           <div :class="[colMap[item.layout.col]]" class="group project-card relative">
-            <div
-              class="absolute inset-0 z-10 cursor-pointer"
-              @click="handleNavigate(item)"
-            ></div>
+            <NuxtLink
+              :to="`/projects/${item.slug}`"
+              custom
+              v-slot="{ href }"
+            >
+              <a 
+                :href="href"
+                class="absolute inset-0 z-10 cursor-pointer"
+                @click.prevent="handleNavigate(item)"
+              />
+            </NuxtLink>
             <!-- IMAGE -->
             <div
               :class="[

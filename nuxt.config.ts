@@ -64,5 +64,10 @@ export default defineNuxtConfig({
         provider: 'google'
       }
     ]
+  },
+  routeRules: {
+    '/**': {
+      prerender: true
+    }
   }
 })
