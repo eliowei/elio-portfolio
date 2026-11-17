@@ -8,15 +8,15 @@
         <div>
           <h3 class="text-[13px] uppercase text-primary mb-4">核心服務</h3>
           <ul class="space-y-2 text-secondary font-body-md">
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 企業官網</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 活動網站</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 品牌形象網站</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 服務介紹頁 / Landing Page</li>
             <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> LINE OA 公版方案</li>
             <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> LINE OA 功能擴充評估</li>
           </ul>
         </div>
         <div class="p-8 bg-surface-container-low border border-outline-variant rounded-lg">
           <p class="italic text-secondary leading-relaxed">
-            「精準並非偶然。它始於高度的專注、真誠的努力、明智的方向與熟練的執行。」
+            可以先提供現有網站、品牌資料或喜歡的參考網站。收到需求後，我會先確認是否適合承接，再討論範圍與報價。
           </p>
         </div>
         </div>
@@ -53,6 +53,8 @@
               >
                 <UInput
                   v-model="state.email"
+                  type="email"
+                  autocomplete="email"
                   placeholder="xxxxx@gmail.com"
                   size="xl"
                   class="w-full"
@@ -102,7 +104,7 @@
               <UTextarea
                 v-model="state.message"
                 :rows="6"
-                placeholder="請簡短描述您的專案目標、需求或想法。"
+                placeholder="請描述品牌或服務、網站用途、參考網站及預計上線時間。若需要 LINE OA 整合，也可在這裡說明。"
                 class="w-full"
                 :ui="fieldUi"
               />
@@ -121,7 +123,7 @@
               "
             >
               <p class="text-xs text-secondary">
-                點擊發送即表示您同意我們的聯繫隱私條款。
+                您提供的資料將用於回覆本次需求與合作聯繫。
               </p>
 
               <UButton
@@ -183,7 +185,7 @@ const state = reactive<Schema>({
 
 const projectOptions = [
   {
-    label: '企業形象網站',
+    label: '品牌形象網站',
     value: 'corporate'
   },
   {
@@ -191,7 +193,7 @@ const projectOptions = [
     value: 'personal'
   },
   {
-    label: '活動網站',
+    label: '活動介紹頁',
     value: 'event'
   },
   {
@@ -199,7 +201,7 @@ const projectOptions = [
     value: 'landing'
   },
   {
-    label: 'LINE OA 公版方案',
+    label: 'LINE OA 內容管理整合',
     value: 'line_oa_template'
   },
   {

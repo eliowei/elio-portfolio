@@ -1,54 +1,35 @@
 export const usePageNavigation = () => {
   const route = useRoute()
+  const router = useRouter()
   const { enter, leave } = usePageTransition()
   const loading = useLoadingIndicator()
-
-  const isNavigating = useState(
-    'isNavigating',
-    () => false
-  )
-
-  const transitionTitle = useState(
-    'transitionTitle',
-    () => ''
-  )
+  const isNavigating = useState('isNavigating', () => false)
+  const transitionTitle = useState('transitionTitle', () => '')
 
   const navigate = async (to: string, title?: string) => {
-    if (isNavigating.value) return
-
-    transitionTitle.value = title || 'ELIO WEI'
-
-    isNavigating.value = true
-
-    const isHashLink = to.startsWith('/#')
-
-    if (isHashLink && route.path === '/') {
-      isNavigating.value = false
-
-      await navigateTo(to)
+    if (isNavigating.value || to === route.fullPath) return
+    if (to.startsWith('/#') && route.path === '/') {
+      await router.push(to)
       return
     }
+
+    isNavigating.value = true
+    transitionTitle.value = title || 'ELIO WEI'
     loading.start()
-
-    await enter()
-
-    await new Promise(resolve =>
-      setTimeout(resolve, 400)
-    )
-
-    await navigateTo(to)
-
-    if (to.includes('#')) {
+    try {
+      await enter()
+      await router.push(to)
       await nextTick()
-
-      loading.finish()
-      await leave()
-
-      isNavigating.value = false
+    } finally {
+      // Always release the navigation lock, including cancelled or failed routes.
+      try {
+        await leave()
+      } finally {
+        loading.finish()
+        isNavigating.value = false
+      }
     }
   }
 
-  return {
-    navigate
-  }
+  return { navigate }
 }

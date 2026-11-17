@@ -13,18 +13,13 @@ export const useAnalytics = () => {
   ) => {
     if (!import.meta.client) return
 
-    const consent = localStorage.getItem('cookie-consent')
-
-    if (!consent) return
-
-    const { analytics } = JSON.parse(consent)
-
-    if (!analytics) return
-  
-    window.dataLayer?.push({
-      event,
-      ...params
-    })
+    try {
+      const consent = localStorage.getItem('cookie-consent')
+      if (!consent || !JSON.parse(consent)?.analytics) return
+      window.dataLayer?.push({ event, ...params })
+    } catch {
+      // Tracking must not interrupt navigation when browser storage is unavailable.
+    }
   }
 
   const sendProjectEvent = (event: string, project: ProjectAnalytics) => {

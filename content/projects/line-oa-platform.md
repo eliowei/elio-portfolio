@@ -5,7 +5,7 @@
 # ============================================================================
 
 title: |
- LINE OA 
+ LINE OA
  商家管理平台
 updatedAt: 2026-07-31
 slug: line-oa-platform
@@ -24,7 +24,7 @@ description: |
 highlights:
   - 商家自主更新
   - 多店管理
-  - 最快 3 天完成導入
+  - 導入範圍依需求確認
 
 cover: /images/projects/line-oa-platform/cover.jpeg
 
@@ -76,7 +76,7 @@ problem:
   items:
     - title: 重複回答相同問題
       description: >
-        客服訊息不斷湧入，其中 80% 都是詢問價格、地點或預約方式等重複問題。
+        客戶經常重複詢問價格、地點或預約方式，需要反覆提供相同資訊。
 
     - title: 貓咪資訊更新困難
       description: >
@@ -111,9 +111,10 @@ showcase:
 - title: 內容管理
   description: >
     包含 FAQ、公告、價目表等基礎內容，皆可透過後台自由編輯，無需工程開發。
+  features: []
 
   # features:
-  
+
   # - 我要看貓貓 管理
   # - 價位表管理
   # - 店址交通管理
@@ -125,10 +126,12 @@ showcase:
   description: >
     將後台內容同步至 LINE 官方帳號，
     提供一致且即時的資訊體驗。
+  features: []
 
 - title: 多店家與權限管理
   description: >
     專為連鎖品牌設計，可個別調整分店專屬的服務與資料。
+  features: []
 
 - title: 數據分析
 
@@ -299,7 +302,7 @@ product:
 
         subtitle: 適合單店快速上線
 
-        price: 28,800
+        price: 28800
 
         suffix: 起
 
@@ -352,7 +355,7 @@ product:
         answer: 可以，後台可自行管理。
 
       - question: 導入需要多久？
-        answer: 最快3個工作天
+        answer: 依帳號設定、資料準備與功能範圍確認，需求討論後提供時程。
 
       - question: 有客製需求怎麼辦？
         answer: 可另外評估報價
@@ -363,7 +366,7 @@ product:
 
     title: 準備開始經營 LINE 官方帳號了嗎？
 
-    description: 歡迎與我討論您的需求，最快 3 個工作天完成導入
+    description: 歡迎討論現有 LINE 官方帳號與內容管理需求，導入範圍及時程將另行確認
 
     button: 立即諮詢
 

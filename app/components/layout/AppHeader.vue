@@ -10,7 +10,7 @@
     <template #left>
         <NuxtImg
           src="/images/logo.png"
-          alt="Logo"
+          alt="Elio Wei 品牌網站建置"
           format="webp"
           width="180"
           height="36"
@@ -23,7 +23,7 @@
     <template #right>
       <div class="flex items-center gap-4">
 
-        <UColorModeButton class="cursor-pointer"/>
+        <ThemeToggle />
 
         <template v-for="item in menus" :key="item.label">
 
@@ -94,23 +94,23 @@
 
   const menus = [
     {
-      label: '作品集',
+      label: '案例' ,
       to: '/#projects',
       type: 'link'
     },
     {
-      label: '關於我',
+      label: '網站服務',
+      to: '/#services',
+      type: 'link'
+    },
+    {
+      label: '合作流程',
+      to: '/#process',
+      type: 'link'
+    },
+    {
+      label: '關於 Elio',
       to: '/#about',
-      type: 'link'
-    },
-    {
-      label: '技術棧',
-      to: '/#stack',
-      type: 'link'
-    },
-    {
-      label: '聯絡我',
-      to: '/#contact',
       type: 'link'
     },
     {

@@ -15,7 +15,7 @@ year: 2026
 order: 02
 
 description: >
-  使用 Nuxt 3 建立的個人品牌作品集網站，
+  使用 Nuxt 4 建立的個人品牌作品集網站，
   整合 SEO、頁面轉場動畫與專案案例展示，
   作為個人品牌與相關服務的展示平台。
 
@@ -28,7 +28,7 @@ highlights:
 cover: /images/projects/personal-website/cover.png
 
 tags:
-  - Nuxt 3
+  - Nuxt 4
   - TypeScript
   - Tailwind CSS
   - GSAP
@@ -43,7 +43,7 @@ demo: https://elioflowra.com
 
 card:
   title: 個人品牌網站
-  description: 展示作品、技術能力與服務內容的個人品牌網站。
+  description: 自有品牌網站：整合服務介紹、案例瀏覽與諮詢表單，建立清楚的合作入口。
 
 # ============================================================================
 # Overview
@@ -53,15 +53,15 @@ card:
 overview:
   title: 建立個人品牌與專業形象展示平台。
 
-content: >
-  對自由接案者與工程師而言，
-  個人網站不只是作品展示工具，
-  更是建立信任感與品牌形象的重要媒介。
+  content: >
+    對自由接案者與工程師而言，
+    個人網站不只是作品展示工具，
+    更是建立信任感與品牌形象的重要媒介。
 
-  本專案以 Nuxt 3 建構，
-  整合專案案例與服務介紹，
-  並透過 SEO 優化與頁面互動設計，
-  提升整體瀏覽體驗與搜尋能見度。
+    本專案以 Nuxt 4 建構，
+    整合專案案例與服務介紹，
+    並透過 SEO 優化與頁面互動設計，
+    提升整體瀏覽體驗與搜尋能見度。
 
 
 # ============================================================================
@@ -113,7 +113,7 @@ showcase:
 responsibilities:
 
   frontend:
-  - Nuxt 3
+  - Nuxt 4
   - TypeScript
   - Tailwind CSS
   - Responsive Design
@@ -134,7 +134,7 @@ responsibilities:
 
 techStack:
   frontend:
-  - Nuxt 3
+  - Nuxt 4
   - Vue 3
   - TypeScript
   - Tailwind CSS

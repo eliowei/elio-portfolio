@@ -1,52 +1,30 @@
 <template>
-  <section class="py-32 bg-surface" id="about">
-    <div class="px-6 md:px-16 max-w-7xl mx-auto">
-    <div class="mb-16">
-      <span class="text-secondary uppercase mb-2 block">Services</span>
-      <h2 class="text-primary text-5xl">提供服務</h2>
-    </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-        <template v-for="(item, index) in card" :key="index">
-          <div class="about-card">
-            <span class="font-label-mono text-secondary mb-2 block">{{ item.headline }}</span>
-            <div class="text-4xl font-headline-md text-primary">{{ item.title }}</div>
-            <p class="mt-4 text-secondary">{{ item.description }}</p>
-          </div>
-        </template>
+  <section id="services" class="py-20 md:py-28 bg-surface scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <p v-entrance class="text-sm text-secondary mb-3">SERVICES</p>
+      <h2 v-entrance="0.08" class="text-3xl md:text-5xl text-primary">從品牌介紹到下一次合作</h2>
+      <p v-entrance="0.16" class="mt-6 max-w-2xl text-secondary leading-relaxed">適合需要建立第一個正式網站、重新整理服務資訊，或為新產品準備獨立介紹頁的品牌。先確認網站要完成的任務，再決定需要的頁面與功能。</p>
+      <div class="grid md:grid-cols-2 gap-6 mt-12">
+        <article v-for="(item, index) in services" v-entrance="index * 0.12" :key="item.title" class="about-card">
+          <p class="text-sm text-secondary mb-4">{{ item.label }}</p>
+          <h3 class="text-2xl text-primary">{{ item.title }}</h3>
+          <p class="text-secondary mt-4 leading-relaxed">{{ item.description }}</p>
+          <ul class="mt-6 space-y-2 text-secondary"><li v-for="point in item.points" :key="point">— {{ point }}</li></ul>
+        </article>
       </div>
+      <aside v-entrance class="mt-6 border border-outline-variant p-8 bg-surface-container-low">
+        <p class="text-sm text-secondary mb-3">延伸整合 / LINE OA</p>
+        <h3 class="text-2xl text-primary">讓網站之外的服務資訊也方便維護</h3>
+        <p class="mt-4 text-secondary leading-relaxed">已有 LINE 官方帳號，且需要管理 FAQ、公告或價目表？可另外評估內容後台與 LINE OA 整合。預約、會員與第三方串接依需求確認，不包含在一般網站建置範圍內。</p>
+        <TransitionLink to="/projects/line-oa-platform" transition-title="LINE OA 商家管理平台" class="inline-block mt-6 underline text-primary">了解 LINE OA 整合方案 →</TransitionLink>
+      </aside>
     </div>
   </section>
 </template>
-
 <script setup>
-const { reveal } = useReveal()
-
-const card = [
-  {
-    headline: '01',
-    title: '企業形象網站',
-    description: '協助企業建立品牌形象網站，提升品牌信任度與線上曝光。'
-  },
-  {
-    headline: '02',
-    title: '活動網站',
-    description: '打造活動宣傳與報名網站，適用於展覽、講座與品牌活動。'
-  },
-  {
-    headline: '03',
-    title: 'Landing Page',
-    description: '聚焦單一產品或服務，提升轉換率與潛在客戶詢問。'
-  },
-  {
-    headline: '04',
-    title: 'LINE OA 解決方案',
-    description: '整合 LINE 官方帳號、內容管理與自動化互動流程。'
-  }
+import TransitionLink from '~/components/ui/TransitionLink.vue'
+const services = [
+  { label: '01 / BRAND WEBSITE', title: '品牌形象網站', description: '把品牌介紹、服務內容與聯絡方式整理成完整網站，讓第一次認識你的客戶有資訊可以參考。', points: ['網站資訊架構與頁面規劃', '響應式介面與前端開發', '基本 SEO 設定與上線交付'] },
+  { label: '02 / LANDING PAGE', title: '服務與活動介紹頁', description: '圍繞一項服務、產品或活動，安排內容與行動入口，讓訪客知道重點，也知道下一步怎麼做。', points: ['單頁內容層級與介面實作', '諮詢、報名或外部連結入口', '依需求評估表單與事件追蹤'] }
 ]
-
-onMounted(() => {
-  reveal({ selector: '.about-card', trigger: '#about', y: 40, stagger: 0.15 })
-})
 </script>

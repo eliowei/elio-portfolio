@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  colorMode: {
+    preference: 'system',
+    fallback: 'light'
+  },
   modules: ['@nuxt/ui', '@nuxt/content', '@nuxt/fonts', '@nuxtjs/sitemap', '@nuxtjs/robots', '@nuxt/scripts', '@nuxt/image'],
   css: ['~/assets/css/main.css'],
   components: [

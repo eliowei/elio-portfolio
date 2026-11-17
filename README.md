@@ -1,75 +1,21 @@
-# Nuxt Minimal Starter
+# Elio Wei 品牌網站服務
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+以品牌網站建置為核心，提供品牌形象網站、服務介紹頁與 Landing Page，LINE OA 內容管理整合作為延伸服務。
 
-## Setup 
+## 本機開發
 
-Make sure to install dependencies:
+安裝依賴後執行 npm run dev；正式建置使用 npm run build，預覽使用 npm run preview。
 
-```bash
-# npm
-npm install
+## 內容維護
 
-# pnpm
-pnpm install
+- app/components/sections/HeroSection.vue：品牌定位與首頁主視覺。
+- app/components/sections/AboutSection.vue：網站服務與 LINE OA 入口。
+- app/components/sections/ServiceDetails.vue：合作流程、服務邊界與 FAQ。
+- content/projects/：案例與產品方案；個人案例應標示專案性質。
+- app/components/contact/ContactFrom.vue：洽詢表單與服務選項。
 
-# yarn
-yarn install
+網站使用 Nuxt 4、Nuxt UI、Tailwind CSS 與 Nuxt Content。SEO 與網址設定見 nuxt.config.ts；EmailJS 使用 NUXT_PUBLIC_EMAIL_SERVICE_ID、NUXT_PUBLIC_EMAIL_TEMPLATE_ID、NUXT_PUBLIC_EMAIL_PUBLIC_KEY 環境變數。
 
-# bun
-bun install
-```
+## 上線前確認
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+確認報價與支援範圍符合實際承接能力，並實測 EmailJS 寄信、手機操作及分析事件。目前 Cookie banner 關閉而自訂事件要求同意紀錄，分析追蹤仍需另外統一處理。

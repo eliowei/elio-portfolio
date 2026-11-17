@@ -28,9 +28,6 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterImage: `${config.public.siteUrl}/images/og-image.png`
 })
-const { leave } = usePageTransition()
-const nuxtApp = useNuxtApp()
-const loading = useLoadingIndicator()
 
 const onAccept = () => {
   accept()
@@ -41,29 +38,6 @@ const onReject = () => {
   reject()
   show.value = false
 }
-
-const isNavigating = useState(
-  'isNavigating',
-  () => false
-)
-
-const isFirstLoad = useState(
-  'isFirstLoad',
-  () => true
-)
-
-nuxtApp.hook('page:finish', async () => {
-  if (isFirstLoad.value) {
-    isFirstLoad.value = false
-    return
-  }
-
-  loading.finish()
-
-  await leave()
-
-  isNavigating.value = false
-})
 
 const initializeAnalytics = () => {
   if (!ENABLE_COOKIE_BANNER) {

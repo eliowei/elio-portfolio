@@ -1,10 +1,10 @@
 <template>
   <div>
     <HeroSection />
-    <ProjectsMarquee />
+
     <LazyAboutSection />
     <LazyFeaturedProjects  :projects="projects" />
-    <LazyTechStack  />
+    <ServiceDetails />
     <LazyContactSection  />
   </div>
 </template>
@@ -13,17 +13,17 @@
 const config = useRuntimeConfig()
 
 useSeoMeta({
-  title: 'Elio Wei｜前端工程師 Frontend Engineer',
-  description: '專注於 Vue、Nuxt 與現代 Web 開發，提供企業形象網站、活動網站、Landing Page 與 LINE Bot 解決方案。',
-  ogTitle: 'Elio Wei | Frontend Engineer',
-  ogDescription: '專注於 Vue、Nuxt 與現代 Web 開發，提供企業形象網站、活動網站、Landing Page 與 LINE Bot 解決方案。',
+  title: 'Elio Wei｜品牌網站建置與 LINE OA 整合',
+  description: '為小型品牌與專業服務者提供品牌形象網站、服務介紹頁與 Landing Page 建置，並依需求評估 LINE OA 與內容管理整合。',
+  ogTitle: 'Elio Wei｜品牌網站建置與 LINE OA 整合',
+  ogDescription: '為小型品牌與專業服務者提供品牌形象網站、服務介紹頁與 Landing Page 建置，並依需求評估 LINE OA 與內容管理整合。',
   ogUrl: `${config.public.siteUrl}/`,
   ogType: 'website',
   ogSiteName: 'Elio Wei',
   ogImage: `${config.public.siteUrl}/images/og-image.png`,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Elio Wei | Frontend Engineer',
-  twitterDescription: '專注於 Vue、Nuxt 與現代 Web 開發，提供企業形象網站、活動網站、Landing Page 與 LINE Bot 解決方案。',
+  twitterTitle: 'Elio Wei｜品牌網站建置與 LINE OA 整合',
+  twitterDescription: '為小型品牌與專業服務者提供品牌形象網站、服務介紹頁與 Landing Page 建置，並依需求評估 LINE OA 與內容管理整合。',
   twitterImage: `${config.public.siteUrl}/images/og-image.png`
 })
 
@@ -44,9 +44,10 @@ useHead({
         jobTitle: 'Frontend Engineer',
         url: 'https://elioflowra.com',
         description:
-          'Frontend Engineer specializing in Vue, Nuxt and modern Web development.',
+          'Brand websites, landing pages and LINE Official Account integrations.',
         sameAs: [
           'https://github.com/eliowei',
+          'https://www.instagram.com/z220168722/',
           'https://www.threads.com/@z220168722'
         ],
       }),
@@ -58,5 +59,5 @@ const { data } = await useAsyncData(
   () => queryCollection('projects').order('order', 'ASC').all()
 )
 
-const projects = computed(() => data.value)
+const projects = computed(() => [...(data.value ?? [])].sort((a, b) => (a.slug === 'personal-portfolio' ? 0 : a.type === 'product' ? 1 : 2) - (b.slug === 'personal-portfolio' ? 0 : b.type === 'product' ? 1 : 2)))
 </script>

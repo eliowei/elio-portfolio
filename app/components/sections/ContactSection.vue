@@ -3,7 +3,7 @@
     <div class="max-w-7xl px-6 md:px-16 mx-auto">
 
       <!-- card -->
-      <div class="relative overflow-hidden bg-zinc-950 text-white border border-outline-variant p-12 md:p-20 contact-content">
+      <div v-entrance class="relative overflow-hidden bg-zinc-950 text-white border border-outline-variant p-12 md:p-20 contact-content">
 
         <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
 
@@ -11,11 +11,11 @@
           <div class="max-w-xl">
 
             <h2 class="font-headline-md text-5xl mb-6">
-              Let's Build Something Meaningful.
+              準備讓品牌有自己的網站
             </h2>
 
             <p class="text-lg mb-8">
-              目前提供企業形象網站、活動網站、Landing Page 建置，以及 LINE OA 解決方案。
+              告訴我你的服務、網站用途與預計時間。即使預算和內容還沒確定，也可以先從需求討論開始。
             </p>
 
           </div>
@@ -25,7 +25,7 @@
 
             <a class="cta-button group" href="/contact" @click.prevent="handleContact">
               <span class="group-hover:scale-110 transition-transform duration-300 group-hover:text-black">
-                 合作洽詢
+                 討論網站需求
               </span>
             </a>
           </div>
@@ -48,7 +48,6 @@
 
 <script setup>
 
-const { reveal } = useReveal()
 const { navigate } = usePageNavigation()
 const { trackContactClick } = useAnalytics()
 
@@ -57,8 +56,4 @@ const handleContact = async () => {
   await navigate('/contact', '合作洽詢')
 }
 
-onMounted(() => {
-  reveal({ selector: '.contact-content', trigger: '#contact', y: 40, start: 'top 60%' })
-  reveal({ selector: '.contact-circle', trigger: '#contact', y: 0, scale: 0.8, duration: 1, start: 'top 80%'})
-})
 </script>

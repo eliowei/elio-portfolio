@@ -8,10 +8,10 @@
 const config = useRuntimeConfig()
 
 useSeoMeta({
-  title: '聯繫我 | Elio Wei',
-  description: '如果你有網站、品牌頁、Landing Page 或系統開發需求，歡迎與我聯繫。',
-  ogTitle: '聯繫我 | Elio Wei',
-  ogDescription: '如果你有網站、品牌頁、Landing Page 或系統開發需求，歡迎與我聯繫。',
+  title: '網站建置與整合洽詢 | Elio Wei',
+  description: '提供品牌形象網站、服務介紹頁與 Landing Page 建置，LINE OA 整合依需求評估。歡迎提供網站用途、參考網站與預計時程。',
+  ogTitle: '網站建置與整合洽詢 | Elio Wei',
+  ogDescription: '提供品牌形象網站、服務介紹頁與 Landing Page 建置，LINE OA 整合依需求評估。歡迎提供網站用途、參考網站與預計時程。',
   ogUrl: `${config.public.siteUrl}/contact`,
   ogType: 'website',
   ogImage: `${config.public.siteUrl}/images/og-image.png`
@@ -30,9 +30,9 @@ useHead({
       children: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'ContactPage',
-        name: '聯繫我 | Elio Wei',
+        name: '網站建置與整合洽詢 | Elio Wei',
         url: `${config.public.siteUrl}/contact`,
-        description: '如果你有網站、品牌頁、Landing Page 或系統開發需求，歡迎與我聯繫。',
+        description: '提供品牌形象網站、服務介紹頁與 Landing Page 建置，LINE OA 整合依需求評估。歡迎提供網站用途、參考網站與預計時程。',
         inLanguage: 'zh-Hant',
         isPartOf: {
           '@type': 'WebSite',

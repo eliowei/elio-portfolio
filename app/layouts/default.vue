@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white text-neutral-900">
+  <div class="min-h-screen bg-surface text-primary">
     <AppHeader />
 
     <main>
