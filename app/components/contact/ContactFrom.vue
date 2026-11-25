@@ -1,155 +1,124 @@
 <template>
-  <section class="bg-surface-container">
-    <div class="max-w-7xl mx-auto px-6 md:px-16 py-32 contact-form">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <!-- Branding/Context Sidebar (Swiss Style) -->
-      <div class="hidden lg:block lg:col-span-4">
-      <div class="sticky top-32 space-y-12">
-        <div>
-          <h3 class="text-[13px] uppercase text-primary mb-4">核心服務</h3>
-          <ul class="space-y-2 text-secondary font-body-md">
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 品牌形象網站</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> 服務介紹頁 / Landing Page</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> LINE OA 公版方案</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary"></span> LINE OA 功能擴充評估</li>
-          </ul>
-        </div>
-        <div class="p-8 bg-surface-container-low border border-outline-variant rounded-lg">
-          <p class="italic text-secondary leading-relaxed">
-            可以先提供現有網站、品牌資料或喜歡的參考網站。收到需求後，我會先確認是否適合承接，再討論範圍與報價。
-          </p>
-        </div>
-        </div>
-        </div>
-        <!-- Main Inquiry Form -->
-        <div class="lg:col-span-8">
-          <UForm
-            :schema="schema"
-            :state="state"
-            class="space-y-12"
-            @submit="onSubmit"
-          >
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <!-- Name -->
-              <UFormField
-                name="name"
-                label="您的姓名"
-                required
-              >
-                <UInput
-                  v-model="state.name"
-                  placeholder="王小明"
-                  size="xl"
-                  class="w-full"
-                  :ui="fieldUi"
-                />
-              </UFormField>
+  <section id="inquiry-form" class="sheet inquiry-body" aria-label="合作洽詢表單">
+    <aside class="inquiry-sidebar">
+      <div class="paper-note inquiry-paper inquiry-service-note">
+        <h2 class="tape-label">網站建置服務</h2>
+        <ul>
+          <li><UIcon name="i-lucide-square-check-big" aria-hidden="true" /> 品牌形象網站</li>
+          <li><UIcon name="i-lucide-square-check-big" aria-hidden="true" /> 服務介紹頁 / Landing Page</li>
+          <li><UIcon name="i-lucide-square-check-big" aria-hidden="true" /> LINE OA 功能擴充評估</li>
+        </ul>
+        <p>延伸服務<br>LINE 官方帳號內容管理整合</p>
+      </div>
+      <p class="paper-note inquiry-paper inquiry-tip">如果你已經有網站、品牌資料或參考範例，也可以一併提供，讓我們更快釐清需求。</p>
 
-              <!-- Email -->
-              <UFormField
-                name="email"
-                label="電子郵件"
-                required
-              >
-                <UInput
-                  v-model="state.email"
-                  type="email"
-                  autocomplete="email"
-                  placeholder="xxxxx@gmail.com"
-                  size="xl"
-                  class="w-full"
-                  :ui="fieldUi"
-                />
-              </UFormField>
-            </div>
+      <svg class="contact-scenery inquiry-tip-leaves" viewBox="0 0 88 98" aria-hidden="true">
+        <path d="M8 93C25 78 42 54 57 13m-18 44C23 57 12 47 8 33c16-1 30 8 31 24Zm8-16c17 0 31-8 38-22-16-3-32 6-38 22Zm8-16C43 21 43 11 48 2c8 5 12 15 7 23ZM27 73C16 72 8 66 3 55c13-2 25 6 24 18Zm3-4c12 7 26 6 37-5-13-5-25-4-37 5Z" />
+        <path class="contact-leaf-hatch" d="m13 37 19 15m23-16 22-13M9 59l13 10m16 0 19-3m-7-59 6 13" />
+      </svg>
+    </aside>
+    <UForm
+      :schema="schema"
+      :state="state"
+      class="inquiry-fields"
+      @submit="onSubmit"
+    >
+      <div class="inquiry-pair">
+        <!-- Name -->
+        <UFormField
+          name="name"
+          label="您的姓名"
+          required
+        >
+          <UInput
+            v-model="state.name"
+            placeholder="王小明" autocomplete="name"
+            size="xl"
+            class="w-full"
+            :ui="fieldUi"
+          />
+        </UFormField>
 
-            <!-- Project Type -->
-            <UFormField
-              name="projectType"
-              label="專案類型"
-              required
-            >
-              <USelect
-                v-model="state.projectType"
-                :items="projectOptions"
-                placeholder="請選擇服務項目"
-                size="xl"
-                class="w-full cursor-pointer"
-                :ui="fieldUi"
-              />
-            </UFormField>
+        <!-- Email -->
+        <UFormField
+          name="email"
+          label="電子郵件"
+          required
+        >
+          <UInput
+            v-model="state.email"
+            type="email"
+            autocomplete="email"
+            placeholder="xxxxx@gmail.com"
+            size="xl"
+            class="w-full"
+            :ui="fieldUi"
+          />
+        </UFormField>
+      </div>
 
-            <!-- Budget -->
-            <UFormField
-              name="budget"
-              label="預算區間"
-              required
-            >
-              <USelect
-                v-model="state.budget"
-                :items="budgetOptions"
-                placeholder="請選擇預算"
-                size="xl"
-                class="w-full cursor-pointer"
-                :ui="fieldUi"
-              />
-            </UFormField>
+      <!-- Project Type -->
+      <UFormField
+        name="projectType"
+        label="專案類型"
+        required
+      >
+        <USelect
+          v-model="state.projectType"
+          :items="projectOptions"
+          placeholder="請選擇服務項目"
+          size="xl"
+          class="w-full cursor-pointer"
+          :ui="selectUi"
+        />
+      </UFormField>
 
-            <!-- Message -->
-            <UFormField
-              name="message"
-              label="訊息內容"
-              required
-            >
-              <UTextarea
-                v-model="state.message"
-                :rows="6"
-                placeholder="請描述品牌或服務、網站用途、參考網站及預計上線時間。若需要 LINE OA 整合，也可在這裡說明。"
-                class="w-full"
-                :ui="fieldUi"
-              />
-            </UFormField>
+      <!-- Budget -->
+      <UFormField
+        name="budget"
+        label="預算區間"
+        required
+      >
+        <USelect
+          v-model="state.budget"
+          :items="budgetOptions"
+          placeholder="請選擇預算"
+          size="xl"
+          class="w-full cursor-pointer"
+          :ui="selectUi"
+        />
+      </UFormField>
 
-            <!-- CTA -->
-            <div
-              class="
-                flex
-                flex-col
-                md:flex-row
-                items-center
-                justify-between
-                gap-8
-                pt-4
-              "
-            >
-              <p class="text-xs text-secondary">
-                您提供的資料將用於回覆本次需求與合作聯繫。
-              </p>
+      <!-- Message -->
+      <UFormField
+        name="message"
+        label="訊息內容"
+        required
+      >
+        <UTextarea
+          v-model="state.message"
+          :rows="6"
+          placeholder="請描述品牌或服務、網站用途、參考網站及預計上線時間。若需要 LINE OA 整合，也可在這裡說明。"
+          class="w-full"
+          :ui="fieldUi"
+        />
+      </UFormField>
 
-              <UButton
-                type="submit"
-                :loading="loading"
-                size="xl"
-                color="neutral"
-                variant="solid"
-                class="
-                  min-w-45
-                  justify-center
-                  font-semibold
-                  cursor-pointer
-                  px-12 py-4
-                "
-              >
-                發送諮詢
-              <UIcon name="material-symbols:arrow-forward" class="size-6" />
-              </UButton>
-            </div>
-
-          </UForm>
+      <div class="inquiry-submit">
+        <p>你提供的資料將用於回覆本次需求與合作聯繫。</p>
+        <div class="inquiry-submit-action">
+          <UButton type="submit" :loading="loading" trailing-icon="i-lucide-arrow-right" class="ink-button inquiry-submit-button">發送諮詢</UButton>
+          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path d="m3 11 4-8m5 13 9-7m-5 14 9-2" />
+          </svg>
         </div>
       </div>
-    </div>
-</section>
+    </UForm>
+    <NuxtImg src="/images/sketchbook/pose-run.webp" alt="" width="232" height="320" loading="lazy" class="inquiry-runner" />
+    <svg class="inquiry-trail" viewBox="0 0 800 75" preserveAspectRatio="none" fill="none" aria-hidden="true">
+      <path d="M5 67C112 66 154 18 258 28s140 48 235 28S620 5 790 12" />
+    </svg>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -157,13 +126,18 @@ import * as z from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 
 const { sendMail } = useContact()
-const { reveal } = useReveal()
 const { trackContactSubmit } = useAnalytics()
 
 const fieldUi = {
-  base: 'ring-outline-variant bg-surface-container-lowest placeholder:text-secondary-fixed-dim focus-visible:ring-1 p-4 hover:bg-surface',
-  placeholder: 'text-outline-variant',
+  base: 'inquiry-control',
+  placeholder: 'inquiry-placeholder',
   trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+}
+const selectUi = {
+  ...fieldUi,
+  content: 'inquiry-select-options',
+  item: 'inquiry-select-option',
+  itemTrailingIcon: 'inquiry-select-check'
 }
 const schema = z.object({
   name: z.string().min(2, '請輸入姓名'),
@@ -197,11 +171,11 @@ const projectOptions = [
     value: 'event'
   },
   {
-    label: 'Landing Page',
+    label: '單頁網站（服務／產品介紹）',
     value: 'landing'
   },
   {
-    label: 'LINE OA 內容管理整合',
+    label: 'LINE 官方帳號內容管理整合',
     value: 'line_oa_template'
   },
   {
@@ -209,7 +183,7 @@ const projectOptions = [
     value: 'line_oa_advanced'
   },
   {
-    label: '專案諮詢',
+    label: '還不確定，想先討論',
     value: 'consultation'
   },
   {
@@ -217,6 +191,11 @@ const projectOptions = [
     value: 'other'
   }
 ]
+
+const route = useRoute()
+watch(() => route.query.service, service => {
+  state.projectType = projectOptions.find(option => option.value === service)?.value ?? ''
+}, { immediate: true })
 
 const budgetOptions = [
   {
@@ -279,21 +258,5 @@ async function onSubmit(
     loading.value = false
   }
 }
-
-onMounted(() => {
-  reveal({
-    selector: '.contact-form',
-    trigger: '.contact-form',
-    y: 40,
-    duration: 0.8
-  })
-
-  reveal({
-    selector: '.sticky',
-    trigger: '.contact-form',
-    x: -20,
-    duration: 0.8
-  })
-})
 
 </script>

@@ -1,18 +1,12 @@
 <template>
-    <main v-if="project" class="bg-surface" >
-      <ProductTemplate
-        v-if="project.type === 'product'"
-        :project="project"
-      />
-
-      <ProjectTemplate
-        v-else
-        :project="project"
-      />
-    </main> 
+  <SketchbookFrame v-if="project">
+    <SketchbookCase :key="project.slug" :project="project" />
+  </SketchbookFrame>
 </template>
 
 <script setup>
+definePageMeta({ layout: false })
+
 const route = useRoute()
 const config = useRuntimeConfig()
 

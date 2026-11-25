@@ -14,10 +14,7 @@ category: Portfolio Website
 year: 2026
 order: 02
 
-description: >
-  使用 Nuxt 4 建立的個人品牌作品集網站，
-  整合 SEO、頁面轉場動畫與專案案例展示，
-  作為個人品牌與相關服務的展示平台。
+description: "我的獨立接案網站，把服務介紹、作品和合作入口放在同一個地方，讓第一次認識我的人知道可以一起做什麼。"
 
 highlights:
   - SEO 優化
@@ -43,7 +40,7 @@ demo: https://elioflowra.com
 
 card:
   title: 個人品牌網站
-  description: 自有品牌網站：整合服務介紹、案例瀏覽與諮詢表單，建立清楚的合作入口。
+  description: "以服務、作品與洽詢串起來的自有品牌網站。"
 
 # ============================================================================
 # Overview
@@ -51,18 +48,24 @@ card:
 # ============================================================================
 
 overview:
-  title: 建立個人品牌與專業形象展示平台。
+  title: "讓第一次來的人快速知道可以怎麼合作"
+  content: "我把網站當成接案時的第一份自我介紹。從首頁的服務分類、案例索引到洽詢表單，每一段都對應訪客在決定合作前要找的資訊。"
 
-  content: >
-    對自由接案者與工程師而言，
-    個人網站不只是作品展示工具，
-    更是建立信任感與品牌形象的重要媒介。
-
-    本專案以 Nuxt 4 建構，
-    整合專案案例與服務介紹，
-    並透過 SEO 優化與頁面互動設計，
-    提升整體瀏覽體驗與搜尋能見度。
-
+caseStudy:
+  label: "自有品牌網站 · 網站設計與前端開發"
+  scope:
+    - "品牌網站與版面設計"
+    - "Nuxt 前端開發"
+    - "手機版與捲動互動"
+    - "案例內容與洽詢流程"
+  process:
+    - title: "整理服務與作品"
+      illustration: portfolio-planning
+      description: "確定首頁要回答的問題，讓服務介紹和案例互相對照。"
+    - title: "設計與實作頁面"
+      illustration: portfolio-devices
+      description: "將首頁、案例和聯絡頁接起來，用 Markdown 管理案例內容，再檢查不同裝置的閱讀順序。"
+  result: "網站提供服務說明、可瀏覽的案例，以及能帶入服務類型的合作洽詢。圖集保留此專案先前的介面紀錄。"
 
 # ============================================================================
 # Feature Showcase
@@ -71,9 +74,8 @@ overview:
 
 showcase:
 - title: Case Study 展示
-  description: >
-    以案例研究形式展示專案內容，
-    清楚呈現問題、解決方案與技術實作。
+  icon: image
+  description: "每件作品有自己的詳情頁，讓訪客看得到問題、實作和畫面。"
 
   features:
     - 專案分類
@@ -82,10 +84,8 @@ showcase:
     - 專案細節頁
 
 - title: SEO 與內容管理
-
-  description: >
-    透過 Nuxt Content 與 Meta 設定，
-    提升搜尋引擎收錄效果與內容維護效率。
+  icon: i-lucide-file-search
+  description: "案例以 Markdown 維護，頁面會讀取標題、摘要和封面，讓首頁與詳情頁使用同一份內容。"
 
   features:
   - Sitemap
@@ -94,10 +94,8 @@ showcase:
   - 搜尋引擎收錄
 
 - title: 動畫與使用體驗
-
-  description: >
-    使用 GSAP 建立頁面轉場與互動效果，
-    強化品牌網站的視覺體驗。
+  icon: devices
+  description: "用頁面轉場和捲動互動引導閱讀，並針對不同螢幕調整畫面。"
 
   features:
 

@@ -1,30 +1,10 @@
 <template>
-  <section class="bg-surface" id="hero">
-    <div class="max-w-7xl mx-auto px-6 md:px-16 pt-24 md:pt-32 pb-16 border-b border-outline-variant">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div class="lg:col-span-8">
-          <span ref="titleRef" class="text-[13px] text-secondary mb-4 block">聯繫</span>
-          <h1 ref="subtitleRef" class="text-7xl max-[600px]:text-5xl mb-6 text-primary">合作洽詢</h1>
-          <p ref="descRef" class="text-lg text-secondary max-w-2xl">想建立品牌網站，或需要 LINE OA 整合？請留下需求與聯絡方式，我會先確認內容，再與您討論服務範圍及下一步。</p>
-        </div>
-      </div>
+  <section class="sheet inquiry-hero" aria-labelledby="inquiry-title">
+    <div class="inquiry-hero-copy">
+      <p class="note-index">— 聯繫</p>
+      <h1 id="inquiry-title">合作<span>洽詢</span></h1>
+      <p>想建立品牌網站，或需要 LINE OA 整合？<br class="hidden sm:block">請留下需求與聯絡方式，我會先確認內容，<br class="hidden sm:block">再和你討論服務範圍及下一步。</p>
     </div>
+    <NuxtImg src="/images/sketchbook/desk.webp" alt="Elio 坐在桌前準備討論網站需求" width="1440" height="810" sizes="100vw lg:740px" fetchpriority="high" class="inquiry-hero-art" />
   </section>
 </template>
-
-<script setup>
-const titleRef = ref()
-const subtitleRef = ref()
-const descRef = ref()
-
-const { playLandingHero } = useHero()
-
-onMounted(() => {
-  playLandingHero({
-    title: titleRef.value,
-    subtitle: subtitleRef.value,
-    desc: descRef.value,
-  })
-})
-
-</script>

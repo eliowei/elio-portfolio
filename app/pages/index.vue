@@ -1,16 +1,10 @@
 <template>
-  <div>
-    <HeroSection />
-
-    <LazyAboutSection />
-    <LazyFeaturedProjects  :projects="projects" />
-    <ServiceDetails />
-    <LazyContactSection  />
-  </div>
+  <SketchbookHome :projects="projects" />
 </template>
 
 <script setup>
 const config = useRuntimeConfig()
+definePageMeta({ layout: false })
 
 useSeoMeta({
   title: 'Elio Wei｜品牌網站建置與 LINE OA 整合',

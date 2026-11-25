@@ -4,9 +4,7 @@
 # 基本資訊
 # ============================================================================
 
-title: |
- LINE OA
- 商家管理平台
+title: "LINE OA 商家管理平台"
 updatedAt: 2026-07-31
 slug: line-oa-platform
 type: product
@@ -15,11 +13,7 @@ category: Product Platform
 year: 2026
 order: 01
 
-description: |
-  讓店家不用找工程師
-  自己就能更新 LINE 官方帳號
-
-  專為貓舍、寵物旅館與寵物美容打造
+description: "給貓舍、寵物旅館與美容店的 LINE 內容後台。店家可以自行編輯公告、服務與常見問題，並把更新同步到官方帳號。"
 
 highlights:
   - 商家自主更新
@@ -42,7 +36,7 @@ tags:
 
 card:
   title: LINE OA 商家管理平台
-  description: 提供商家自行管理 LINE 官方帳號內容的後台管理平台。
+  description: "給寵物店家的 LINE 內容管理後台，可自行更新公告與服務資訊。"
 
 # ============================================================================
 # Overview
@@ -50,17 +44,24 @@ card:
 # ============================================================================
 
 overview:
-  title: 讓商家無需依賴工程師，也能自行維護 LINE 官方帳號內容。
+  title: "讓店家自己維護 LINE 官方帳號內容"
+  content: "不少店家透過 LINE 提供公告、價目和服務資訊。當內容分散在不同設定中，每一次更新都要重新找位置。這套後台把經常修改的內容集中起來，讓店家可以自行維護並同步到官方帳號。"
 
-  content: >
-    許多商家將 LINE 官方帳號作為主要資訊入口，
-    但每次修改公告、價格或服務內容時，
-    都需要重新設定或請工程師協助處理。
-
-    本專案建立可重複部署的商家管理平台，
-    透過後台系統整合公告、服務內容、
-    圖文選單與會員管理功能，
-    讓商家可自行維護內容並即時同步至 LINE 官方帳號。
+caseStudy:
+  label: "LINE 官方帳號整合方案 · 商家內容後台"
+  scope:
+    - "LINE OA 串接與導入"
+    - "公告、服務及常見問題"
+    - "店家與後台權限"
+    - "操作教學與交接"
+  process:
+    - title: "先確認店家平常更新哪些資訊"
+      illustration: shop-notebook
+      description: "盤點 LINE 帳號、公告、服務項目及常見問題，再決定後台與選單需要的範圍。"
+    - title: "完成串接、資料建置與交接"
+      illustration: shop-integration
+      description: "建立店家資料並測試 LINE 顯示。上線時說明如何自行維護，預約或第三方串接可另行討論。"
+  result: "圖集展示 LINE 官方帳號和店家後台，包括總覽、資料管理與公告編輯。想導入現有帳號，可往下查看方案與常見問題。"
 
 # ============================================================================
 # Problem
@@ -109,8 +110,9 @@ benefits:
 showcase:
 
 - title: 內容管理
-  description: >
-    包含 FAQ、公告、價目表等基礎內容，皆可透過後台自由編輯，無需工程開發。
+  icon: i-lucide-panels-top-left
+  description: "店家可以在同一個後台更新公告、服務等常用資料。"
+
   features: []
 
   # features:
@@ -123,17 +125,20 @@ showcase:
   # - 排序管理
 
 - title: LINE OA 整合
-  description: >
-    將後台內容同步至 LINE 官方帳號，
-    提供一致且即時的資訊體驗。
+  icon: i-lucide-message-circle
+  description: "把店家更新的內容接到 LINE 官方帳號，顧客從原本的聊天入口就能查閱。"
+
   features: []
 
 - title: 多店家與權限管理
-  description: >
-    專為連鎖品牌設計，可個別調整分店專屬的服務與資料。
+  icon: i-lucide-shield-check
+  description: "管理者可以依店家設置後台帳號與操作權限。"
+
   features: []
 
 - title: 數據分析
+  icon: i-lucide-chart-no-axes-column
+  description: "查看圖文選單的點擊紀錄，掌握哪些內容最常被使用者開啟。"
 
   features:
     - 追蹤圖文選單點擊紀錄
@@ -380,6 +385,7 @@ product:
 gallery:
 - title: LINE 官方帳號首頁
   image: /images/projects/line-oa-platform/01.jpeg
+  device: phone
 
 - title: 系統資訊總覽
   image: /images/projects/line-oa-platform/02.png

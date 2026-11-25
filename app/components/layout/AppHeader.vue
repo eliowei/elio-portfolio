@@ -2,21 +2,19 @@
   <UHeader
     v-model:open="open"
     :ui="{
-      root: 'bg-surface/90 border-b border-outline-variant backdrop-blur-sm',
-      content: 'bg-surface'
+      root: 'bg-washi/90 border-b border-paperBorder backdrop-blur-md',
+      content: 'bg-washi'
     }"
   >
     <!-- TITLE -->
     <template #left>
-        <NuxtImg
-          src="/images/logo.png"
-          alt="Elio Wei 品牌網站建置"
-          format="webp"
-          width="180"
-          height="36"
-          class="h-9 w-auto cursor-pointer dark:invert"
-          @click.prevent="handleLogoClick"
-        />
+      <NuxtLink to="/" class="group flex items-center gap-3 text-sumi" aria-label="Elio Wei 首頁" @click.prevent="handleLogoClick">
+        <span aria-hidden="true" class="studio-serif grid size-9 place-items-center rounded-lg bg-vermilionDark text-lg font-bold text-white">E</span>
+        <span>
+          <span class="flex items-center gap-2"><span class="studio-serif text-lg font-bold">Elio Wei.</span></span>
+          <span class="block text-[11px] text-sumiMuted">獨立網站設計與開發</span>
+        </span>
+      </NuxtLink>
     </template>
 
     <!-- RIGHT -->
@@ -28,33 +26,21 @@
         <template v-for="item in menus" :key="item.label">
 
           <!-- CTA -->
-          <UButton
+          <NuxtLink
             v-if="item.type === 'primary'"
-            :label="item.label"
-            color="primary"
-            variant="solid"
-            size="lg"
-            @click="handleNavigate(item.to)"
-            class="hidden lg:inline-flex font-bold cursor-pointer"
-          />
+            :to="item.to"
+            class="hidden rounded-lg bg-vermilionDark px-4 py-2.5 text-sm font-semibold text-white hover:brightness-90 lg:inline-flex"
+            @click.prevent="handleNavigate(item.to)"
+          >{{ item.label }} ↗</NuxtLink>
 
-          <!-- NAV LINK -->
-          <!-- <NuxtLink
+          <NuxtLink
             v-else
             :to="item.to"
             @click.prevent="handleNavigate(item.to)"
-            class="nav-link hidden lg:inline-flex"
+            class="hidden cursor-pointer text-sm text-sumi hover:text-vermilion lg:inline-flex"
           >
             {{ item.label }}
-          </NuxtLink> -->
-
-          <button
-            v-else
-            @click="handleNavigate(item.to)"
-            class="nav-link hidden lg:inline-flex cursor-pointer"
-          >
-            {{ item.label }}
-          </button>
+          </NuxtLink>
 
         </template>
 
@@ -94,13 +80,13 @@
 
   const menus = [
     {
-      label: '案例' ,
-      to: '/#projects',
+      label: '網站服務',
+      to: '/#services',
       type: 'link'
     },
     {
-      label: '網站服務',
-      to: '/#services',
+      label: '案例作品',
+      to: '/#projects',
       type: 'link'
     },
     {
@@ -111,6 +97,11 @@
     {
       label: '關於 Elio',
       to: '/#about',
+      type: 'link'
+    },
+    {
+      label: '常見問題',
+      to: '/#faq',
       type: 'link'
     },
     {

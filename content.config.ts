@@ -37,6 +37,13 @@ export default defineContentConfig({
       // 卡片資訊
       // ==========================================================================
 
+      caseStudy: z.object({
+        label: z.string(),
+        scope: z.array(z.string()),
+        process: z.array(z.object({ title: z.string(), description: z.string(), illustration: z.string().optional() })),
+        result: z.string(),
+      }).optional(),
+
       card: z.object({
         title: z.string(),
         description: z.string()
@@ -83,6 +90,7 @@ export default defineContentConfig({
       showcase: z.array(
         z.object({
           title: z.string(),
+          icon: z.string().optional(),
           description: z.string(),
           features: z.array(z.string())
       })
@@ -247,7 +255,8 @@ export default defineContentConfig({
       gallery: z.array(
         z.object({
           title: z.string(),
-          image: z.string()
+          image: z.string(),
+          device: z.enum(['laptop', 'phone']).optional()
         })
       ),
 
