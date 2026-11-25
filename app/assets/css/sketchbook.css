@@ -173,7 +173,13 @@
 .journey-traveler[data-pose="think"] [data-frame="think"],
 .journey-traveler[data-pose="crouch"] [data-frame="crouch"],
 .journey-traveler[data-pose="drop"] [data-frame="drop"],
-.journey-traveler[data-pose="read"] [data-frame="read"] { visibility: visible; }
+.journey-traveler[data-pose="read"] [data-frame="read"],
+.journey-traveler[data-pose="poke-head-react"] [data-frame="poke-head-react"],
+.journey-traveler[data-pose="poke-head-settle"] [data-frame="poke-head-settle"],
+.journey-traveler[data-pose="poke-body-react"] [data-frame="poke-body-react"],
+.journey-traveler[data-pose="poke-body-settle"] [data-frame="poke-body-settle"],
+.journey-traveler[data-pose="poke-feet-react"] [data-frame="poke-feet-react"],
+.journey-traveler[data-pose="poke-feet-settle"] [data-frame="poke-feet-settle"] { visibility: visible; }
 .journey-traveler [data-frame="think"] { --pose-height: 1.14; }
 .journey-traveler [data-frame="crouch"] { --pose-height: .79; }
 @media (max-width: 600px) {
@@ -776,5 +782,65 @@
     36% { translate: 1% 12%; rotate: -2deg; }
     62% { translate: 3% 46%; rotate: -6deg; }
     100% { translate: 5% 115%; rotate: -10deg; }
+  }
+}
+
+/* ── Poking Elio on the home page ─────────────────────────────────────────── */
+html.journey-poke-hover { cursor: pointer; }
+.journey-bubble {
+  position: absolute;
+  z-index: 8;
+  width: max-content;
+  max-width: min(15rem, calc(100% - 1rem));
+  padding: .6rem .8rem .7rem;
+  transform: translate(-50%, calc(-100% - 12px));
+  background: var(--card) url('/images/sketchbook/paper.webp');
+  background-blend-mode: multiply;
+  border: 1px solid var(--rule);
+  border-radius: 2% 3% 3% 2% / 4% 3% 5% 2%;
+  box-shadow: 2px 3px 0 var(--shadow-brown);
+  color: var(--ink);
+  font-size: .9rem;
+  line-height: 1.45;
+}
+.journey-bubble p { margin: 0; }
+.journey-bubble .ink-button { margin-top: .45rem; font-size: .82rem; }
+.journey-bubble::after {
+  content: '';
+  position: absolute;
+  left: var(--tail, 50%);
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  translate: -50% 0;
+  rotate: 45deg;
+  background: var(--card);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .journey-bubble { transform-origin: 50% 100%; animation: journey-bubble-pop 200ms cubic-bezier(.3,1.4,.5,1) both; }
+  .journey-traveler[data-reaction] img { transform-origin: 50% 100%; }
+  .journey-traveler[data-reaction="legs"] img { animation: journey-hop 400ms cubic-bezier(.3,.8,.4,1) both; }
+  @keyframes journey-bubble-pop {
+    from { opacity: 0; scale: .85; translate: 0 6px; }
+    to { opacity: 1; scale: 1; translate: 0 0; }
+  }
+  @keyframes journey-bonk {
+    0%, 100% { rotate: 0deg; }
+    20% { rotate: -8deg; }
+    45% { rotate: 6deg; }
+    70% { rotate: -3deg; }
+  }
+  @keyframes journey-wiggle {
+    0%, 100% { scale: 1 1; }
+    30% { scale: 1.07 .93; }
+    60% { scale: .97 1.05; }
+  }
+  @keyframes journey-hop {
+    0%, 100% { translate: 0 0; scale: 1 1; }
+    18% { translate: 0 0; scale: 1.06 .92; }
+    50% { translate: 0 -8px; scale: .98 1.03; }
+    82% { translate: 0 0; scale: 1.05 .94; }
   }
 }

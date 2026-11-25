@@ -14,6 +14,10 @@
       <img v-for="name in visiblePoses" :key="name" :data-frame="name" :src="'/images/sketchbook/pose-' + (name === 'read' ? 'read-v2' : name) + '.webp'" alt="" decoding="async">
     </div>
   </div>
+  <div v-if="bubble.open" ref="bubbleEl" class="journey-bubble" role="status" :style="{ left: bubble.left + 'px', top: bubble.top + 'px', '--tail': bubble.tail + 'px' }">
+    <p>{{ bubble.text }}</p>
+    <NuxtLink v-if="bubble.to" :to="bubble.to" class="ink-button" @click="closeBubble">{{ bubble.label }}</NuxtLink>
+  </div>
 </template>
 
 <script setup>
@@ -28,7 +32,14 @@ const reveal = ref(null)
 const jumpGap = ref(null)
 const traveler = ref(null)
 const landingMarks = ref(null)
-const poses = ['idle', 'walk', 'run', 'wave', 'present', 'think', 'crouch', 'drop', 'read']
+const bubbleEl = ref(null)
+const bubble = reactive({ open: false, text: '', to: '', label: '', left: 0, top: 0, tail: 0 })
+
+function closeBubble() {
+  bubble.open = false
+}
+const poses = ['idle', 'walk', 'run', 'wave', 'present', 'think', 'crouch', 'drop', 'read',
+  'poke-head-react', 'poke-head-settle', 'poke-body-react', 'poke-body-settle', 'poke-feet-react', 'poke-feet-settle']
 const flightFrames = ['fly-slow', 'fly-down', 'fly-dive', 'fly-up', 'fly-land']
 const mobileFlight = ref(false)
 const visiblePoses = computed(() => mobileFlight.value ? [...poses, ...flightFrames] : poses)
@@ -147,11 +158,23 @@ onMounted(() => {
     let pacedLength = 0
     let previousProgress = 0
     let running = false
+    let reacting = false
+    let restoreTo = 'idle'
+    let reactionTimer
+    let settleReactionTimer
+    let bubbleTimer
+    let bubbleScroll = 0
+    let pokeTimes = []
+    const lineCursor = { head: 0, body: 0, legs: 0 }
 
-    function pose(name) {
-      if (traveler.value.dataset.pose === name) return
+    function applyPose(name) {
       traveler.value.dataset.pose = name
       notebook.classList.toggle('journey-thinking', name === 'think')
+    }
+
+    function pose(name) {
+      if (reacting || traveler.value.dataset.pose === name) return
+      applyPose(name)
     }
 
     function distanceAtProgress(progress) {
@@ -166,6 +189,7 @@ onMounted(() => {
     }
 
     function paint(progress, velocity = 0) {
+      if (reacting) endReaction()
       const arrivalProgress = gsap.utils.clamp(0, 1, (progress - arrivalStart) / (1 - arrivalStart))
       const swapped = arrivalProgress >= arrivalSwap
       const growth = gsap.utils.clamp(0, 1, (arrivalProgress - arrivalSwap) / (1 - arrivalSwap))
@@ -523,7 +547,183 @@ onMounted(() => {
     rebuild()
     resize.observe(notebook)
 
+    // ── Poking Elio ─────────────────────────────────────────────────────────
+    // The layer is decorative and sits behind the content, so clicks are caught on the
+    // document and hit-tested against the sprite's visible pixels (not its box).
+    const restingPoses = ['idle', 'wave', 'present', 'think', 'read']
+    const alphaCache = new Map()
+    const zoneSprite = { head: 'poke-head', body: 'poke-body', legs: 'poke-feet' }
+    const zoneLines = {
+      head: ['哎呀！別戳我的頭～', '嘿，我正在想事情耶', '頭髮要亂掉啦！'],
+      legs: ['癢癢的～哈哈', '別戳腳啦！', '差點跌倒…'],
+    }
+    const sectionTalk = {
+      hero: { text: '嗨，我是 Elio！先看看我能幫你做什麼吧', label: '看服務', to: '/#services' },
+      services: { text: '想知道哪一種服務適合你？', label: '和我聊聊', to: '/contact' },
+      projects: { text: '這些都是我一件一件做出來的', label: '看全部作品', to: '/#projects' },
+      process: { text: '流程很簡單，先聊聊你的想法就好', label: '開始討論', to: '/contact' },
+      about: { text: '我喜歡把資訊整理成好讀的頁面', label: '合作洽詢', to: '/contact' },
+      faq: { text: '還有問題嗎？直接問我最快', label: '合作洽詢', to: '/contact' },
+    }
+
+    function visibleFrame() {
+      return traveler.value.querySelector('[data-frame="' + traveler.value.dataset.pose + '"]')
+    }
+
+    // Returns the vertical position (0 = top of the sprite, 1 = feet) when the pointer is on a solid pixel.
+    function spriteHit(clientX, clientY) {
+      const t = traveler.value
+      if (!t.classList.contains('is-ready') || t.dataset.cardStage) return null
+      if (!reacting && !restingPoses.includes(t.dataset.pose)) return null
+      const img = visibleFrame()
+      if (!img || !img.complete || !img.naturalWidth) return null
+      const rect = img.getBoundingClientRect()
+      if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return null
+      let u = (clientX - rect.left) / rect.width
+      const v = (clientY - rect.top) / rect.height
+      if (Number.parseFloat(getComputedStyle(t).getPropertyValue('--facing')) < 0) u = 1 - u
+      let image = alphaCache.get(img.currentSrc)
+      if (!image) {
+        const canvas = document.createElement('canvas')
+        canvas.width = img.naturalWidth
+        canvas.height = img.naturalHeight
+        const context = canvas.getContext('2d', { willReadFrequently: true })
+        context.drawImage(img, 0, 0)
+        image = context.getImageData(0, 0, canvas.width, canvas.height)
+        alphaCache.set(img.currentSrc, image)
+      }
+      const x = Math.min(image.width - 1, Math.max(0, Math.floor(u * image.width)))
+      const y = Math.min(image.height - 1, Math.max(0, Math.floor(v * image.height)))
+      return image.data[(y * image.width + x) * 4 + 3] > 60 ? v : null
+    }
+
+    function currentSection() {
+      // Elio often stands in the gap between two sections, so pick the nearest one.
+      const foot = visibleFrame().getBoundingClientRect().bottom - 8
+      let nearest = null
+      let nearestDistance = Infinity
+      for (const id of ['hero', 'services', 'projects', 'process', 'about', 'faq']) {
+        const box = notebook.querySelector('#' + id)?.getBoundingClientRect()
+        if (!box) continue
+        const distance = foot < box.top ? box.top - foot : foot > box.bottom ? foot - box.bottom : 0
+        if (distance < nearestDistance) {
+          nearest = id
+          nearestDistance = distance
+        }
+      }
+      return nearestDistance < 260 ? nearest : null
+    }
+
+    function endReaction() {
+      clearTimeout(reactionTimer)
+      clearTimeout(settleReactionTimer)
+      if (reacting) {
+        reacting = false
+        applyPose(restoreTo)
+      }
+      traveler.value.removeAttribute('data-reaction')
+      bubble.open = false
+      clearTimeout(bubbleTimer)
+    }
+
+    async function poke(zone) {
+      const t = traveler.value
+      if (!reacting) restoreTo = t.dataset.pose
+      reacting = true
+      clearTimeout(reactionTimer)
+      const now = performance.now()
+      pokeTimes = pokeTimes.filter(time => now - time < 4000)
+      pokeTimes.push(now)
+      applyPose(zoneSprite[zone] + '-react')
+      clearTimeout(settleReactionTimer)
+      settleReactionTimer = setTimeout(() => {
+        if (reacting) applyPose(zoneSprite[zone] + '-settle')
+      }, 520)
+      t.removeAttribute('data-reaction')
+      void t.offsetWidth // restart the motion when poked again
+      t.dataset.reaction = zone
+
+      let talk
+      if (pokeTimes.length >= 6) {
+        talk = { text: '好啦好啦～再戳我要去工作囉' }
+      } else if (zone === 'body') {
+        talk = sectionTalk[currentSection()] ?? { text: '嗨！需要幫忙嗎？', label: '合作洽詢', to: '/contact' }
+      } else {
+        talk = { text: zoneLines[zone][lineCursor[zone]++ % zoneLines[zone].length] }
+      }
+      bubble.text = talk.text
+      bubble.label = talk.label ?? ''
+      bubble.to = talk.to ?? ''
+      bubble.open = true
+      bubbleScroll = window.scrollY
+      await nextTick()
+
+      const rect = visibleFrame().getBoundingClientRect()
+      const frame = notebook.getBoundingClientRect()
+      const width = bubbleEl.value?.offsetWidth ?? 0
+      const centre = rect.left + rect.width / 2 - frame.left
+      const left = gsap.utils.clamp(width / 2 + 8, Math.max(width / 2 + 8, frame.width - width / 2 - 8), centre)
+      bubble.left = left
+      bubble.top = rect.top - frame.top
+      bubble.tail = gsap.utils.clamp(16, Math.max(16, width - 16), width / 2 + centre - left)
+
+      reactionTimer = setTimeout(() => {
+        reacting = false
+        applyPose(restoreTo)
+        t.removeAttribute('data-reaction')
+      }, 1900)
+      clearTimeout(bubbleTimer)
+      bubbleTimer = setTimeout(() => { bubble.open = false }, talk.to ? 6000 : 4200)
+    }
+
+    function onPointerDown(event) {
+      if (event.button !== 0) return
+      if (event.target.closest?.('.journey-bubble')) return
+      if (event.target.closest?.('a, button, summary, input, textarea, select, label, [role="button"]')) {
+        bubble.open = false
+        return
+      }
+      const v = spriteHit(event.clientX, event.clientY)
+      if (v === null) {
+        bubble.open = false
+        return
+      }
+      poke(v < .34 ? 'head' : v < .68 ? 'body' : 'legs')
+    }
+
+    let hoverFrame
+    function onPointerMove(event) {
+      if (event.pointerType !== 'mouse') return
+      cancelAnimationFrame(hoverFrame)
+      hoverFrame = requestAnimationFrame(() => {
+        document.documentElement.classList.toggle('journey-poke-hover', spriteHit(event.clientX, event.clientY) !== null)
+      })
+    }
+
+    function onScrollAway() {
+      if (bubble.open && Math.abs(window.scrollY - bubbleScroll) > 40) bubble.open = false
+    }
+
+    function onKeyDown(event) {
+      if (event.key === 'Escape') bubble.open = false
+    }
+
+    document.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('pointermove', onPointerMove, { passive: true })
+    window.addEventListener('scroll', onScrollAway, { passive: true })
+    document.addEventListener('keydown', onKeyDown)
+
     return () => {
+      document.removeEventListener('pointerdown', onPointerDown)
+      document.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('scroll', onScrollAway)
+      document.removeEventListener('keydown', onKeyDown)
+      cancelAnimationFrame(hoverFrame)
+      clearTimeout(reactionTimer)
+      clearTimeout(settleReactionTimer)
+      clearTimeout(bubbleTimer)
+      document.documentElement.classList.remove('journey-poke-hover')
+      bubble.open = false
       resize.disconnect()
       cancelAnimationFrame(frame)
       clearTimeout(settle)
