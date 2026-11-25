@@ -5,6 +5,19 @@
   --accent: #9e432c;
   --rule: #a68f78;
   --paper: #fbf2e4;
+  --accent-strong: #8f3526;
+  --accent-bright: #ad432d;
+  --ray-red: #b95738;
+  --sun: #c5812c;
+  --sage: #6e7650;
+  --sage-fill: #b5b37b72;
+  --tan: #bca58d;
+  --tan-dark: #a17b56;
+  --tan-light: #cfbba2;
+  --shadow-brown: #8e6c483b;
+  --card: #fff6e7;
+  --card-warm: #fcf2df;
+  --note: #f7e6cd;
   --heading: "Klee One", "Noto Serif TC", "Microsoft JhengHei", serif;
   background: var(--paper) url('/images/sketchbook/paper.webp') repeat;
   color: var(--ink);
@@ -41,7 +54,7 @@
 .hero-copy { padding: 1.25rem 0 1.4rem 1.5rem; z-index: 1; }
 .hero-copy h1 { font-size: clamp(1.75rem, 3.75vw, 3.1rem); margin: .85rem 0; letter-spacing: .025em; }
 .hero-copy h1 span { position: relative; white-space: nowrap; }
-.hero-copy h1 span::after { content: ""; position: absolute; left: 0; right: -.1rem; bottom: -.2rem; height: 6px; border-top: 4px solid #b95738; border-radius: 50%; transform: rotate(-3deg); }
+.hero-copy h1 span::after { content: ""; position: absolute; left: 0; right: -.1rem; bottom: -.2rem; height: 6px; border-top: 4px solid var(--ray-red); border-radius: 50%; transform: rotate(-3deg); }
 .hero-copy > p:not(.tape-label) { color: var(--soft-ink); font-size: .92rem; }
 .tape-label { display: inline-block; background: #efd1a9; box-shadow: 1px 2px 0 #aa805a4d; padding: .18rem .7rem; color: var(--ink); transform: rotate(-5deg); clip-path: polygon(1% 5%, 99% 0%, 97% 92%, 2% 100%, 4% 60%); font-family: var(--heading); font-weight: 750; }
 .note-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: .8rem; }
@@ -51,7 +64,7 @@
 .services-intro { margin: 0 0 1rem 17%; }
 .note-services { padding: .75rem 1.5rem 2.5rem; }
 .service-notes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.6rem, 2.3vw, 1.55rem); margin-left: 8%; }
-.paper-note { position: relative; background: #fcf0dd url('/images/sketchbook/paper.webp'); border: 1px solid var(--rule); border-radius: 2% 3% 3% 2% / 4% 3% 5% 2%; box-shadow: 2px 3px 0 #8e6c483b; }
+.paper-note { position: relative; background: var(--card-warm) url('/images/sketchbook/paper.webp'); border: 1px solid var(--rule); border-radius: 2% 3% 3% 2% / 4% 3% 5% 2%; box-shadow: 2px 3px 0 var(--shadow-brown); }
 .paper-note::before, .polaroid::before, .work-card::before { content: ""; position: absolute; z-index: 2; pointer-events: none; width: 36px; height: 12px; top: -6px; right: 12px; transform: rotate(13deg); background: #e9bc7cbd; clip-path: polygon(0 8%,100% 0,95% 100%,0 89%,7% 51%); }
 .service-notes .paper-note { display: grid; justify-items: center; align-content: center; min-height: 125px; padding: .75rem .45rem; text-align: center; }
 .service-notes .paper-note:nth-child(even) { rotate: 1deg; }
@@ -65,12 +78,12 @@
 .note-works .ink-button, .note-about .ink-button, .note-contact .ink-button { margin-top: .55rem; }
 .work-deck { min-width: 0; }
 .work-track { display: flex; gap: .15rem; position: relative; padding: 1.15rem .75rem; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; overflow-anchor: none; }
-.work-card { position: relative; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; background: #f7ead8; border: 1px solid var(--rule); padding: .45rem .45rem .2rem; box-shadow: 3px 4px 0 #8e6c4838; rotate: -5deg; }
+.work-card { position: relative; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; background: #f7ead8; border: 1px solid var(--rule); padding: .45rem .45rem .2rem; box-shadow: 3px 4px 0 var(--shadow-brown); rotate: -5deg; }
 .work-card:last-child { scroll-snap-align: end; }
 .work-card:nth-child(2n) { rotate: 4deg; }
 .work-card:nth-child(3n) { rotate: 6deg; }
 .work-card:hover, .work-card:focus-within { z-index: 3; rotate: 0deg; translate: 0 -5px; }
-.work-card img { width: 100%; aspect-ratio: 1.55; object-fit: contain; background: #eee0cd; border: 1px solid #cfbba2; }
+.work-card img { width: 100%; aspect-ratio: 1.55; object-fit: contain; background: #eee0cd; border: 1px solid var(--tan-light); }
 .work-card h3 { margin: .35rem .1rem; font-size: .79rem; }
 .work-controls { display: flex; align-items: center; justify-content: flex-end; gap: .55rem; font-size: .78rem; }
 .work-controls button { display: grid; place-items: center; min-width: 42px; min-height: 42px; color: var(--accent); }
@@ -86,7 +99,7 @@
 .process-notes li:nth-child(2n) { rotate: 1deg; }
 
 .note-about { display: grid; grid-template-columns: minmax(0,.7fr) minmax(0,.65fr) minmax(0,1fr); gap: clamp(.8rem,3vw,2rem); align-items: center; padding: .65rem 5% 1.7rem 4%; }
-.polaroid { position: relative; justify-self: center; width: min(100%, 172px); padding: .45rem .45rem .8rem; border: 1px solid var(--rule); background: #fff7e9; rotate: -9deg; box-shadow: 3px 4px 0 #997b5740; }
+.polaroid { position: relative; justify-self: center; width: min(100%, 172px); padding: .45rem .45rem .8rem; border: 1px solid var(--rule); background: var(--card); rotate: -9deg; box-shadow: 3px 4px 0 #997b5740; }
 .polaroid img { width: 100%; height: auto; aspect-ratio: 1.1; object-fit: cover; object-position: center 22%; }
 .about-note { padding: 1rem; rotate: -2deg; }
 .about-note::before { display: none; }
@@ -200,7 +213,7 @@
 @media (min-width: 681px) { .sketchbook .note-process { padding-block-end: clamp(108px, 12vw, 138px); } }
 .sketchbook .note-contact { margin-block-start: 12rem; }
 .sketchbook .scenery { position: absolute; pointer-events: none; }
-.sketchbook .scenery-grass { width: clamp(38px, 6vw, 70px); stroke: #747650; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.sketchbook .scenery-grass { width: clamp(38px, 6vw, 70px); stroke: var(--sage); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .sketchbook .grass-services { left: 4%; translate: 0 -38%; rotate: -7deg; }
 .sketchbook .grass-works { right: 3%; translate: 0 0; rotate: 10deg; }
 .sketchbook .scenery-mountain { width: clamp(95px, 21vw, 230px); height: auto; right: -8%; bottom: .1rem; }
@@ -339,13 +352,13 @@
   .journey-traveler[data-pose="fly-up"] [data-frame="fly-up"] { animation: elio-glide 420ms ease-in-out infinite; }
   .journey-traveler[data-pose="fly-dive"]::after {
     content: ""; position: absolute; bottom: calc(var(--scene-height, var(--journey-height)) * .62);
-    left: -8px; width: 16px; height: 14px; border-inline: 1px dashed #a17b56;
+    left: -8px; width: 16px; height: 14px; border-inline: 1px dashed var(--tan-dark);
     animation: elio-pencil-speed 260ms linear infinite;
   }
   .journey-traveler[data-pose="fly-land"] [data-frame="fly-land"] { animation: elio-flight-landing 180ms ease-out both; transform-origin: center bottom; }
   .journey-traveler[data-pose="fly-land"]::after {
     content: ""; position: absolute; bottom: -2px; left: -8px; width: 16px; height: 4px;
-    border-top: 1px dashed #a17b56; animation: elio-landing-marks 180ms ease-out both;
+    border-top: 1px dashed var(--tan-dark); animation: elio-landing-marks 180ms ease-out both;
   }
   @keyframes elio-glide {
     0%, 100% { translate: 0 0; }
@@ -387,7 +400,7 @@
   background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: 5px 8px 6px 7px;
-  box-shadow: 2px 2px 0 #8e6c4833;
+  box-shadow: 2px 2px 0 var(--shadow-brown);
 }
 .sketchbook .back-to-top .iconify { width: 19px; height: 19px; }
 .sketchbook .back-to-top {
@@ -445,7 +458,7 @@
 .inquiry-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
 .sketchbook .inquiry-fields label { font-weight: 650; color: var(--ink); }
 .sketchbook .inquiry-fields .inquiry-control {
-  min-height: 44px; padding: .65rem .8rem; border: 1px solid #bca58d; border-radius: .55rem;
+  min-height: 44px; padding: .65rem .8rem; border: 1px solid var(--tan); border-radius: .55rem;
   background: #fffaf071; color: var(--ink); box-shadow: 1px 2px 0 #8e6c481a;
 }
 .sketchbook .inquiry-fields textarea.inquiry-control { min-height: 115px; }
@@ -459,15 +472,15 @@
 .inquiry-select-options .inquiry-select-option { color: #45362b; }
 .inquiry-select-options .inquiry-select-option[data-state="checked"] { color: #8f3526; }
 .inquiry-select-options .inquiry-select-option[data-highlighted]:not([data-disabled])::before { background: #eedcc4; }
-.inquiry-select-options .inquiry-select-check { color: #a4432f; }
+.inquiry-select-options .inquiry-select-check { color: #ad432d; }
 .inquiry-submit { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .8rem 1.25rem; margin-block-start: clamp(.4rem, 1.8vw, 1.25rem); }
 .inquiry-submit p { font-size: .78rem; color: var(--soft-ink); }
 .inquiry-submit-action { position: relative; justify-self: end; }
-.inquiry-submit-action svg { position: absolute; inset: -23px -23px auto auto; width: 27px; stroke: #c5812c; stroke-width: 2.6; stroke-linecap: round; pointer-events: none; }
+.inquiry-submit-action svg { position: absolute; inset: -23px -23px auto auto; width: 27px; stroke: var(--sun); stroke-width: 2.6; stroke-linecap: round; pointer-events: none; }
 .sketchbook .inquiry-submit-button { justify-content: center; gap: .85rem;
   width: var(--inquiry-submit-width); min-height: 48px; padding: .62rem .85rem;
-  color: #fff9ef; border: 1px solid #8b3423; border-radius: 9px 12px 10px 11px;
-  background: #ad432d url('/images/sketchbook/paper.webp') repeat;
+  color: #fff9ef; border: 1px solid var(--accent-strong); border-radius: 9px 12px 10px 11px;
+  background: var(--accent-bright) url('/images/sketchbook/paper.webp') repeat;
   background-blend-mode: multiply;
   box-shadow: inset 0 0 0 1px #fff3df27, 1px 2px 0 #71352335;
   font-size: 1rem; letter-spacing: .08em; white-space: nowrap;
@@ -510,7 +523,7 @@
 .sketchbook-contact .inquiry-hero { position: relative; isolation: isolate; padding-block-start: .35rem; }
 .sketchbook-contact .inquiry-hero-copy { position: relative; z-index: 1; padding-block: 1rem; }
 .sketchbook-contact .inquiry-hero-art { align-self: end; justify-self: end; width: 105%; max-width: none; translate: 2% .3rem; }
-.sketchbook-contact .contact-scenery { position: absolute; width: 70px; height: auto; color: #6e7650; fill: #c3c18c66; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.sketchbook-contact .contact-scenery { position: absolute; width: 70px; height: auto; color: var(--sage); fill: var(--sage-fill); stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 .sketchbook-contact .contact-leaf-hatch { fill: none; stroke-width: .7; opacity: .7; }
 .sketchbook-contact { position: relative; }
 .sketchbook-contact > .inquiry-hero-leaves {
@@ -538,7 +551,7 @@
 }
 
 .sketchbook-contact .inquiry-paper {
-  --inquiry-paper-color: #f6e6cd;
+  --inquiry-paper-color: var(--note);
   position: relative; isolation: isolate; border: 0; box-shadow: none; background: none;
   filter: drop-shadow(1px 2px 1px #6d523540);
 }
@@ -591,7 +604,7 @@
   background-size: 420px auto;
   background-blend-mode: multiply;
   border-color: #a7896a9c;
-  box-shadow: 1px 2px 0 #8e6c4830, 2px 4px 6px #6d50351c, inset 0 0 0 2px #fff4e0a6;
+  box-shadow: 1px 2px 0 var(--shadow-brown), 2px 4px 6px #6d50351c, inset 0 0 0 2px #fff4e0a6;
 }
 .sketchbook-home .paper-note::before, .sketchbook-home .work-card::before,
 .sketchbook-home .polaroid::before, .sketchbook-home .tape-label {
@@ -599,11 +612,11 @@
   background-size: 185px auto;
   background-blend-mode: multiply;
 }
-.sketchbook-home .pencil-rays { width: 31px; stroke: #b76244; stroke-width: 2.5; stroke-linecap: round; }
-.sketchbook-home .rays-services { inset: -.6rem 4% auto auto; rotate: 20deg; stroke: #be802c; }
+.sketchbook-home .pencil-rays { width: 31px; stroke: var(--ray-red); stroke-width: 2.5; stroke-linecap: round; }
+.sketchbook-home .rays-services { inset: -.6rem 4% auto auto; rotate: 20deg; stroke: var(--sun); }
 .sketchbook-home .rays-works { inset: -.4rem auto auto -.5rem; rotate: -31deg; }
 .sketchbook-home .rays-about { inset: -.5rem 40% auto auto; rotate: 27deg; }
-.sketchbook-home .pencil-sprig { width: clamp(34px, 6vw, 68px); right: -1.1rem; bottom: -2.3rem; color: #6c714c; fill: #b5b37b72; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.sketchbook-home .pencil-sprig { width: clamp(34px, 6vw, 68px); right: -1.1rem; bottom: -2.3rem; color: var(--sage); fill: var(--sage-fill); stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .sketchbook-home .pencil-sprig-veins { fill: none; stroke-width: .8; }
 .sketchbook-home .pencil-cloud { width: clamp(32px, 4.6vw, 58px); left: 0; bottom: .18rem; stroke: #9a7e65; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 680px) {
