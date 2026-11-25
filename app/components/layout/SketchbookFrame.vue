@@ -55,7 +55,7 @@ const links = computed(() => [
   { label: '首頁', to: homeLink('#page-top') },
   { label: '服務', to: homeLink('#services') },
   { label: '作品', to: homeLink('#projects') },
-  { label: '合作流程', to: route.path === '/contact' ? '#contact-process' : '#process' },
+  { label: '合作流程', to: route.path === '/contact' ? '#contact-process' : homeLink('#process') },
   { label: '關於', to: homeLink('#about') },
   { label: '常見問題', to: homeLink('#faq') },
 ])

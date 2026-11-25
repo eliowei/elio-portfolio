@@ -22,7 +22,7 @@ highlights:
   - 響應式網頁設計
   - 專案案例展示
 
-cover: /images/projects/personal-website/cover.png
+cover: /images/projects/personal-website/01.jpg
 
 tags:
   - 品牌網站
@@ -204,13 +204,13 @@ challenges:
 gallery:
 
 - title: 首頁 Hero
-  image: /images/projects/personal-website/01.png
+  image: /images/projects/personal-website/01.jpg
 
 - title: Case Study 列表
-  image: /images/projects/personal-website/02.png
+  image: /images/projects/personal-website/02.jpg
 
 - title: 作品詳情
-  image: /images/projects/personal-website/03.png
+  image: /images/projects/personal-website/03.jpg
 
 # ============================================================================
 # Layout

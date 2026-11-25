@@ -74,5 +74,9 @@ export default defineNuxtConfig({
     '/**': {
       prerender: true
     }
+  },
+  experimental: {
+    // Vercel does not serve the extracted /_payload.json files (404 on every page change). Inline the data in the HTML instead.
+    payloadExtraction: false
   }
 })

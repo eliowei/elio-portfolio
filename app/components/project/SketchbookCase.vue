@@ -1,5 +1,5 @@
 <template>
-  <main id="main" class="sketchbook-case">
+  <main id="main" ref="caseRoot" class="sketchbook-case">
     <div v-if="paperSweeping" class="paper-tear case-arrival-paper" aria-hidden="true" @animationend.self="paperSweeping = false"><span class="paper-tear-intact"></span><span class="paper-tear-bits"></span></div>
     <div class="sheet case-main-sheet">
       <section class="case-hero" :class="{ 'case-hero--arriving': workArrival }" aria-labelledby="case-title">
@@ -250,10 +250,45 @@ const workArrival = ref(false)
 const paperSweeping = ref(false)
 let coverAnimation
 
+const caseRoot = ref(null)
+let revealObserver
+let pending = []
+let onPageEnd = null
+
 onMounted(() => {
   const from = takeWorkCover(props.project.slug)
   if (from) animateWorkArrival(from) // synchronous: no unpainted frame before the paper covers the page
+  watchChapters()
 })
+
+// Chapters below the hero fade and rise in once their top is well inside the screen (30% up from the bottom on
+// desktop, 15% on phones): the sections are tall, so triggering at the edge would play the animation unseen.
+// Anything already on screen is left alone.
+function watchChapters() {
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const inset = window.innerWidth >= 1024 ? 30 : 15
+  const reveal = el => {
+    el.classList.remove('is-awaiting-reveal')
+    el.classList.add('is-revealing')
+    revealObserver.unobserve(el)
+  }
+  revealObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) if (entry.isIntersecting) reveal(entry.target)
+  }, { rootMargin: `0px 0px -${inset}% 0px` })
+  pending = []
+  for (const chapter of caseRoot.value.querySelectorAll('.case-chapter, .case-invitation')) {
+    if (chapter.getBoundingClientRect().top < window.innerHeight * (1 - inset / 100)) continue
+    chapter.classList.add('is-awaiting-reveal')
+    revealObserver.observe(chapter)
+    pending.push(chapter)
+  }
+  // The last sections can never rise above the trigger line once the page has reached its end: show them then.
+  onPageEnd = () => {
+    if (window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 4) return
+    for (const el of pending) if (el.classList.contains('is-awaiting-reveal')) reveal(el)
+  }
+  window.addEventListener('scroll', onPageEnd, { passive: true })
+}
 
 function animateWorkArrival(from) {
   const frame = heroPhoto.value
@@ -271,6 +306,8 @@ function animateWorkArrival(from) {
 }
 
 onBeforeUnmount(() => {
+  revealObserver?.disconnect()
+  if (onPageEnd) window.removeEventListener('scroll', onPageEnd)
   coverAnimation?.cancel()
 })
 

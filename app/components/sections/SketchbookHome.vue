@@ -137,6 +137,9 @@ let revealObserver
 onMounted(() => {
   if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+  // Start once the section's top is well inside the screen, not as it touches the bottom edge: 18% on desktop
+  // (tall screens show a lot of the section at once), 10% on phones.
+  const inset = window.innerWidth >= 1024 ? 18 : 10
   revealObserver = new IntersectionObserver(entries => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue
@@ -144,10 +147,10 @@ onMounted(() => {
       entry.target.classList.add('is-revealing')
       revealObserver.unobserve(entry.target)
     }
-  }, { rootMargin: '0px 0px -6% 0px' })
+  }, { rootMargin: `0px 0px -${inset}% 0px` })
 
   for (const section of notebook.value.querySelectorAll('[data-scroll-reveal]')) {
-    if (section.getBoundingClientRect().top < window.innerHeight * .94) continue
+    if (section.getBoundingClientRect().top < window.innerHeight * (1 - inset / 100)) continue
     section.classList.add('is-awaiting-reveal')
     revealObserver.observe(section)
   }

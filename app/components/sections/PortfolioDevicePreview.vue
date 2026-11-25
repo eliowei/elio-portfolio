@@ -12,7 +12,7 @@
       </div>
     </fieldset>
     <div class="mt-4 grid min-h-60 place-items-center overflow-hidden rounded-xl border border-paperBorder bg-washiDarker p-3 sm:min-h-72">
-      <NuxtImg v-if="preview === 'desktop'" src="/images/projects/personal-website/cover.png" width="1904" height="866" sizes="100vw lg:650px" alt="個人品牌網站桌機實作畫面" class="w-full rounded-md border border-paperBorder shadow-washi-md" />
+      <NuxtImg v-if="preview === 'desktop'" src="/images/projects/personal-website/01.jpg" width="1904" height="866" sizes="100vw lg:650px" alt="個人品牌網站桌機實作畫面" class="w-full rounded-md border border-paperBorder shadow-washi-md" />
       <div v-else class="w-44 rounded-[1.4rem] border-[5px] border-sumi bg-washiCard p-3 text-sumi shadow-washi-md">
         <div class="mx-auto mb-3 h-1 w-8 rounded-full bg-sumi" aria-hidden="true"></div>
         <p class="border-b border-paperBorder pb-2 text-xs font-bold">Elio Wei</p>

@@ -13,7 +13,7 @@
   border-top: 4px solid var(--accent); border-radius: 50%; rotate: -3deg;
 }
 .case-label { font-size: .86rem; font-weight: 700; color: var(--soft-ink); }
-.case-hero p:not(.note-index), .case-chapter p { color: var(--soft-ink); line-height: 1.7; }
+.case-hero p:not(.note-index), .case-chapter p:not(.note-index) { color: var(--soft-ink); line-height: 1.7; }
 .case-tags { display: flex; flex-wrap: wrap; gap: .35rem .55rem; margin-top: .85rem; }
 .case-tags li { border: 1px solid #b7a085; padding: .13rem .45rem; border-radius: .45rem; font-size: .76rem; background: #f2dfba55; }
 .case-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.1rem; }
@@ -302,4 +302,17 @@ html:has(.case-lightbox[open]) { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .case-arrival-paper, .case-tape-strokes { display: none; }
   .case-cover-elio--press { animation: none; }
+}
+
+/* Chapters rise into place as they scroll into view. Decorations only fade: they carry their own rotation. */
+@media (prefers-reduced-motion: no-preference) {
+  .sketchbook .case-chapter.is-revealing > :not(.case-decoration),
+  .sketchbook .case-invitation.is-revealing > * { animation: case-chapter-rise 520ms cubic-bezier(.22,.75,.25,1) backwards; }
+  .sketchbook .case-chapter.is-revealing > :nth-child(2) { animation-delay: 70ms; }
+  .sketchbook .case-chapter.is-revealing > :nth-child(3) { animation-delay: 140ms; }
+  .sketchbook .case-chapter.is-revealing > :nth-child(n+4) { animation-delay: 210ms; }
+  @keyframes case-chapter-rise {
+    from { opacity: 0; translate: 0 18px; }
+    to { opacity: 1; translate: 0 0; }
+  }
 }
