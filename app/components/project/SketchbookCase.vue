@@ -1,5 +1,6 @@
 <template>
   <main id="main" class="sketchbook-case">
+    <div v-if="paperSweeping" class="case-arrival-paper" aria-hidden="true" @animationend="paperSweeping = false"></div>
     <div class="sheet case-main-sheet">
       <section class="case-hero" aria-labelledby="case-title">
         <div>
@@ -15,7 +16,7 @@
             <NuxtLink v-if="project.github" :to="project.github" external target="_blank" rel="noopener noreferrer" class="ink-button ink-outline">查看原始碼 ↗</NuxtLink>
           </div>
         </div>
-        <figure class="case-cover">
+        <figure class="case-cover" :class="{ 'case-cover--sweeping': paperSweeping }">
           <svg class="case-decoration case-leaf-corner" viewBox="0 0 86 94" aria-hidden="true">
           <path d="M7 89Q43 55 65 10M30 65Q10 62 7 43q20 3 23 22Zm10-12q4-22 31-26-7 19-31 26Zm8-13Q28 33 29 14q17 5 19 26Zm8-7Q55 14 73 4q1 21-17 29Z" />
           <path class="case-leaf-veins" d="m13 48 13 13m18-12 19-16M33 21l12 15m15-8L69 9" />
@@ -26,10 +27,17 @@
             <path class="case-leaf-veins" d="m39 12 9 2m-23 9 9-1m-16 14 8-4M12 51l6-8m12 3 2-11m15 2 1-12M3 43l6-4" />
           </svg>
           <svg class="case-cover-rays" viewBox="0 0 40 36" fill="none" aria-hidden="true"><path d="m7 16-2-9m11 8 6-11m0 18 12-5" /></svg>
-          <div class="case-photo">
+          <div ref="heroPhoto" class="case-photo">
             <NuxtImg :src="project.cover" :alt="project.title.trim() + '的專案畫面'" sizes="100vw lg:640px" width="960" fetchpriority="high" />
           </div>
-          <NuxtImg src="/images/sketchbook/pose-present.webp" alt="" width="212" height="320" class="case-cover-elio" />
+          <span v-if="workArrival" class="case-cover-elio case-cover-elio--press" aria-hidden="true">
+            <img src="/images/sketchbook/pose-tape-press.webp" width="340" height="379" alt="">
+            <svg class="case-tape-strokes" viewBox="0 0 36 28" fill="none">
+              <path pathLength="1" d="m5 17 10 2" />
+              <path pathLength="1" d="m12 5 7 7" />
+            </svg>
+          </span>
+          <NuxtImg v-else src="/images/sketchbook/pose-present.webp" alt="" width="212" height="320" class="case-cover-elio" />
         </figure>
       </section>
 
@@ -89,9 +97,6 @@
             </span>
             <h3>{{ item.title }}</h3>
             <p>{{ item.description }}</p>
-            <ul v-if="item.features.length" class="case-highlight-features">
-              <li v-for="feature in item.features" :key="feature">{{ feature }}</li>
-            </ul>
           </article>
         </div>
       </section>
@@ -226,6 +231,8 @@
 </template>
 
 <script setup>
+import { takeWorkCover } from '~/utils/work-page-transition'
+
 const props = defineProps({ project: { type: Object, required: true } })
 const gallery = computed(() => props.project.gallery ?? [])
 const resultPreviews = computed(() => {
@@ -241,6 +248,44 @@ const processSteps = computed(() => props.project.caseStudy?.process ?? props.pr
 const technicalNotes = computed(() => [...(props.project.challenges ?? []), ...(props.project.systemDesign ?? [])])
 const numberFormat = new Intl.NumberFormat('zh-TW')
 const stackLabels = { frontend: '前端', backend: '後端', database: '資料庫', tools: '開發工具', messaging: '訊息整合', deployment: '部署', architecture: '架構' }
+
+const heroPhoto = ref(null)
+const workArrival = ref(false)
+const paperSweeping = ref(false)
+let arrivalFrame
+let coverAnimation
+
+onMounted(() => {
+  const from = takeWorkCover(props.project.slug)
+  if (from) arrivalFrame = requestAnimationFrame(() => animateWorkArrival(from))
+})
+
+function animateWorkArrival(from) {
+  const frame = heroPhoto.value
+  const image = frame?.querySelector('img')
+  if (!from || !frame?.animate || !image || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const to = image.getBoundingClientRect()
+  if (!to.width || !to.height) return
+  const x = from.left + from.width / 2 - to.left - to.width / 2
+  const y = from.top + from.height / 2 - to.top - to.height / 2
+  const scaleX = from.width / to.width
+  const scaleY = from.height / to.height
+
+  workArrival.value = true
+  paperSweeping.value = true
+  const fromCard = (lift) => `translate(${x}px, ${y - lift}px) scale(${scaleX}, ${scaleY})`
+  coverAnimation = frame.animate([
+    { transform: fromCard(0), offset: 0, easing: 'ease-out' },
+    { transform: fromCard(7), offset: .16, easing: 'cubic-bezier(.22,.75,.24,1)' },
+    { transform: 'none', offset: 1 },
+  ], { duration: 450 })
+}
+
+onBeforeUnmount(() => {
+  if (arrivalFrame !== undefined) cancelAnimationFrame(arrivalFrame)
+  coverAnimation?.cancel()
+})
 
 const lightbox = ref(null)
 const imageIndex = ref(null)

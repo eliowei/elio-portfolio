@@ -31,6 +31,7 @@
 .case-overview, .case-spread { display: grid; grid-template-columns: minmax(0,.62fr) minmax(0,1.38fr); gap: clamp(1.25rem,4vw,3.8rem); align-items: start; }
 .case-overview { align-items: center; }
 .case-scope { justify-self: center; width: min(100%, 390px); rotate: -3deg; padding: .85rem 1.1rem 1rem; }
+.sketchbook .case-scope { background-color: var(--note-yellow); }
 .case-scope .tape-label { margin-bottom: .55rem; }
 .case-checklist { display: grid; gap: .45rem; font-size: .92rem; }
 .case-checklist li { display: flex; align-items: flex-start; gap: .5rem; }
@@ -39,7 +40,6 @@
 .case-highlight-list article, .case-process-list li, .case-pricing article { min-width: 0; padding: .85rem; }
 .case-highlight-list article:nth-child(even), .case-process-list li:nth-child(even) { rotate: 1.1deg; }
 .case-highlight-list p, .case-process-list p, .case-faq-list dd { font-size: .91rem; }
-.case-highlight-features { color: var(--soft-ink); font-size: .78rem; list-style: disc; padding-inline-start: 1rem; margin-block-start: .4rem; }
 .case-process-list, .case-pricing, .case-faq-list, .case-technical-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
 .case-step { color: var(--accent); font-weight: 750; font-style: italic; }
 .case-pricing, .case-faq-list { margin-top: 1rem; }
@@ -181,7 +181,7 @@ html:has(.case-lightbox[open]) { overflow: hidden; }
   color: #674e38;
   border: 1px solid #987759;
   border-radius: 6% 12% 9% 8%;
-  background: #f5dcae url('/images/sketchbook/paper.webp') center / 200px auto;
+  background: var(--note-yellow) url('/images/sketchbook/paper.webp') center / 200px auto;
   background-blend-mode: multiply;
 }
 .case-highlight-list article:nth-child(even) .case-highlight-symbol { rotate: 5deg; background-color: #e7e5c6; }
@@ -262,4 +262,43 @@ html:has(.case-lightbox[open]) { overflow: hidden; }
   .case-overview-art .case-scope { width: min(95%, 390px); rotate: -3deg; }
   .case-overview-desk { width: min(100%, 185px); justify-self: end; }
   .case-overview-landscape { width: min(100%, 120px); }
+}
+
+.case-arrival-paper {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: #f7e5c8 url('/images/sketchbook/paper.webp') 0 0 / 640px auto;
+  background-blend-mode: multiply;
+  clip-path: polygon(0 18%, 8% 15%, 17% 18%, 23% 14%, 33% 15%, 40% 10%, 49% 12%, 57% 7%, 67% 8%, 74% 4%, 84% 5%, 95% 0, 100% 2%, 100% 100%, 0 100%);
+  animation: case-paper-sweep 390ms cubic-bezier(.33,.1,.35,1) 55ms both;
+}
+.case-cover--sweeping { z-index: 6; }
+.case-cover-elio--press { z-index: 1; bottom: -1rem; width: clamp(72px, 10vw, 120px); animation: case-tape-press 180ms ease-out 345ms both; }
+.case-cover-elio--press > img { display: block; width: 100%; height: auto; }
+.case-tape-strokes { position: absolute; top: 36%; left: -13%; width: 30%; stroke: #a94f32; stroke-width: 2.6; stroke-linecap: round; }
+.case-tape-strokes path { opacity: 0; stroke-dasharray: 1; stroke-dashoffset: 1; animation: case-tape-stroke 180ms ease-out 440ms both; }
+.case-tape-strokes path + path { animation-delay: 467ms; }
+@keyframes case-tape-stroke {
+  0% { opacity: 0; stroke-dashoffset: 1; }
+  36%, 65% { opacity: 1; stroke-dashoffset: 0; }
+  100% { opacity: 0; stroke-dashoffset: 0; }
+}
+@keyframes case-paper-sweep {
+  0% { transform: translateY(88%); opacity: .95; }
+  42% { transform: translateY(33%); opacity: .7; }
+  100% { transform: translateY(-105%); opacity: 0; }
+}
+@keyframes case-tape-press {
+  0% { opacity: 0; transform: translate(8px, 8px); }
+  68% { opacity: 1; transform: translate(-3px, 0); }
+  100% { opacity: 1; transform: translate(0, 0); }
+}
+@media (max-width: 680px) {
+  .case-cover-elio--press { width: clamp(54px, 16vw, 80px); bottom: -.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-arrival-paper, .case-tape-strokes { display: none; }
+  .case-cover-elio--press { animation: none; }
 }

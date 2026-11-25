@@ -1,8 +1,8 @@
 <template>
   <div class="work-deck" @pointerenter="hovered = $event.pointerType === 'mouse'" @pointerleave="hovered = false">
     <div id="project-carousel" ref="carousel" class="work-track" tabindex="0" role="region" aria-label="精選作品輪播" @scroll.passive="updateActive" @pointerdown="resetAfterInput" @wheel.passive="resetAfterInput" @focusin="focused = true" @focusout="focused = $event.currentTarget.contains($event.relatedTarget)" @keydown.left.self.prevent="move(-1)" @keydown.right.self.prevent="move(1)">
-      <article v-for="({ item, copy }, slot) in slides" :key="copy + item.slug" class="work-card" :class="{ 'is-current': slot === scrollIndex }" :aria-hidden="copy ? 'true' : undefined">
-        <NuxtLink :to="item.path" :external="item.slug === 'line-oa-platform'" class="block" :tabindex="copy ? -1 : undefined" @click="trackProjectView({ id: item.slug, title: item.card.title })">
+      <article v-for="({ item, copy }, slot) in slides" :key="copy + item.slug" class="work-card" :class="{ 'is-current': slot === scrollIndex }" :aria-hidden="copy ? 'true' : undefined" @click.capture="onWorkClick($event, item)">
+        <NuxtLink :to="item.path" :external="item.slug === 'line-oa-platform'" class="block" :tabindex="copy ? -1 : undefined">
           <NuxtImg :src="item.cover" :alt="item.card.title + '實作畫面'" width="640" sizes="68vw md:320px" loading="lazy" />
           <h3>{{ item.card.title }} ↗</h3>
         </NuxtLink>
@@ -12,12 +12,13 @@
       <button type="button" aria-label="上一個作品" aria-controls="project-carousel" @click="move(-1)">←</button>
       <span class="tabular-nums" :aria-live="autoplayActive ? 'off' : 'polite'">{{ active + 1 }} / {{ projects.length }}</span>
       <button type="button" aria-label="下一個作品" aria-controls="project-carousel" @click="move(1)">→</button>
-      <button type="button" aria-controls="project-carousel" class="px-2" @click="playing = !playing">{{ playing ? '暫停播放' : '自動播放' }}</button>
     </div>
   </div>
 </template>
 
 <script setup>
+import { rememberWorkCover } from '~/utils/work-page-transition'
+
 const props = defineProps({ projects: { type: Array, default: () => [] } })
 const carousel = ref(null)
 const active = ref(0)
@@ -130,4 +131,10 @@ function move(step) {
 }
 
 const { trackProjectView } = useAnalytics()
+
+function onWorkClick(event, item) {
+  trackProjectView({ id: item.slug, title: item.card.title })
+  const cover = event.currentTarget.querySelector('img')
+  if (cover) rememberWorkCover(event, item.slug, cover)
+}
 </script>

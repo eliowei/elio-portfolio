@@ -6,7 +6,7 @@
         <strong>Elio Wei<span>.</span></strong><small>網站設計與前端開發</small>
       </NuxtLink>
       <nav class="masthead-links" aria-label="主要導覽">
-        <NuxtLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</NuxtLink>
+        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" :aria-current="link.label === activeLabel ? 'page' : undefined">{{ link.label }}</NuxtLink>
       </nav>
       <div class="mobile-menu" @keydown.esc="closeMenu">
         <button ref="menuButton" type="button" class="menu-toggle" :aria-expanded="menuOpen" :aria-controls="menuId" :aria-label="menuOpen ? '關閉導覽選單' : '開啟導覽選單'" @click="menuOpen = !menuOpen">
@@ -57,6 +57,12 @@ const links = computed(() => [
   { label: '關於', to: homeLink('#about') },
   { label: '常見問題', to: homeLink('#faq') },
 ])
+
+const activeLabel = computed(() =>
+  route.path === '/' ? '首頁'
+    : route.path.startsWith('/projects') ? '作品'
+      : route.path === '/contact' ? '合作流程'
+        : null)
 
 function closeMenu() {
   if (!menuOpen.value) return
