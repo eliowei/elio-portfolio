@@ -844,3 +844,29 @@ html.journey-poke-hover { cursor: pointer; }
     82% { translate: 0 0; scale: 1.05 .94; }
   }
 }
+
+/* ── Picking Elio up: a fixed ghost follows the pointer ──────────────────── */
+html.journey-dragging, html.journey-dragging * { cursor: grabbing !important; }
+html.journey-dragging body { user-select: none; -webkit-user-select: none; }
+.journey-ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 35;
+  display: grid;
+  pointer-events: none;
+  transform: translate(calc(var(--x) - 50%), calc(var(--y) - 32%)) scaleY(calc(1 + var(--stretch, 0)));
+  transform-origin: 50% 32%;
+  filter: drop-shadow(0 6px 5px #5a3d2a33);
+  will-change: transform;
+}
+.journey-ghost img { grid-area: 1 / 1; display: block; width: auto; max-width: none; height: var(--h); }
+/* One drawing, two parts: the torso swings from the collar, the legs from the hips and lag behind it. */
+.journey-ghost-body { transform: rotate(var(--swing, 0deg)); transform-origin: 50% 32%; }
+.journey-ghost-carrier { grid-area: 1 / 1; display: block; transform: rotate(var(--swing, 0deg)); transform-origin: 50% 32%; }
+.journey-ghost-legs { transform: rotate(var(--legs, 0deg)); transform-origin: 50% 58%; }
+/* The hands are separate layers (scripts/split-lifted-hands.py); transform-origin is each cuff. */
+.journey-ghost-hand-l { transform: rotate(var(--arm-l, 0deg)); transform-origin: 21.1% 54.7%; }
+.journey-ghost-hand-r { transform: rotate(var(--arm-r, 0deg)); transform-origin: 79.7% 55%; }
+.journey-ghost[data-split] .journey-ghost-body { clip-path: inset(0 -30% 33% -30%); }
+.journey-ghost[data-split] .journey-ghost-legs { clip-path: inset(66% -30% 0 -30%); }

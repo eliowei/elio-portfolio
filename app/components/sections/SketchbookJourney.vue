@@ -18,6 +18,15 @@
     <p>{{ bubble.text }}</p>
     <NuxtLink v-if="bubble.to" :to="bubble.to" class="ink-button" @click="closeBubble">{{ bubble.label }}</NuxtLink>
   </div>
+  <div v-if="ghost.active" class="journey-ghost" aria-hidden="true" :data-split="ghost.frame === 'lifted' ? '' : null" :style="{ '--x': ghost.x + 'px', '--y': ghost.y + 'px', '--swing': ghost.swing + 'deg', '--legs': ghost.legs + 'deg', '--arm-l': ghost.armL + 'deg', '--arm-r': ghost.armR + 'deg', '--stretch': ghost.stretch, '--h': ghostHeight + 'px' }">
+    <template v-if="ghost.frame === 'lifted'">
+      <span class="journey-ghost-carrier"><img class="journey-ghost-legs" src="/images/sketchbook/pose-lifted-body.webp" alt=""></span>
+      <img class="journey-ghost-body" src="/images/sketchbook/pose-lifted-body.webp" alt="">
+      <span class="journey-ghost-carrier"><img class="journey-ghost-hand journey-ghost-hand-l" src="/images/sketchbook/pose-lifted-hand-l.webp" alt=""></span>
+      <span class="journey-ghost-carrier"><img class="journey-ghost-hand journey-ghost-hand-r" src="/images/sketchbook/pose-lifted-hand-r.webp" alt=""></span>
+    </template>
+    <img v-else class="journey-ghost-body" :src="ghostSrc" alt="">
+  </div>
 </template>
 
 <script setup>
@@ -35,11 +44,15 @@ const landingMarks = ref(null)
 const bubbleEl = ref(null)
 const bubble = reactive({ open: false, text: '', to: '', label: '', left: 0, top: 0, tail: 0 })
 
+const ghost = reactive({ active: false, x: 0, y: 0, swing: 0, legs: 0, armL: 0, armR: 0, stretch: 0, height: 116, frame: 'lifted' })
+const ghostSrc = computed(() => '/images/sketchbook/pose-' + ghost.frame + '.webp')
+const ghostHeight = computed(() => ghost.height * (ghost.frame === 'crouch' ? .79 : 1))
+
 function closeBubble() {
   bubble.open = false
 }
 const poses = ['idle', 'walk', 'run', 'wave', 'present', 'think', 'crouch', 'drop', 'read',
-  'poke-head-react', 'poke-head-settle', 'poke-body-react', 'poke-body-settle', 'poke-feet-react', 'poke-feet-settle']
+  'poke-head-react', 'poke-head-settle', 'poke-body-react', 'poke-body-settle', 'poke-feet-react', 'poke-feet-settle', 'lifted-body', 'lifted-hand-l', 'lifted-hand-r']
 const flightFrames = ['fly-slow', 'fly-down', 'fly-dive', 'fly-up', 'fly-land']
 const mobileFlight = ref(false)
 const visiblePoses = computed(() => mobileFlight.value ? [...poses, ...flightFrames] : poses)
@@ -676,49 +689,304 @@ onMounted(() => {
       bubbleTimer = setTimeout(() => { bubble.open = false }, talk.to ? 6000 : 4200)
     }
 
-    function onPointerDown(event) {
-      if (event.button !== 0) return
-      if (event.target.closest?.('.journey-bubble')) return
-      if (event.target.closest?.('a, button, summary, input, textarea, select, label, [role="button"]')) {
-        bubble.open = false
-        return
-      }
-      const v = spriteHit(event.clientX, event.clientY)
-      if (v === null) {
-        bubble.open = false
-        return
-      }
-      poke(v < .34 ? 'head' : v < .68 ? 'body' : 'legs')
+    // ── Picking Elio up ─────────────────────────────────────────────────────
+    // A fixed "ghost" copy follows the pointer above every layer while the real sprite
+    // stays on the path. On release the ghost drops back onto the sprite's current spot.
+    const DRAG_THRESHOLD = 6
+    // He hangs from the grabbed point like a weight on a rope: a damped pendulum driven by the
+    // pointer's acceleration, so a hard flick throws him further, and he overshoots and swings back.
+    const PENDULUM = { stiffness: 190, damping: 5.5, push: .0045, max: .45 } // push: rad/s² per px/s²; max in rad
+    const STRETCH = { stiffness: 230, damping: 11, push: .002, max: .06 } // vertical give when jerked up or down
+    // The legs hang from the hips and trail the torso: relative angle (rad) driven by the torso's angular acceleration.
+    const LEGS = { stiffness: 150, damping: 5.5, lag: .35, max: .3 }
+    // The hands hang from the cuffs: light and floppy, so softer springs and more lag than the legs.
+    const ARMS = { stiffness: 60, damping: 1.9, lag: .9, max: .7, rightStiffness: 1.12 }
+    const interactiveSelector = '.journey-bubble, a, button, summary, input, textarea, select, label, [role="button"]'
+    const grabLines = ['哇～放我下來啦！', '要掉下去啦～', '你力氣好大！']
+    const landLines = ['呼～差點摔倒', '謝啦，我繼續走囉']
+    const frameScale = { crouch: .79, think: 1.14 }
+    let press = null // { x, y, id, zone }
+    let dragging = false
+    let returning = false
+    let physicsFrame
+    let releaseFactor = 1
+    const pointer = { x: 0, y: 0 }
+    const sim = { angle: 0, omega: 0, legs: 0, legsVel: 0, armL: 0, armLVel: 0, armR: 0, armRVel: 0, stretch: 0, stretchVel: 0, vx: 0, vy: 0, px: 0, py: 0, t: 0 }
+    let returnFrame
+    let grabCursor = 0
+    let landCursor = 0
+    let hoverFrame
+
+    function ghostHeightFor(frame) {
+      return ghost.height * (frameScale[frame] ?? 1)
     }
 
-    let hoverFrame
+    function beginPress(x, y, id) {
+      if (dragging || returning) return false
+      const v = spriteHit(x, y)
+      if (v === null) return false
+      press = { x, y, id, zone: v < .34 ? 'head' : v < .68 ? 'body' : 'legs' }
+      return true
+    }
+
+    // Puts the bubble's tail on (x, y), a viewport point, keeping the bubble inside the page.
+    function placeBubble(x, y) {
+      const frame = notebook.getBoundingClientRect()
+      const width = bubbleEl.value?.offsetWidth ?? 0
+      const centre = x - frame.left
+      const left = gsap.utils.clamp(width / 2 + 8, Math.max(width / 2 + 8, frame.width - width / 2 - 8), centre)
+      bubble.left = left
+      bubble.top = y - frame.top
+      bubble.tail = gsap.utils.clamp(16, Math.max(16, width - 16), width / 2 + centre - left)
+    }
+
+    async function sayAt(text, x, y, hideAfter) {
+      bubble.text = text
+      bubble.label = ''
+      bubble.to = ''
+      bubble.open = true
+      bubbleScroll = window.scrollY
+      await nextTick()
+      placeBubble(x, y)
+      clearTimeout(bubbleTimer)
+      bubbleTimer = setTimeout(() => { bubble.open = false }, hideAfter)
+    }
+
+    function simulate(now) {
+      const dt = Math.min(.033, Math.max(.001, (now - sim.t) / 1000))
+      sim.t = now
+      const vx = sim.vx + ((pointer.x - sim.px) / dt - sim.vx) * .4 // smoothed pointer velocity
+      const vy = sim.vy + ((pointer.y - sim.py) / dt - sim.vy) * .4
+      const ax = gsap.utils.clamp(-14000, 14000, (vx - sim.vx) / dt)
+      const ay = gsap.utils.clamp(-14000, 14000, (vy - sim.vy) / dt)
+      sim.px = pointer.x
+      sim.py = pointer.y
+      sim.vx = vx
+      sim.vy = vy
+      for (let i = 0; i < 2; i++) { // two sub-steps keep the springs stable
+        const h = dt / 2
+        const torsoAcceleration = -PENDULUM.stiffness * sim.angle - PENDULUM.damping * sim.omega + PENDULUM.push * ax
+        sim.omega += torsoAcceleration * h
+        sim.angle += sim.omega * h
+        sim.legsVel += (-LEGS.stiffness * sim.legs - LEGS.damping * sim.legsVel - LEGS.lag * torsoAcceleration) * h
+        sim.legs = gsap.utils.clamp(-LEGS.max, LEGS.max, sim.legs + sim.legsVel * h)
+        sim.armLVel += (-ARMS.stiffness * sim.armL - ARMS.damping * sim.armLVel - ARMS.lag * torsoAcceleration) * h
+        sim.armL = gsap.utils.clamp(-ARMS.max, ARMS.max, sim.armL + sim.armLVel * h)
+        sim.armRVel += (-ARMS.stiffness * ARMS.rightStiffness * sim.armR - ARMS.damping * sim.armRVel - ARMS.lag * torsoAcceleration) * h
+        sim.armR = gsap.utils.clamp(-ARMS.max, ARMS.max, sim.armR + sim.armRVel * h)
+        if (Math.abs(sim.angle) > PENDULUM.max) {
+          sim.angle = Math.sign(sim.angle) * PENDULUM.max
+          sim.omega *= .4
+        }
+        sim.stretchVel += (-STRETCH.stiffness * sim.stretch - STRETCH.damping * sim.stretchVel - STRETCH.push * ay) * h
+        sim.stretch = gsap.utils.clamp(-STRETCH.max, STRETCH.max, sim.stretch + sim.stretchVel * h)
+      }
+      ghost.swing = sim.angle * 180 / Math.PI * releaseFactor
+      ghost.legs = sim.legs * 180 / Math.PI * releaseFactor
+      ghost.armL = sim.armL * 180 / Math.PI * releaseFactor
+      ghost.armR = sim.armR * 180 / Math.PI * releaseFactor
+      ghost.stretch = sim.stretch * releaseFactor
+      physicsFrame = requestAnimationFrame(simulate)
+    }
+
+    function startDrag(x, y) {
+      dragging = true
+      endReaction()
+      const t = traveler.value
+      restoreTo = restingPoses.includes(t.dataset.pose) ? t.dataset.pose : 'idle'
+      const img = visibleFrame()
+      const poseHeight = Number.parseFloat(getComputedStyle(img).getPropertyValue('--pose-height')) || 1
+      ghost.height = img.getBoundingClientRect().height / poseHeight
+      ghost.frame = 'lifted'
+      ghost.x = x
+      ghost.y = y
+      ghost.swing = 0
+      ghost.legs = 0
+      ghost.armL = 0
+      ghost.armR = 0
+      ghost.stretch = 0
+      ghost.active = true
+      t.style.opacity = '0'
+      document.documentElement.classList.add('journey-dragging')
+      document.documentElement.classList.remove('journey-poke-hover')
+      pointer.x = x
+      pointer.y = y
+      Object.assign(sim, { angle: 0, omega: 0, legs: 0, legsVel: 0, armL: 0, armLVel: 0, armR: 0, armRVel: 0, stretch: 0, stretchVel: 0, vx: 0, vy: 0, px: x, py: y, t: performance.now() })
+      releaseFactor = 1
+      cancelAnimationFrame(physicsFrame)
+      physicsFrame = requestAnimationFrame(simulate)
+      sayAt(grabLines[grabCursor++ % grabLines.length], x, y - ghostHeightFor(ghost.frame) * .32 - 4, 2200)
+    }
+
+    function moveDrag(x, y) {
+      pointer.x = x
+      pointer.y = y
+      ghost.x = x
+      ghost.y = y
+      if (bubble.open) placeBubble(x, y - ghostHeightFor(ghost.frame) * .32 - 4) // the bubble stays above his head
+    }
+
+    function releaseDrag() {
+      dragging = false
+      returning = true
+      document.documentElement.classList.remove('journey-dragging')
+      bubble.open = false
+      ghost.frame = 'drop'
+      const start = { x: ghost.x, y: ghost.y }
+      const startedAt = performance.now()
+      const slide = gsap.parseEase('power2.out')
+      const bounce = gsap.parseEase('bounce.out')
+      const step = now => {
+        const p = Math.min(1, (now - startedAt) / 560)
+        // Aim at the sprite's live position: the page may scroll while the ghost is falling back.
+        const rect = visibleFrame().getBoundingClientRect()
+        const targetX = rect.left + rect.width / 2
+        const targetY = rect.bottom - ghostHeightFor(ghost.frame) * .68
+        ghost.x = start.x + (targetX - start.x) * slide(p)
+        ghost.y = start.y + (targetY - start.y) * bounce(p)
+        pointer.x = ghost.x
+        pointer.y = ghost.y
+        releaseFactor = 1 - p
+        if (p < 1) {
+          returnFrame = requestAnimationFrame(step)
+          return
+        }
+        landGhost()
+      }
+      returnFrame = requestAnimationFrame(step)
+    }
+
+    function landGhost() {
+      cancelAnimationFrame(physicsFrame)
+      releaseFactor = 1
+      ghost.swing = 0
+      ghost.legs = 0
+      ghost.armL = 0
+      ghost.armR = 0
+      ghost.stretch = 0
+      ghost.active = false
+      const t = traveler.value
+      t.style.opacity = ''
+      applyPose('crouch')
+      const rect = visibleFrame().getBoundingClientRect()
+      sayAt(landLines[landCursor++ % landLines.length], rect.left + rect.width / 2, rect.top, 1800)
+      setTimeout(() => {
+        if (t.dataset.pose === 'crouch') applyPose(restoreTo) // untouched by scrolling: stand back up
+        returning = false
+      }, 220)
+    }
+
+    function movePress(x, y) {
+      if (!press) return
+      if (!dragging) {
+        if (Math.hypot(x - press.x, y - press.y) < DRAG_THRESHOLD) return
+        startDrag(x, y)
+        return
+      }
+      moveDrag(x, y)
+    }
+
+    function endPress(cancelled) {
+      const finished = press
+      press = null
+      if (dragging) releaseDrag()
+      else if (finished && !cancelled) poke(finished.zone)
+    }
+
+    function onPointerDown(event) {
+      if (event.pointerType === 'touch' || event.button !== 0) return
+      if (event.target.closest?.(interactiveSelector)) {
+        bubble.open = false
+        return
+      }
+      if (!beginPress(event.clientX, event.clientY, event.pointerId)) {
+        bubble.open = false
+        return
+      }
+      event.preventDefault() // no text selection while grabbing
+    }
+
     function onPointerMove(event) {
+      if (event.pointerType === 'touch') return
+      if (press && press.id === event.pointerId) {
+        movePress(event.clientX, event.clientY)
+        return
+      }
       if (event.pointerType !== 'mouse') return
       cancelAnimationFrame(hoverFrame)
       hoverFrame = requestAnimationFrame(() => {
-        document.documentElement.classList.toggle('journey-poke-hover', spriteHit(event.clientX, event.clientY) !== null)
+        document.documentElement.classList.toggle('journey-poke-hover', !dragging && spriteHit(event.clientX, event.clientY) !== null)
       })
     }
 
+    function onPointerEnd(event) {
+      if (event.pointerType === 'touch') return
+      if (press && press.id === event.pointerId) endPress(event.type === 'pointercancel')
+    }
+
+    // Touch: a non-passive touchstart is the only way to stop the page from scrolling under the finger.
+    function onTouchStart(event) {
+      if (event.touches.length !== 1 || event.target.closest?.(interactiveSelector)) return
+      const touch = event.touches[0]
+      if (beginPress(touch.clientX, touch.clientY, touch.identifier)) event.preventDefault()
+    }
+
+    function onTouchMove(event) {
+      if (!press) return
+      const touch = Array.from(event.touches).find(item => item.identifier === press.id)
+      if (!touch) return
+      event.preventDefault()
+      movePress(touch.clientX, touch.clientY)
+    }
+
+    function onTouchEnd(event) {
+      if (press && !Array.from(event.touches).some(item => item.identifier === press.id)) endPress(event.type === 'touchcancel')
+    }
+
     function onScrollAway() {
-      if (bubble.open && Math.abs(window.scrollY - bubbleScroll) > 40) bubble.open = false
+      if (bubble.open && !dragging && !returning && Math.abs(window.scrollY - bubbleScroll) > 40) bubble.open = false
     }
 
     function onKeyDown(event) {
-      if (event.key === 'Escape') bubble.open = false
+      if (event.key !== 'Escape') return
+      if (dragging) endPress(true)
+      bubble.open = false
+    }
+
+    function onBlur() {
+      if (press) endPress(true)
     }
 
     document.addEventListener('pointerdown', onPointerDown)
-    document.addEventListener('pointermove', onPointerMove, { passive: true })
+    document.addEventListener('pointermove', onPointerMove)
+    document.addEventListener('pointerup', onPointerEnd)
+    document.addEventListener('pointercancel', onPointerEnd)
+    document.addEventListener('touchstart', onTouchStart, { passive: false })
+    document.addEventListener('touchmove', onTouchMove, { passive: false })
+    document.addEventListener('touchend', onTouchEnd)
+    document.addEventListener('touchcancel', onTouchEnd)
     window.addEventListener('scroll', onScrollAway, { passive: true })
+    window.addEventListener('blur', onBlur)
     document.addEventListener('keydown', onKeyDown)
 
     return () => {
       document.removeEventListener('pointerdown', onPointerDown)
       document.removeEventListener('pointermove', onPointerMove)
+      document.removeEventListener('pointerup', onPointerEnd)
+      document.removeEventListener('pointercancel', onPointerEnd)
+      document.removeEventListener('touchstart', onTouchStart)
+      document.removeEventListener('touchmove', onTouchMove)
+      document.removeEventListener('touchend', onTouchEnd)
+      document.removeEventListener('touchcancel', onTouchEnd)
       window.removeEventListener('scroll', onScrollAway)
+      window.removeEventListener('blur', onBlur)
       document.removeEventListener('keydown', onKeyDown)
       cancelAnimationFrame(hoverFrame)
+      cancelAnimationFrame(returnFrame)
+      cancelAnimationFrame(physicsFrame)
+      ghost.active = false
+      traveler.value && (traveler.value.style.opacity = '')
+      document.documentElement.classList.remove('journey-dragging')
       clearTimeout(reactionTimer)
       clearTimeout(settleReactionTimer)
       clearTimeout(bubbleTimer)
