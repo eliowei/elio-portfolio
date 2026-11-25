@@ -891,8 +891,11 @@ onMounted(() => {
       const t = traveler.value
       t.style.opacity = ''
       applyPose('crouch')
-      const rect = visibleFrame().getBoundingClientRect()
-      sayAt(landLines[landCursor++ % landLines.length], rect.left + rect.width / 2, rect.top, 1800)
+      // Place the bubble above where his head will be once he has stood up again; the crouching frame is about
+      // 21% shorter, so measuring it would leave the bubble touching his head a moment later.
+      const standing = t.querySelector('[data-frame="' + restoreTo + '"]') ?? visibleFrame()
+      const rect = standing.getBoundingClientRect()
+      sayAt(landLines[landCursor++ % landLines.length], rect.left + rect.width / 2, rect.top - 4, 1800)
       setTimeout(() => {
         if (t.dataset.pose === 'crouch') applyPose(restoreTo) // untouched by scrolling: stand back up
         returning = false

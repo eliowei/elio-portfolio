@@ -794,7 +794,7 @@ html.journey-poke-hover { cursor: pointer; }
   width: max-content;
   max-width: min(15rem, calc(100% - 1rem));
   padding: .6rem .8rem .7rem;
-  transform: translate(-50%, calc(-100% - 12px));
+  transform: translate(-50%, calc(-100% - 22px)); /* 22px: the tail hangs ~8px below the box, so the tip stays ~14px clear of his head */
   background: var(--card) url('/images/sketchbook/paper.webp');
   background-blend-mode: multiply;
   border: 1px solid var(--rule);
