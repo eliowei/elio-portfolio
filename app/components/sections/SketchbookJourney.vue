@@ -641,7 +641,9 @@ onMounted(() => {
 
     async function poke(zone) {
       const t = traveler.value
-      if (!reacting) restoreTo = t.dataset.pose
+      markEngaged()
+      if (!reacting) restoreTo = hintBefore ?? t.dataset.pose
+      hintBefore = null
       reacting = true
       clearTimeout(reactionTimer)
       const now = performance.now()
@@ -716,6 +718,25 @@ onMounted(() => {
     let grabCursor = 0
     let landCursor = 0
     let hoverFrame
+    let lastScrollAt = performance.now()
+    const HINT_KEY = 'elio-journey-hint'      // how many times this visit he has already nudged
+    const ENGAGED_KEY = 'elio-journey-engaged' // set for good once the visitor has poked or lifted him
+    const HINT_LIMIT = 3
+    let hintCount = 0
+    let engaged = false
+    let lastHintAt = 0
+    let hintBefore = null // the pose he had before waving, so an interaction does not leave him waving
+    let hintPoseTimer
+    try {
+      hintCount = Number(sessionStorage.getItem(HINT_KEY)) || 0
+      engaged = localStorage.getItem(ENGAGED_KEY) === '1'
+    } catch { /* storage unavailable: the hint just repeats */ }
+
+    function markEngaged() {
+      engaged = true
+      clearTimeout(hintPoseTimer)
+      try { localStorage.setItem(ENGAGED_KEY, '1') } catch { /* ignore */ }
+    }
 
     function ghostHeightFor(frame) {
       return ghost.height * (frameScale[frame] ?? 1)
@@ -792,8 +813,10 @@ onMounted(() => {
     function startDrag(x, y) {
       dragging = true
       endReaction()
+      markEngaged()
       const t = traveler.value
-      restoreTo = restingPoses.includes(t.dataset.pose) ? t.dataset.pose : 'idle'
+      restoreTo = hintBefore ?? (restingPoses.includes(t.dataset.pose) ? t.dataset.pose : 'idle')
+      hintBefore = null
       const img = visibleFrame()
       const poseHeight = Number.parseFloat(getComputedStyle(img).getPropertyValue('--pose-height')) || 1
       ghost.height = img.getBoundingClientRect().height / poseHeight
@@ -944,6 +967,7 @@ onMounted(() => {
     }
 
     function onScrollAway() {
+      lastScrollAt = performance.now()
       if (bubble.open && !dragging && !returning && Math.abs(window.scrollY - bubbleScroll) > 40) bubble.open = false
     }
 
@@ -956,6 +980,29 @@ onMounted(() => {
     function onBlur() {
       if (press) endPress(true)
     }
+
+    // A friendly nudge: he waves and says hello when he stands still in view. Up to three times a visit,
+    // 20s apart, and never again once the visitor has played with him.
+    const hintTimer = setInterval(() => {
+      if (engaged || hintCount >= HINT_LIMIT || reacting || dragging || returning || press || bubble.open) return
+      if (lastHintAt && performance.now() - lastHintAt < 20000) return
+      const t = traveler.value
+      if (!t || !t.classList.contains('is-ready') || t.dataset.cardStage || !restingPoses.includes(t.dataset.pose)) return
+      if (performance.now() - lastScrollAt < 1500) return
+      const rect = visibleFrame().getBoundingClientRect()
+      if (rect.top < 60 || rect.bottom > window.innerHeight - 10) return
+      hintCount += 1
+      lastHintAt = performance.now()
+      try { sessionStorage.setItem(HINT_KEY, String(hintCount)) } catch { /* ignore */ }
+      hintBefore = t.dataset.pose
+      applyPose('wave')
+      clearTimeout(hintPoseTimer)
+      hintPoseTimer = setTimeout(() => {
+        if (!reacting && !dragging && t.dataset.pose === 'wave' && hintBefore) applyPose(hintBefore)
+        hintBefore = null
+      }, 2200)
+      sayAt('戳戳我？也可以把我拎起來喔～', rect.left + rect.width / 2, rect.top, 7000)
+    }, 800)
 
     document.addEventListener('pointerdown', onPointerDown)
     document.addEventListener('pointermove', onPointerMove)
@@ -984,6 +1031,8 @@ onMounted(() => {
       cancelAnimationFrame(hoverFrame)
       cancelAnimationFrame(returnFrame)
       cancelAnimationFrame(physicsFrame)
+      clearInterval(hintTimer)
+      clearTimeout(hintPoseTimer)
       ghost.active = false
       traveler.value && (traveler.value.style.opacity = '')
       document.documentElement.classList.remove('journey-dragging')

@@ -79,8 +79,6 @@
           <p class="note-index"><span>04</span> About</p>
           <h2 id="about-title">關於我</h2>
           <p>我是一位從事網站設計與前端開發的工程師。喜歡把資訊整理成好讀的頁面，讓品牌有一個好用、耐看的網站。</p>
-          <button type="button" class="ink-button ink-outline" :aria-expanded="aboutOpen" aria-controls="about-more" @click="aboutOpen = !aboutOpen">{{ aboutOpen ? '收起介紹 −' : '了解更多 ↗' }}</button>
-          <p v-show="aboutOpen" id="about-more">我使用 Vue 與 Nuxt 建置網站，也開發過 LINE 官方帳號內容管理平台。合作時會由我直接和你討論內容、畫面與開發範圍。</p>
         </div>
         <svg class="scenery pencil-rays rays-about" viewBox="0 0 36 34" fill="none" aria-hidden="true">
           <path d="M6 13Q5 8 3 5m12 10L17 2m5 18q5-6 12-9" />
@@ -133,7 +131,6 @@
 <script setup>
 defineProps({ projects: { type: Array, default: () => [] } })
 
-const aboutOpen = ref(false)
 const notebook = ref(null)
 let revealObserver
 

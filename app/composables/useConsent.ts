@@ -63,5 +63,10 @@ export const useConsent = () => {
     )
   }
 
-  return { getConsent, accept, reject, loadGTM }
+  // Forget the choice so the banner asks again (used by the privacy page).
+  const resetConsent = () => {
+    localStorage.removeItem(STORAGE_KEY)
+  }
+
+  return { getConsent, accept, reject, loadGTM, resetConsent }
 }

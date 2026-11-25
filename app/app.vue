@@ -21,15 +21,15 @@ useHead({
 })
 const { accept, reject, getConsent, loadGTM } = useConsent()
 const show = ref(false)
-const ENABLE_COOKIE_BANNER = false
+const ENABLE_COOKIE_BANNER = true
 
 useSeoMeta({
   ogType: 'website',
   ogSiteName: 'Elio Wei',
-  ogImage: `${config.public.siteUrl}/images/og-image.png`,
+  ogImage: `${config.public.siteUrl}/images/og-image-v2.jpg`,
 
   twitterCard: 'summary_large_image',
-  twitterImage: `${config.public.siteUrl}/images/og-image.png`
+  twitterImage: `${config.public.siteUrl}/images/og-image-v2.jpg`
 })
 
 const onAccept = () => {

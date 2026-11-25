@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 237 64" role="img" aria-label="Elio Wei.">
+  <title>Elio Wei.</title>
+  <g fill="#3b2b21" font-family="Georgia, 'Times New Roman', serif" font-size="51" font-weight="bold" font-style="italic" letter-spacing="-1.5">
+    <text x="2" y="54">Eli</text>
+    <text x="116" y="54">Wei</text>
+  </g>
+  <g transform="translate(6 0)">
+  <ellipse cx="85" cy="39.5" rx="16.8" ry="14.2" transform="rotate(-12 85 39.5)" fill="none" stroke="#ad542e" stroke-width="4.9"/>
+  <g fill="none" stroke="#493225" stroke-width="1.9" stroke-linecap="round">
+    <circle cx="79" cy="40" r="4.4"/>
+    <circle cx="91" cy="38.5" r="4.4"/>
+    <path d="M83.4 39.5q1.6-2 3.3-.4M74.6 39.5l-2-.7m22.7-1 2-.7"/>
+  </g>
+  <g fill="none" stroke="#ad542e" stroke-width="2.1" stroke-linecap="round">
+    <path d="m75 19-3-4m13 2v-5m10 7 3-4"/>
+  </g>
+  </g>
+  <circle cx="221" cy="50" r="4.6" fill="#ad542e"/>
+</svg>

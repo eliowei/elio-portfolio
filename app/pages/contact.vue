@@ -24,7 +24,7 @@ useSeoMeta({
   ogDescription: '提供品牌形象網站、服務介紹頁與 Landing Page 建置，LINE OA 整合依需求評估。歡迎提供網站用途、參考網站與預計時程。',
   ogUrl: `${config.public.siteUrl}/contact`,
   ogType: 'website',
-  ogImage: `${config.public.siteUrl}/images/og-image.png`
+  ogImage: `${config.public.siteUrl}/images/og-image-v2.jpg`
 })
 
 useHead({

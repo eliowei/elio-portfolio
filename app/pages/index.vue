@@ -14,11 +14,11 @@ useSeoMeta({
   ogUrl: `${config.public.siteUrl}/`,
   ogType: 'website',
   ogSiteName: 'Elio Wei',
-  ogImage: `${config.public.siteUrl}/images/og-image.png`,
+  ogImage: `${config.public.siteUrl}/images/og-image-v2.jpg`,
   twitterCard: 'summary_large_image',
   twitterTitle: 'Elio Wei｜品牌網站建置與 LINE OA 整合',
   twitterDescription: '為小型品牌與專業服務者提供品牌形象網站、服務介紹頁與 Landing Page 建置，並依需求評估 LINE OA 與內容管理整合。',
-  twitterImage: `${config.public.siteUrl}/images/og-image.png`
+  twitterImage: `${config.public.siteUrl}/images/og-image-v2.jpg`
 })
 
 useHead({
