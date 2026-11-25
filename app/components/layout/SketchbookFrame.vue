@@ -1,5 +1,6 @@
 <template>
   <div id="page-top" class="sketchbook" tabindex="-1">
+    <div class="paper-tear paper-tear--page" aria-hidden="true"><span class="paper-tear-intact"></span><span class="paper-tear-bits"></span></div>
     <a href="#main" class="sr-only focus:not-sr-only">跳到主要內容</a>
     <header class="sheet masthead" :class="{ 'is-floating': scrolled, 'is-tucked': hideHeader && !menuOpen }">
       <NuxtLink :to="homeLink('#page-top')" class="masthead-brand" aria-label="Elio Wei 首頁" @click="menuOpen = false">

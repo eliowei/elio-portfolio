@@ -26,11 +26,9 @@ highlights:
 cover: /images/projects/weather-bike-bot/cover.png
 
 tags:
-  - Node.js
-  - Express
   - LINE Bot
-  - Flex Message
-  - API Integration
+  - 即時資料
+  - 資訊卡片
 
 github: https://github.com/eliowei/linebot
 
@@ -53,20 +51,20 @@ overview:
   content: "出門前常要查可借車數、空車位和稍後的天氣。我把即時站點和預報整合到同一個 LINE 選單，讓使用者從熟悉的聊天視窗就能取得這些資訊。"
 
 caseStudy:
-  label: "個人 LINE Bot 專案 · 第三方資料整合"
+  label: "LINE 查詢服務"
   scope:
     - "LINE 訊息與選單設計"
     - "YouBike 即時資料"
     - "中央氣象署預報"
-    - "Flex Message 資訊卡片"
+    - "LINE 資訊卡片"
   process:
     - title: "拆成站點與天氣兩條查詢流程"
       illustration: bike-route
       description: "用功能選單區分任務，站點流程也支援分享位置來查附近資訊。"
-    - title: "把不同來源整理成容易讀的卡片"
+    - title: "把不同來源的資料整理成容易讀的卡片"
       illustration: bike-messages
-      description: "統一站點資料格式，再用 LINE Flex Message 呈現可借數量、空位和分時預報。"
-  result: "圖集收錄功能選單、站點查詢、位置分享和天氣預報的實際 LINE 對話畫面。"
+      description: "站點與天氣資料統一整理成資訊卡，可借數量、空位和分時預報一眼就能看懂。"
+  result: "使用者不必切換 App，在 LINE 裡就能查附近站點、可借車數和接下來的天氣。"
 
 # ============================================================================
 # Feature Showcase
@@ -97,7 +95,7 @@ showcase:
 
 - title: LINE 互動體驗
   icon: i-lucide-message-square-text
-  description: "用功能選單和 Flex Message 把查詢結果排成可讀的 LINE 訊息。"
+  description: "用功能選單和資訊卡片把查詢結果排成可讀的 LINE 訊息。"
 
   features:
     - 關鍵字觸發

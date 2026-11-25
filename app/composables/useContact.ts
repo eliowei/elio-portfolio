@@ -5,7 +5,7 @@ export const useContact = () => {
     name: string,
     email: string,
     projectType: string,
-    budget: string,
+    budget?: string,
     message: string
   }) => {
     const config = useRuntimeConfig()
@@ -23,7 +23,7 @@ export const useContact = () => {
         from_name: payload.name,
         from_email: payload.email,
         project_type: payload.projectType,
-        budget: payload.budget,
+        budget: payload.budget || 'unknown',
         message: payload.message,
         reply_to: payload.email
       },

@@ -23,11 +23,9 @@ highlights:
 cover: /images/projects/line-oa-platform/cover.jpeg
 
 tags:
-  - Vue 3
-  - PrimeVue
-  - Node.js
-  - MongoDB
-  - LINE Messaging API
+  - 內容後台
+  - LINE 串接
+  - 店家權限
 
 # ============================================================================
 # Card Information

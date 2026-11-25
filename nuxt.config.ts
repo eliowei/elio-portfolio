@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     }
   ],
   app: {
+    pageTransition: { name: 'paper-page' },
     head: {
       htmlAttrs: {
         lang: 'zh-Hant'

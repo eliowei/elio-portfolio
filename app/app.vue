@@ -6,7 +6,7 @@
     </Transition>
   </ClientOnly>
 
-  <NuxtLoadingIndicator color="var(--color-primary)" :height="3"/>
+  <NuxtLoadingIndicator color="#9e432c" :height="3" />
   <UApp>
     <NuxtLayout>
       <NuxtPage />
@@ -16,6 +16,9 @@
 
 <script setup>
 const config = useRuntimeConfig()
+useHead({
+  link: [{ rel: 'preload', as: 'image', href: '/images/sketchbook/page-tear-edge.webp', media: '(prefers-reduced-motion: no-preference)' }],
+})
 const { accept, reject, getConsent, loadGTM } = useConsent()
 const show = ref(false)
 const ENABLE_COOKIE_BANNER = false

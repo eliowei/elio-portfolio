@@ -264,36 +264,36 @@ html:has(.case-lightbox[open]) { overflow: hidden; }
   .case-overview-landscape { width: min(100%, 120px); }
 }
 
-.case-arrival-paper {
-  position: fixed;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  background: #f7e5c8 url('/images/sketchbook/paper.webp') 0 0 / 640px auto;
-  background-blend-mode: multiply;
-  clip-path: polygon(0 18%, 8% 15%, 17% 18%, 23% 14%, 33% 15%, 40% 10%, 49% 12%, 57% 7%, 67% 8%, 74% 4%, 84% 5%, 95% 0, 100% 2%, 100% 100%, 0 100%);
-  animation: case-paper-sweep 390ms cubic-bezier(.33,.1,.35,1) 55ms both;
-}
-.case-cover--sweeping { z-index: 6; }
-.case-cover-elio--press { z-index: 1; bottom: -1rem; width: clamp(72px, 10vw, 120px); animation: case-tape-press 180ms ease-out 345ms both; }
+.case-cover-elio--press { z-index: 1; bottom: -1rem; width: clamp(72px, 10vw, 120px); }
+.case-hero--arriving .case-cover-elio--press { animation: case-tape-press 200ms ease-out 400ms both; }
 .case-cover-elio--press > img { display: block; width: 100%; height: auto; }
 .case-tape-strokes { position: absolute; top: 36%; left: -13%; width: 30%; stroke: #a94f32; stroke-width: 2.6; stroke-linecap: round; }
-.case-tape-strokes path { opacity: 0; stroke-dasharray: 1; stroke-dashoffset: 1; animation: case-tape-stroke 180ms ease-out 440ms both; }
-.case-tape-strokes path + path { animation-delay: 467ms; }
+.case-tape-strokes path { opacity: 0; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.case-hero--arriving .case-tape-strokes path { animation: case-tape-stroke 180ms ease-out 540ms both; }
+.case-hero--arriving .case-tape-strokes path + path { animation-delay: 570ms; }
 @keyframes case-tape-stroke {
   0% { opacity: 0; stroke-dashoffset: 1; }
   36%, 65% { opacity: 1; stroke-dashoffset: 0; }
   100% { opacity: 0; stroke-dashoffset: 0; }
 }
-@keyframes case-paper-sweep {
-  0% { transform: translateY(88%); opacity: .95; }
-  42% { transform: translateY(33%); opacity: .7; }
-  100% { transform: translateY(-105%); opacity: 0; }
-}
 @keyframes case-tape-press {
   0% { opacity: 0; transform: translate(8px, 8px); }
   68% { opacity: 1; transform: translate(-3px, 0); }
   100% { opacity: 1; transform: translate(0, 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .case-hero--arriving > div > * { animation: case-hero-rise 360ms cubic-bezier(.22,.75,.25,1) backwards; }
+  .case-hero--arriving > div > :nth-child(1) { animation-delay: 220ms; }
+  .case-hero--arriving > div > :nth-child(2) { animation-delay: 270ms; }
+  .case-hero--arriving > div > :nth-child(3) { animation-delay: 320ms; }
+  .case-hero--arriving > div > :nth-child(4) { animation-delay: 370ms; }
+  .case-hero--arriving > div > :nth-child(5) { animation-delay: 420ms; }
+  .case-hero--arriving > div > :nth-child(6) { animation-delay: 470ms; }
+  .case-hero--arriving > div > :nth-child(7) { animation-delay: 520ms; }
+  @keyframes case-hero-rise {
+    from { opacity: 0; translate: 0 10px; }
+    to { opacity: 1; translate: 0 0; }
+  }
 }
 @media (max-width: 680px) {
   .case-cover-elio--press { width: clamp(54px, 16vw, 80px); bottom: -.8rem; }

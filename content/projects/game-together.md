@@ -25,11 +25,9 @@ highlights:
 cover: /images/projects/game-together/cover.png
 
 tags:
-  - Vue 3
-  - Vuetify
-  - Node.js
-  - MongoDB
-  - WebSocket
+  - 活動搜尋
+  - 申請管理
+  - 即時聊天
 
 github: https://github.com/eliowei/game-together
 demo: https://eliowei.github.io/game-together
@@ -53,20 +51,20 @@ overview:
   content: "玩家常需要在貼文、聊天室和社群群組間來回確認日期、缺額和參加方式。我把搜尋、活動詳情、申請與聊天室放進同一個流程，也讓主辦人有地方管理參加狀態。"
 
 caseStudy:
-  label: "個人全端專案 · 活動管理與即時聊天"
+  label: "社群活動平台"
   scope:
     - "揪團搜尋與篩選"
     - "活動及申請管理"
     - "即時聊天室"
     - "前後端與資料庫整合"
   process:
-    - title: "規劃玩家與主辦人的操作"
+    - title: "先釐清玩家與主辦人各自要完成什麼"
       illustration: game-planning
-      description: "拆出搜尋、活動詳情、申請和管理頁面，讓兩種角色找到各自需要的操作。"
-    - title: "接上活動與即時通訊"
+      description: "把找團、看詳情、申請與管理拆成各自的頁面，讓兩種角色都能很快找到需要的操作。"
+    - title: "讓討論在同一個地方完成"
       illustration: game-chat
-      description: "整合會員驗證、活動資料和 Socket.IO，並在離開聊天室時清理連線。"
-  result: "圖集展示從找團、看詳情到聊天的操作，也收錄主辦人管理與個人資料畫面。"
+      description: "把會員、活動與即時聊天串在一起，玩家不必離開網站就能和主辦人討論。"
+  result: "玩家可以從搜尋、看活動、申請一路到聊天；主辦人也有自己的管理畫面。"
 
 # ============================================================================
 # Feature Showcase

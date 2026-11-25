@@ -76,8 +76,7 @@
       <!-- Budget -->
       <UFormField
         name="budget"
-        label="預算區間"
-        required
+        label="預算區間（選填）"
       >
         <USelect
           v-model="state.budget"
@@ -105,7 +104,7 @@
       </UFormField>
 
       <div class="inquiry-submit">
-        <p>你提供的資料將用於回覆本次需求與合作聯繫。</p>
+        <p>你提供的資料將用於回覆本次需求與合作聯繫，通常 1–2 個工作天內回覆。</p>
         <div class="inquiry-submit-action">
           <UButton type="submit" :loading="loading" trailing-icon="i-lucide-arrow-right" class="ink-button inquiry-submit-button">發送諮詢</UButton>
           <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
@@ -143,7 +142,7 @@ const schema = z.object({
   name: z.string().min(2, '請輸入姓名'),
   email: z.string().email('Email 格式錯誤'),
   projectType: z.string().min(1, '請選擇專案類型'),
-  budget: z.string().min(1, '請選擇預算'),
+  budget: z.string().optional(),
   message: z.string().min(1, '請輸入內容')
 })
 

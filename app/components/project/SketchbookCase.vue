@@ -1,10 +1,10 @@
 <template>
   <main id="main" class="sketchbook-case">
-    <div v-if="paperSweeping" class="case-arrival-paper" aria-hidden="true" @animationend="paperSweeping = false"></div>
+    <div v-if="paperSweeping" class="paper-tear case-arrival-paper" aria-hidden="true" @animationend.self="paperSweeping = false"><span class="paper-tear-intact"></span><span class="paper-tear-bits"></span></div>
     <div class="sheet case-main-sheet">
-      <section class="case-hero" aria-labelledby="case-title">
+      <section class="case-hero" :class="{ 'case-hero--arriving': workArrival }" aria-labelledby="case-title">
         <div>
-          <NuxtLink to="/#projects" class="case-back">← 返回作品列表</NuxtLink>
+          <NuxtLink to="/#projects" class="case-back" @click.capture="rememberReturnedWork">← 返回作品列表</NuxtLink>
           <p class="note-index">Project Note / <span>{{ String(project.order).padStart(2, '0') }}</span></p>
           <h1 id="case-title"><span>{{ project.title.trim() }}</span></h1>
           <p class="case-label">{{ project.caseStudy?.label ?? project.category }}</p>
@@ -13,10 +13,9 @@
           <div class="case-actions">
             <NuxtLink v-if="project.demo" :to="project.demo" external target="_blank" rel="noopener noreferrer" class="ink-button"><UIcon name="i-lucide-external-link" aria-hidden="true" /> 前往實際網站 ↗</NuxtLink>
             <NuxtLink v-else-if="pricing" to="#case-pricing" class="ink-button">查看導入方案 ↓</NuxtLink>
-            <NuxtLink v-if="project.github" :to="project.github" external target="_blank" rel="noopener noreferrer" class="ink-button ink-outline">查看原始碼 ↗</NuxtLink>
           </div>
         </div>
-        <figure class="case-cover" :class="{ 'case-cover--sweeping': paperSweeping }">
+        <figure class="case-cover">
           <svg class="case-decoration case-leaf-corner" viewBox="0 0 86 94" aria-hidden="true">
           <path d="M7 89Q43 55 65 10M30 65Q10 62 7 43q20 3 23 22Zm10-12q4-22 31-26-7 19-31 26Zm8-13Q28 33 29 14q17 5 19 26Zm8-7Q55 14 73 4q1 21-17 29Z" />
           <path class="case-leaf-veins" d="m13 48 13 13m18-12 19-16M33 21l12 15m15-8L69 9" />
@@ -30,14 +29,13 @@
           <div ref="heroPhoto" class="case-photo">
             <NuxtImg :src="project.cover" :alt="project.title.trim() + '的專案畫面'" sizes="100vw lg:640px" width="960" fetchpriority="high" />
           </div>
-          <span v-if="workArrival" class="case-cover-elio case-cover-elio--press" aria-hidden="true">
+          <span class="case-cover-elio case-cover-elio--press" aria-hidden="true">
             <img src="/images/sketchbook/pose-tape-press.webp" width="340" height="379" alt="">
-            <svg class="case-tape-strokes" viewBox="0 0 36 28" fill="none">
+            <svg v-if="workArrival" class="case-tape-strokes" viewBox="0 0 36 28" fill="none">
               <path pathLength="1" d="m5 17 10 2" />
               <path pathLength="1" d="m12 5 7 7" />
             </svg>
           </span>
-          <NuxtImg v-else src="/images/sketchbook/pose-present.webp" alt="" width="212" height="320" class="case-cover-elio" />
         </figure>
       </section>
 
@@ -180,20 +178,14 @@
         </dl>
       </section>
 
-      <details v-if="technicalNotes.length || project.tags?.length || project.industries?.length" class="case-technical">
-        <summary>{{ project.type === 'product' ? '查看適用情境與導入細節' : '查看技術與實作細節' }}</summary>
+      <details v-if="project.type === 'product' && (project.problem?.items?.length || project.benefits?.length || project.industries?.length)" class="case-technical">
+        <summary>查看適用情境與導入細節</summary>
         <div class="case-technical-grid">
           <article v-for="item in project.problem?.items" :key="item.title">
             <h3>{{ item.title }}</h3><p>{{ item.description }}</p>
           </article>
           <article v-if="project.benefits?.length">
             <h3>導入後可使用</h3><p>{{ project.benefits.join('、') }}</p>
-          </article>
-          <div v-for="(items, group) in project.techStack" :key="group">
-            <h3>{{ stackLabels[group] ?? group }}</h3><p>{{ items.join('、') }}</p>
-          </div>
-          <article v-for="note in technicalNotes" :key="note.title">
-            <h3>{{ note.title }}</h3><p v-if="note.problem">{{ note.problem }}</p><p>{{ note.solution || note.description }}</p>
           </article>
           <article v-for="industry in project.industries" :key="industry.title">
             <h3>{{ industry.title }}</h3><p>{{ industry.items.join('、') }}</p>
@@ -234,6 +226,12 @@
 import { takeWorkCover } from '~/utils/work-page-transition'
 
 const props = defineProps({ project: { type: Object, required: true } })
+const returnWork = useState('return-work-slug', () => null)
+function rememberReturnedWork(event) {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+  returnWork.value = props.project.slug
+}
+
 const gallery = computed(() => props.project.gallery ?? [])
 const resultPreviews = computed(() => {
   const entries = gallery.value.map((item, index) => ({ ...item, index, device: item.device ?? 'laptop' }))
@@ -245,45 +243,34 @@ const pricing = computed(() => props.project.product?.pricing)
 const offer = computed(() => props.project.product?.cta)
 const scope = computed(() => props.project.caseStudy?.scope ?? props.project.highlights ?? [])
 const processSteps = computed(() => props.project.caseStudy?.process ?? props.project.implementation ?? [])
-const technicalNotes = computed(() => [...(props.project.challenges ?? []), ...(props.project.systemDesign ?? [])])
 const numberFormat = new Intl.NumberFormat('zh-TW')
-const stackLabels = { frontend: '前端', backend: '後端', database: '資料庫', tools: '開發工具', messaging: '訊息整合', deployment: '部署', architecture: '架構' }
 
 const heroPhoto = ref(null)
 const workArrival = ref(false)
 const paperSweeping = ref(false)
-let arrivalFrame
 let coverAnimation
 
 onMounted(() => {
   const from = takeWorkCover(props.project.slug)
-  if (from) arrivalFrame = requestAnimationFrame(() => animateWorkArrival(from))
+  if (from) animateWorkArrival(from) // synchronous: no unpainted frame before the paper covers the page
 })
 
 function animateWorkArrival(from) {
   const frame = heroPhoto.value
-  const image = frame?.querySelector('img')
-  if (!from || !frame?.animate || !image || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  if (!from || !frame?.animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  const to = image.getBoundingClientRect()
-  if (!to.width || !to.height) return
-  const x = from.left + from.width / 2 - to.left - to.width / 2
-  const y = from.top + from.height / 2 - to.top - to.height / 2
-  const scaleX = from.width / to.width
-  const scaleY = from.height / to.height
-
+  // The old page is already gone, so there is no card position to fly from.
+  // Sequence: paper tears open (0-520ms) -> cover is lifted in the slit -> Elio presses it flat.
+  window.scrollTo({ top: 0, behavior: 'instant' })
   workArrival.value = true
   paperSweeping.value = true
-  const fromCard = (lift) => `translate(${x}px, ${y - lift}px) scale(${scaleX}, ${scaleY})`
   coverAnimation = frame.animate([
-    { transform: fromCard(0), offset: 0, easing: 'ease-out' },
-    { transform: fromCard(7), offset: .16, easing: 'cubic-bezier(.22,.75,.24,1)' },
-    { transform: 'none', offset: 1 },
-  ], { duration: 450 })
+    { transform: 'translateY(-16px) rotate(-1.6deg) scale(1.035)' },
+    { transform: 'none' },
+  ], { duration: 280, delay: 400, easing: 'cubic-bezier(.3,1.35,.5,1)', fill: 'backwards' })
 }
 
 onBeforeUnmount(() => {
-  if (arrivalFrame !== undefined) cancelAnimationFrame(arrivalFrame)
   coverAnimation?.cancel()
 })
 

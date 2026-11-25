@@ -25,11 +25,9 @@ highlights:
 cover: /images/projects/personal-website/cover.png
 
 tags:
-  - Nuxt 4
-  - TypeScript
-  - Tailwind CSS
-  - GSAP
-  - Nuxt Content
+  - 品牌網站
+  - RWD 響應式
+  - 前端開發
 
 demo: https://elioflowra.com
 
@@ -64,8 +62,8 @@ caseStudy:
       description: "確定首頁要回答的問題，讓服務介紹和案例互相對照。"
     - title: "設計與實作頁面"
       illustration: portfolio-devices
-      description: "將首頁、案例和聯絡頁接起來，用 Markdown 管理案例內容，再檢查不同裝置的閱讀順序。"
-  result: "網站提供服務說明、可瀏覽的案例，以及能帶入服務類型的合作洽詢。圖集保留此專案先前的介面紀錄。"
+      description: "將首頁、案例和聯絡頁串起來，案例內容可以持續新增，再檢查不同裝置的閱讀順序。"
+  result: "訪客可以先看服務與案例，再從任何頁面帶著服務類型直接洽詢。"
 
 # ============================================================================
 # Feature Showcase

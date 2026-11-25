@@ -405,6 +405,7 @@ onMounted(() => {
       let beatStart
       const hiddenSegments = []
       serviceBeats = []
+      const handles = [null]
       for (let index = 1; index < points.length; index++) {
         const previous = points[index - 1]
         const next = points[index]
@@ -437,14 +438,43 @@ onMounted(() => {
           control1 = [previous.x + dx * .66, previous.y]
           control2 = [next.x, previous.y + dy * .38]
         }
-        if (next.cardStage) {
-          line.value.setAttribute('d', path)
-          beatStart = line.value.getTotalLength()
-        }
         if (next.cardStage === 'jump') {
           const drop = next.y - previous.y
           control1 = [previous.x + 3, previous.y + drop * .14]
           control2 = [next.x - 3, next.y - drop * .28]
+        }
+        handles[index] = [control1, control2]
+      }
+      // Smooth every joint between non-card segments: align the incoming and outgoing
+      // tangents (no sharp corners) and give short handles a minimum length so that
+      // turns become wide ellipses instead of tight arcs. Card stages keep their own shapes.
+      const unit = (x, y) => {
+        const length = Math.hypot(x, y)
+        return length > .001 ? [x / length, y / length] : null
+      }
+      for (let index = 1; index < points.length - 1; index++) {
+        const joint = points[index]
+        if (joint.cardStage || points[index + 1].cardStage) continue
+        const incoming = handles[index][1]
+        const outgoing = handles[index + 1][0]
+        const a = unit(joint.x - incoming[0], joint.y - incoming[1])
+        const b = unit(outgoing[0] - joint.x, outgoing[1] - joint.y)
+        const direction = a && b && unit(a[0] + b[0], a[1] + b[1])
+        if (!direction) continue
+        const chordIn = Math.hypot(joint.x - points[index - 1].x, joint.y - points[index - 1].y)
+        const chordOut = Math.hypot(points[index + 1].x - joint.x, points[index + 1].y - joint.y)
+        const lengthIn = Math.min(chordIn * .6, Math.max(Math.hypot(joint.x - incoming[0], joint.y - incoming[1]), chordIn * .38))
+        const lengthOut = Math.min(chordOut * .6, Math.max(Math.hypot(outgoing[0] - joint.x, outgoing[1] - joint.y), chordOut * .38))
+        handles[index][1] = [joint.x - direction[0] * lengthIn, joint.y - direction[1] * lengthIn]
+        handles[index + 1][0] = [joint.x + direction[0] * lengthOut, joint.y + direction[1] * lengthOut]
+      }
+      for (let index = 1; index < points.length; index++) {
+        const previous = points[index - 1]
+        const next = points[index]
+        const [control1, control2] = handles[index]
+        if (next.cardStage) {
+          line.value.setAttribute('d', path)
+          beatStart = line.value.getTotalLength()
         }
         const segment = ' C ' + control1.join(' ') + ', ' + control2.join(' ') + ', ' + next.x + ' ' + next.y
         if (['drop-tuck', 'jump'].includes(next.cardStage)) {

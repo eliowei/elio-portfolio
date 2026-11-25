@@ -6,7 +6,7 @@
       <section id="hero" class="note-hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="tape-label">你好，我是 Elio。</p>
-          <h1 id="hero-title">將你的想法，<br>打造成有價值的<span>網站。</span></h1>
+          <h1 id="hero-title">為小型品牌打造<br>好看、好用的<span>網站</span>，<br>也能串接 LINE OA。</h1>
           <p>專注於網站設計與前端開發，<br>從需求討論、設計、開發到上線，<br>用清楚的流程，把想法變成落地的成果。</p>
           <div class="note-actions">
             <NuxtLink to="/contact" class="ink-button">開始討論專案 ↗</NuxtLink>
@@ -173,7 +173,7 @@ const steps = [
 ]
 const strengths = ['設計與前端開發整合', '重視使用者體驗與細節', '直接溝通，彈性合作']
 const questions = [
-  { q: '網站費用與製作時間怎麼估？', a: '依頁面數量、功能、素材與預計上線時間評估，確認範圍後再報價。' },
+  { q: '網站費用與製作時間怎麼估？', a: '品牌網站依頁面數量、功能、素材與預計上線時間評估，確認範圍後再報價；LINE OA 商家管理平台已有公開方案，可參考該案例頁。' },
   { q: '沒有完整文案或照片可以先討論嗎？', a: '可以。先提供現有資料與想介紹的服務，合作前再確認要補哪些素材。' },
   { q: '上線後可以自己更新內容嗎？', a: '可以依更新頻率和內容規劃管理方式，後台與交接範圍會在報價時確認。' },
   { q: '網站包含 SEO 或 LINE 整合嗎？', a: '網站提供基本搜尋與社群分享設定，持續 SEO 經營和 LINE 整合可另外討論。' },
