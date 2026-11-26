@@ -562,6 +562,8 @@
   width: calc(82% - .5rem - var(--inquiry-submit-width) - .9rem);
   height: 56px;
 }
+/* Drops the button to the runner's vertical center; the privacy text stays put. */
+.sketchbook-contact .inquiry-submit-action { translate: 0 3.25rem; }
 
 .sketchbook-contact .inquiry-paper {
   --inquiry-paper-color: var(--card-warm);
@@ -597,11 +599,16 @@
   .sketchbook-contact .inquiry-hero-copy { padding-block: .2rem; }
   .sketchbook-contact .inquiry-hero-art { width: 100%; translate: 0; }
   .sketchbook-contact > .inquiry-hero-leaves { top: -4rem; left: -.8rem; width: 48px; opacity: .72; }
-  .sketchbook-contact .inquiry-body { padding-block-end: 6rem; }
+  .sketchbook-contact .inquiry-body { padding-block-end: 2rem; }
   .sketchbook-contact .inquiry-tip-leaves { left: -.8rem; width: 40px; bottom: -.45rem; }
-  .sketchbook-contact .inquiry-runner, .sketchbook-contact .inquiry-trail { display: block; }
-  .sketchbook-contact .inquiry-runner { width: 56px; left: 9%; }
-  .sketchbook-contact .inquiry-trail { height: 32px; left: 21%; width: 65%; bottom: .7rem; }
+  /* Runner and trail share the form's grid cell, bottom-aligned with the submit button. */
+  .sketchbook-contact .inquiry-fields, .sketchbook-contact .inquiry-runner, .sketchbook-contact .inquiry-trail { grid-area: 1 / 1; }
+  .sketchbook-contact .inquiry-sidebar { grid-row: 2; }
+  .sketchbook-contact .inquiry-submit { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .sketchbook-contact .inquiry-submit-action { translate: 0; }
+  .sketchbook-contact .inquiry-runner, .sketchbook-contact .inquiry-trail { display: block; position: static; place-self: end start; }
+  .sketchbook-contact .inquiry-runner { width: 48px; margin: 0 0 -9px 4%; }
+  .sketchbook-contact .inquiry-trail { height: 32px; width: calc(96% - 48px - var(--inquiry-submit-width) - .6rem); margin: 0 0 -4px calc(4% + 48px); }
   .sketchbook-contact .inquiry-process-list li:not(:last-child) > .note-index::after { content: '↓'; inset-inline-start: 50%; top: 100%; }
   .sketchbook-contact .inquiry-process-grass { left: 11%; bottom: 2rem; width: 44px; }
 }
