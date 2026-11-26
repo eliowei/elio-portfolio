@@ -211,7 +211,7 @@
     <dialog ref="lightbox" class="case-lightbox" aria-label="案例圖片預覽" @keydown.left.prevent="stepImage(-1)" @keydown.right.prevent="stepImage(1)">
       <div v-if="currentImage">
         <button type="button" class="case-lightbox-close" aria-label="關閉圖片" autofocus @click="lightbox.close()">×</button>
-        <NuxtImg :src="currentImage.image" :alt="currentImage.title" />
+        <NuxtImg v-for="(item, index) in gallery" v-show="index === imageIndex" :key="item.image" :src="item.image" :alt="item.title" loading="eager" />
         <div class="case-lightbox-caption">
           <button type="button" aria-label="上一張圖片" @click="stepImage(-1)">←</button>
           <p>{{ currentImage.title }} · {{ imageIndex + 1 }} / {{ gallery.length }}</p>
@@ -317,14 +317,26 @@ const lightbox = ref(null)
 const imageIndex = ref(null)
 const currentImage = computed(() => gallery.value[imageIndex.value])
 
-async function openImage(index) {
-  imageIndex.value = index
-  await nextTick()
-  lightbox.value?.showModal()
+// All gallery images stay in the dialog. The visible one changes only after the next is decoded,
+// so the previous picture stays on screen instead of an empty frame.
+let requestedImage = 0
+
+function imageReady(index) {
+  return lightbox.value?.querySelectorAll('img')[index]?.decode().catch(() => {})
 }
 
-function stepImage(step) {
-  imageIndex.value = (imageIndex.value + step + gallery.value.length) % gallery.value.length
+async function openImage(index) {
+  requestedImage = imageIndex.value = index
+  await nextTick()
+  await imageReady(index)
+  if (requestedImage === index && !lightbox.value?.open) lightbox.value?.showModal()
+}
+
+async function stepImage(step) {
+  const next = (requestedImage + step + gallery.value.length) % gallery.value.length
+  requestedImage = next
+  await imageReady(next)
+  if (requestedImage === next) imageIndex.value = next
 }
 
 function contactLink(path, service) {

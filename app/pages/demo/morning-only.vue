@@ -23,9 +23,9 @@
         </div>
         <div class="hero-light" aria-hidden="true" />
         <div class="hero-copy">
-          <p class="concept">概念提案・虛構攝影品牌</p>
-          <h1 id="mo-title">天剛亮的時候，<br><span>人最不會裝。</span></h1>
-          <p>在你熟悉的地方，<br>用晨間自然光拍下伴侶、家庭和個人日常。</p>
+          <p class="concept">虛構攝影品牌概念提案</p>
+          <h1 id="mo-title">天剛亮的時候<br><span>人最不會裝</span></h1>
+          <p>在你熟悉的地方<br>用晨光拍下伴侶家庭與個人的日常</p>
           <div ref="heroActions" class="actions">
             <a href="#booking" class="btn">詢問檔期 →</a>
             <a href="#works" class="text-link">瀏覽作品集</a>
@@ -39,7 +39,7 @@
       <section class="wrap" aria-labelledby="mo-mornings">
         <div v-entrance class="section-head">
           <h2 id="mo-mornings">三個早晨 <i lang="en">Three Mornings</i></h2>
-          <p>不同的關係，一樣的早晨。<br>用晨光記錄那些自然又真實的片段。</p>
+          <p>不同的關係 一樣的早晨<br>用晨光記錄那些自然又真實的片段</p>
         </div>
         <ul class="mornings">
           <li v-for="item in mornings" :key="item.type">
@@ -54,7 +54,7 @@
         <div v-entrance class="wrap works-head">
           <div class="section-head">
             <h2 id="mo-works" ref="worksTitle" tabindex="-1">{{ showAll ? '完整作品集' : '代表作' }} <i lang="en">Works</i></h2>
-            <p>從清晨的光，<br>到生活裡最真實的表情。</p>
+            <p>從清晨的光<br>到生活裡最真實的表情</p>
             <button type="button" class="btn outline" @click="toggleWorks">{{ showAll ? '返回代表作' : '查看完整作品集' }}</button>
           </div>
         </div>
@@ -94,8 +94,9 @@
         </div>
         <div v-if="showAll" class="wrap wall-wrap">
           <div class="wall">
-            <button v-for="(work, index) in works" :key="work.id" type="button" :style="{ '--i': index }" :aria-label="`放大檢視：${work.alt}`" @click="openPhoto(index)">
+            <button v-for="(work, index) in works" :key="work.id" type="button" :aria-label="`放大檢視：${work.alt}`" @click="openPhoto(index)">
               <img :src="photo(work.id)" :alt="work.alt" width="1000" height="667">
+              <span class="sheen" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -103,9 +104,9 @@
 
       <section id="plans" class="wrap plans" aria-labelledby="mo-plans">
         <div v-entrance>
-          <h2 id="mo-plans">你想留多長的<wbr>早晨？</h2>
-          <p>從日出開始，<br>選一段屬於你的生活時光。</p>
-          <p class="fine">價格為展示用的虛構內容。</p>
+          <h2 id="mo-plans">你想留多長的<wbr>早晨</h2>
+          <p>從日出開始<br>選一段屬於你的生活時光</p>
+          <p class="fine">價格為展示用的虛構內容</p>
         </div>
         <ul>
           <li v-for="(plan, index) in plans" :key="plan.name" v-entrance="index * .12" :class="{ recommended: plan.recommended }">
@@ -154,13 +155,13 @@
             </label>
             <label>方案 *
               <select v-model="form.plan" required>
-                <option v-for="plan in plans" :key="plan.name" :value="plan.name">{{ plan.name }}（{{ plan.hours }} 小時）</option>
+                <option v-for="plan in plans" :key="plan.name" :value="plan.name">{{ plan.name }}　{{ plan.hours }} 小時</option>
               </select>
             </label>
             <label>預計拍攝日期 *<input v-model="form.date" type="date" required></label>
             <button type="submit" class="btn">詢問檔期 →</button>
           </form>
-          <p ref="statusEl" class="fine" role="status">{{ sent ? '這是展示頁面，資料沒有傳送出去。' : '展示用表單，資料不會傳送。' }}</p>
+          <p ref="statusEl" class="fine" role="status">{{ sent ? '展示頁面並未傳送資料' : '此表單僅供展示' }}</p>
         </div>
       </section>
     </main>
@@ -170,7 +171,7 @@
       <nav aria-label="頁尾導覽">
         <a v-for="link in links" :key="link.href" :href="link.href">{{ link.label }}</a>
       </nav>
-      <p class="fine">虛構品牌概念提案・示意照片來自 Pexels，並非本品牌拍攝・<NuxtLink to="/">Concept by Elio Wei</NuxtLink></p>
+      <p class="fine credits"><span>虛構品牌概念提案</span><span>示意照片取自 Pexels 非本品牌拍攝</span><NuxtLink to="/">Concept by Elio Wei</NuxtLink></p>
     </footer>
 
     <button type="button" class="to-top" :class="{ 'is-visible': pastHero && !(inView && !showAll) }" aria-label="回到頁面最上方" @click="toTop">
@@ -187,7 +188,7 @@
         <img :src="photo(openWork.id)" :alt="openWork.alt">
         <figcaption>
           <button type="button" aria-label="上一張" @click="stepPhoto(-1)">‹</button>
-          <p aria-live="polite">{{ openWork.alt }}・{{ openIndex + 1 }} / {{ works.length }}</p>
+          <p aria-live="polite">{{ openWork.alt }}　{{ openIndex + 1 }} / {{ works.length }}</p>
           <button type="button" aria-label="下一張" @click="stepPhoto(1)">›</button>
         </figcaption>
       </figure>
@@ -223,9 +224,9 @@ const mornings = [
   { id: 1084556, time: '07:30', type: '一個人', kind: '生活肖像', alt: '女子坐在窗邊望向戶外' }
 ]
 const featured = [
-  { id: 7683850, time: '06:30', type: '兩個人', line: '一起等咖啡變涼的那幾分鐘。', focus: '32% center', alt: '伴侶在廚房裡靠著彼此' },
-  { id: 5692279, time: '07:00', type: '一家人', line: '早餐桌上，誰也沒在看鏡頭。', focus: '75% center', alt: '孩子和長輩圍著餐桌吃早餐' },
-  { id: 36714310, time: '07:30', type: '一個人', line: '出門以前，先在窗邊站一下。', focus: '68% center', alt: '女子拿著杯子站在窗前' }
+  { id: 7683850, time: '06:30', type: '兩個人', line: '一起等咖啡變涼的那幾分鐘', focus: '32% center', alt: '伴侶在廚房裡靠著彼此' },
+  { id: 5692279, time: '07:00', type: '一家人', line: '早餐桌上誰也沒在看鏡頭', focus: '75% center', alt: '孩子和長輩圍著餐桌吃早餐' },
+  { id: 36714310, time: '07:30', type: '一個人', line: '出門以前先在窗邊站一下', focus: '68% center', alt: '女子拿著杯子站在窗前' }
 ]
 const works = [
   { id: 7683850, alt: '伴侶在廚房裡靠著彼此' },
@@ -463,8 +464,33 @@ async function toggleWorks() {
     held.value = false
     go(current.value)
   }
+  developWall()
   ScrollTrigger.refresh()
 }
+
+// Full portfolio entrance: each photo rises like a sunrise inside an arch, develops from an overexposed
+// frame into its real colours, then catches one pass of light. Rows further down play when scrolled to.
+let wallMotion: gsap.Context | undefined
+function developWall() {
+  wallMotion?.revert()
+  wallMotion = undefined
+  if (!showAll.value || reducedMotion()) return
+  wallMotion = gsap.context(() => {
+    root.value?.querySelectorAll('.wall button').forEach((tile, index) => {
+      const image = tile.querySelector('img')
+      gsap.timeline({ delay: (index % 3) * .18, scrollTrigger: { trigger: tile, start: 'top 88%', once: true } })
+        .fromTo(tile,
+          { clipPath: 'inset(100% 0% 0% 0% round 50% 50% 0% 0%)' },
+          { clipPath: 'inset(0% 0% 0% 0% round 0% 0% 0% 0%)', duration: 1.25, ease: 'power4.inOut', clearProps: 'clipPath' })
+        .fromTo(image,
+          { scale: 1.4, filter: 'brightness(2.4) sepia(0.9) saturate(1.6) blur(10px)' },
+          { scale: 1, filter: 'brightness(1) sepia(0) saturate(1) blur(0px)', duration: 1.9, ease: 'power2.out', clearProps: 'transform,filter' }, .1)
+        // x: 0 drops the pixel offset GSAP reads from the CSS transform, which otherwise ends the sweep mid-photo.
+        .fromTo(tile.querySelector('.sheen'), { x: 0, xPercent: -120 }, { x: 0, xPercent: 120, duration: 1.1, ease: 'power1.inOut' }, .85)
+    })
+  })
+}
+onBeforeUnmount(() => wallMotion?.revert())
 </script>
 
 <style scoped>
@@ -548,7 +574,8 @@ async function toggleWorks() {
 .pager .play { font-size: .875rem; padding-inline: .6rem; text-decoration: underline; text-underline-offset: .3em; }
 
 .wall { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: clamp(190px, 24vw, 330px); gap: .75rem; }
-.wall button { grid-column: span 2; overflow: hidden; cursor: zoom-in; }
+.wall button { position: relative; grid-column: span 2; overflow: hidden; cursor: zoom-in; }
+.sheen { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; transform: translateX(-120%); background: linear-gradient(105deg, #fff0 32%, #ffd9a0b3 48%, #fff7e8e6 52%, #fff0 68%); }
 .wall img { width: 100%; height: 100%; object-fit: cover; }
 .wall button:nth-child(1), .wall button:nth-child(4) { grid-column: span 4; }
 .wall button:nth-child(4) { order: 1; }
@@ -606,6 +633,7 @@ footer nav { display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
 footer nav a { padding-block: .6rem; }
 footer .fine { width: 100%; color: #cfc8bd; }
 footer .fine a { text-decoration: underline; }
+.credits { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; }
 .sticky-cta { display: none; }
 
 .hero { overflow: hidden; }
@@ -615,7 +643,6 @@ footer .fine a { text-decoration: underline; }
   .hero-copy > :nth-child(3) { animation-delay: .3s; }
   .hero-copy > :nth-child(4) { animation-delay: .45s; }
   .hero h1 span { animation: mo-underline .7s ease-out 1s both; }
-  .wall button { animation: mo-rise .6s ease-out both; animation-delay: calc(var(--i) * 80ms); }
   .mo-lightbox[open] img { animation: mo-rise .35s ease-out; }
   .mornings img, .wall img { transition: scale .8s cubic-bezier(.2, .7, .2, 1); }
   .mornings li:hover img { scale: 1.07; }
