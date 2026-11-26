@@ -60,6 +60,20 @@ export default defineContentConfig({
       }),
 
       // ==========================================================================
+      // Story Sections
+      // 案例長文段落（有此欄位時依序編號顯示在 Overview 之後）
+      // ==========================================================================
+
+      sections: z.array(z.object({
+        label: z.string(),
+        title: z.string(),
+        lead: z.string().optional(),
+        paragraphs: z.array(z.string()).optional(),
+        items: z.array(z.object({ name: z.string(), text: z.string() })).optional(),
+        colors: z.array(z.object({ name: z.string(), value: z.string() })).optional()
+      })).optional(),
+
+      // ==========================================================================
       // Problem
       // 商業痛點（Product）
       // ==========================================================================

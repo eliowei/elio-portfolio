@@ -99,6 +99,25 @@
         </div>
       </section>
 
+      <section v-for="(section, index) in sections" :key="section.label" class="case-chapter case-spread case-story" :aria-labelledby="'case-story-' + index">
+        <div>
+          <p class="note-index"><span>{{ chapterNumber(index + 2) }}</span> {{ section.label }}</p>
+          <h2 :id="'case-story-' + index">{{ section.title }}</h2>
+        </div>
+        <div class="case-story-body">
+          <h3 v-if="section.lead">{{ section.lead }}</h3>
+          <p v-for="text in section.paragraphs" :key="text">{{ text }}</p>
+          <dl v-if="section.items" class="case-story-list">
+            <div v-for="item in section.items" :key="item.name" class="paper-note"><dt>{{ item.name }}</dt><dd>{{ item.text }}</dd></div>
+          </dl>
+          <ul v-if="section.colors" class="case-colors">
+            <li v-for="color in section.colors" :key="color.value" class="paper-note">
+              <span :style="{ background: color.value }" aria-hidden="true" />{{ color.name }}<code>{{ color.value }}</code>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section v-if="processSteps.length" class="case-chapter case-spread case-process" aria-labelledby="case-process-title">
         <div>
           <p class="note-index"><span>03</span> Process</p>
@@ -125,7 +144,7 @@
 
       <section v-if="gallery.length" class="case-chapter case-spread case-result" aria-labelledby="case-result-title">
         <div>
-          <p class="note-index"><span>04</span> Result</p>
+          <p class="note-index"><span>{{ chapterNumber(sections.length ? sections.length + 2 : 4) }}</span> Result</p>
           <h2 id="case-result-title">實際成果展示</h2>
           <p v-if="project.caseStudy?.result">{{ project.caseStudy.result }}</p>
         </div>
@@ -241,6 +260,8 @@ const resultPreviews = computed(() => {
 })
 // A demo hosted on this site is a self-initiated concept, not a client's live website.
 const isConcept = computed(() => props.project.demo?.startsWith('/'))
+const sections = computed(() => props.project.sections ?? [])
+const chapterNumber = value => String(value).padStart(2, '0')
 const pricing = computed(() => props.project.product?.pricing)
 const offer = computed(() => props.project.product?.cta)
 const scope = computed(() => props.project.caseStudy?.scope ?? props.project.highlights ?? [])

@@ -1,7 +1,7 @@
 <template>
   <div ref="root" class="mo">
     <header class="top" @keydown.esc="menuOpen = false">
-      <a href="#top" class="logo">只拍早上<small>MORNING ONLY</small></a>
+      <a href="#top" class="logo">晨間影像<small>MORNING ONLY</small></a>
       <button
         type="button" class="menu-button" :aria-expanded="menuOpen" :aria-label="menuOpen ? '關閉選單' : '開啟選單'"
         aria-controls="mo-nav" @click="menuOpen = !menuOpen"
@@ -23,7 +23,7 @@
         </div>
         <div class="hero-light" aria-hidden="true" />
         <div class="hero-copy">
-          <p class="concept">虛構攝影品牌概念提案</p>
+          <p class="concept">只拍早上｜虛構攝影品牌概念提案</p>
           <h1 id="mo-title">天剛亮的時候<br><span>人最不會裝</span></h1>
           <p>在你熟悉的地方<br>用晨光拍下伴侶家庭與個人的日常</p>
           <div ref="heroActions" class="actions">
@@ -167,7 +167,7 @@
     </main>
 
     <footer>
-      <p class="logo">只拍早上<small>MORNING ONLY</small></p>
+      <p class="logo">晨間影像<small>MORNING ONLY</small></p>
       <nav aria-label="頁尾導覽">
         <a v-for="link in links" :key="link.href" :href="link.href">{{ link.label }}</a>
       </nav>
@@ -205,8 +205,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 definePageMeta({ layout: false })
 useSeoMeta({
-  title: '只拍早上｜自然光攝影概念提案',
-  description: '虛構攝影品牌的一頁式網站概念提案：只拍早上的自然光生活寫真。'
+  title: '晨間影像｜自然光攝影概念提案',
+  description: '晨間影像是只拍早上的自然光生活寫真，虛構攝影品牌的一頁式網站概念提案。'
 })
 
 // Photos from Pexels (https://www.pexels.com/photo/<id>/), free to use under the Pexels license.
