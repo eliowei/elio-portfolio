@@ -464,7 +464,6 @@
 .inquiry-service-note ul { display: grid; gap: .5rem; }
 .inquiry-service-note li { display: flex; align-items: center; gap: .5rem; }
 .inquiry-service-note li .iconify { flex: none; color: var(--accent); }
-.inquiry-service-note p { padding-block-start: .6rem; margin-block-start: .75rem; border-top: 1px dashed var(--rule); }
 .sketchbook .inquiry-tip { padding: .85rem .9rem; margin: 1.85rem .15rem 0 1rem; rotate: -4deg; background: var(--note-tip); }
 .inquiry-runner { width: min(100%, 94px); height: auto; margin: .75rem 0 -2.7rem 13%; }
 .inquiry-fields { display: grid; gap: 1.05rem; }

@@ -129,6 +129,8 @@
 </template>
 
 <script setup>
+import { services } from '~/data/services'
+
 defineProps({ projects: { type: Array, default: () => [] } })
 
 const notebook = ref(null)
@@ -159,12 +161,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   revealObserver?.disconnect()
 })
-const services = [
-  { id: 'corporate', title: '品牌／企業網站', description: '整理品牌、服務與聯絡入口', icon: 'i-lucide-panels-top-left' },
-  { id: 'landing', title: '活動頁／Landing Page', description: '介紹活動、商品或服務', icon: 'i-lucide-layers' },
-  { id: 'line_oa_template', title: 'LINE OA／LINE Bot', description: '內容管理與流程整合', icon: 'i-lucide-message-circle' },
-  { id: 'other', title: '客製化功能開發', description: '依需求規劃功能與串接', icon: 'i-lucide-settings' },
-]
 const steps = [
   { title: '需求討論', description: '了解目標與需求', icon: 'i-lucide-messages-square' },
   { title: '規劃設計', description: '架構與視覺提案', icon: 'i-lucide-panels-top-left' },

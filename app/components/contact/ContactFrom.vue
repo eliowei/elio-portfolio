@@ -4,11 +4,8 @@
       <div class="paper-note inquiry-paper inquiry-service-note">
         <h2 class="tape-label">網站建置服務</h2>
         <ul>
-          <li><UIcon name="i-lucide-square-check-big" aria-hidden="true" /> 品牌形象網站</li>
-          <li><UIcon name="i-lucide-square-check-big" aria-hidden="true" /> 服務介紹頁 / Landing Page</li>
-          <li><UIcon name="i-lucide-square-check-big" aria-hidden="true" /> LINE OA 功能擴充評估</li>
+          <li v-for="service in services" :key="service.id"><UIcon name="i-lucide-square-check-big" aria-hidden="true" /> {{ service.title }}</li>
         </ul>
-        <p>延伸服務<br>LINE 官方帳號內容管理整合</p>
       </div>
       <p class="paper-note inquiry-paper inquiry-tip">如果你已經有網站、品牌資料或參考範例，也可以一併提供，讓我們更快釐清需求。</p>
 
@@ -123,6 +120,7 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
+import { services } from '~/data/services'
 
 const { sendMail } = useContact()
 const { trackContactSubmit } = useAnalytics()
@@ -157,38 +155,8 @@ const state = reactive<Schema>({
 })
 
 const projectOptions = [
-  {
-    label: '品牌形象網站',
-    value: 'corporate'
-  },
-  {
-    label: '個人品牌網站',
-    value: 'personal'
-  },
-  {
-    label: '活動介紹頁',
-    value: 'event'
-  },
-  {
-    label: '單頁網站（服務／產品介紹）',
-    value: 'landing'
-  },
-  {
-    label: 'LINE 官方帳號內容管理整合',
-    value: 'line_oa_template'
-  },
-  {
-    label: 'LINE OA 進階整合需求',
-    value: 'line_oa_advanced'
-  },
-  {
-    label: '還不確定，想先討論',
-    value: 'consultation'
-  },
-  {
-    label: '其他需求',
-    value: 'other'
-  }
+  ...services.map(({ id, title }) => ({ label: title, value: id })),
+  { label: '還不確定，想先討論', value: 'consultation' }
 ]
 
 const route = useRoute()

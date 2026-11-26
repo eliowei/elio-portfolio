@@ -19,9 +19,9 @@ const config = useRuntimeConfig()
 
 useSeoMeta({
   title: '網站建置與整合洽詢 | Elio Wei',
-  description: '提供品牌形象網站、服務介紹頁與 Landing Page 建置，LINE OA 整合依需求評估。歡迎提供網站用途、參考網站與預計時程。',
+  description: '提供品牌形象網站與一頁式網站／活動頁建置，LINE OA／LINE Bot 整合與客製化功能依需求評估。歡迎提供網站用途、參考網站與預計時程。',
   ogTitle: '網站建置與整合洽詢 | Elio Wei',
-  ogDescription: '提供品牌形象網站、服務介紹頁與 Landing Page 建置，LINE OA 整合依需求評估。歡迎提供網站用途、參考網站與預計時程。',
+  ogDescription: '提供品牌形象網站與一頁式網站／活動頁建置，LINE OA／LINE Bot 整合與客製化功能依需求評估。歡迎提供網站用途、參考網站與預計時程。',
   ogUrl: `${config.public.siteUrl}/contact`,
   ogType: 'website',
   ogImage: `${config.public.siteUrl}/images/og-image-v2.jpg`
@@ -42,7 +42,7 @@ useHead({
         '@type': 'ContactPage',
         name: '網站建置與整合洽詢 | Elio Wei',
         url: `${config.public.siteUrl}/contact`,
-        description: '提供品牌形象網站、服務介紹頁與 Landing Page 建置，LINE OA 整合依需求評估。歡迎提供網站用途、參考網站與預計時程。',
+        description: '提供品牌形象網站與一頁式網站／活動頁建置，LINE OA／LINE Bot 整合與客製化功能依需求評估。歡迎提供網站用途、參考網站與預計時程。',
         inLanguage: 'zh-Hant',
         isPartOf: {
           '@type': 'WebSite',
