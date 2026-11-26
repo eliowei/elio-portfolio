@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>晨間影像｜響應式設計稿</title>
+<style>
+:root{--ink:#201d19;--paper:#faf9f7;--cream:#f4eee6;--night:#1d2642;--rust:#ad4027;--muted:#62594f;--line:#ded8d1;--serif:"Noto Serif TC","Songti TC","PMingLiU",serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 "Noto Sans TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3,p,figure{margin:0}h1,h2,h3,.brand,.price{font-family:var(--serif)}h2{font-size:clamp(28px,4vw,43px);line-height:1.25}h3{font-size:27px;line-height:1.3}
+a{color:inherit;text-underline-offset:.32em}button,input,select{font:inherit}button,summary{cursor:pointer}
+.wrap{width:min(100% - 112px,1280px);margin:auto}.section{padding-block:clamp(64px,8vw,116px)}.muted{color:var(--muted)}
+.notice{text-align:center;background:#191916;color:white;font-size:12px;padding:5px 12px}
+.hero{background:linear-gradient(180deg,var(--night) 3%,#434263 42%,#b78c88 64%,#f0c49e 81%,var(--paper) 100%);color:#fff7ee}
+header .wrap{display:flex;align-items:center;justify-content:space-between;min-height:88px;gap:20px}.brand{font-size:25px;font-weight:bold;text-decoration:none;white-space:nowrap}
+nav{display:flex;align-items:center;gap:28px}nav a:not(.button){text-decoration:none}.menu{display:none}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 24px;border:0;border-radius:99px;background:var(--rust);color:white;font-weight:700;text-decoration:none;white-space:nowrap}
+.hero-copy{display:grid;grid-template-columns:1.35fr 1fr;align-items:end;gap:clamp(24px,5vw,72px);padding:70px 0 38px}
+.time{display:inline-block;border:1px solid currentColor;border-radius:99px;padding:0 12px;font:bold 14px/1.3 Georgia,serif;font-variant-numeric:tabular-nums}
+h1{margin-top:22px;font-size:clamp(42px,6vw,88px);line-height:1.15;letter-spacing:.01em}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;margin-top:20px}
+.photo{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:4 / 3;background:radial-gradient(ellipse at 55% 28%,#ffe1b8,#b09a84 62%,#7b665d);color:white}
+.photo::before,.photo::after{content:"";position:absolute;left:var(--mark,36%);bottom:-34%;width:34%;height:76%;border-radius:48% 48% 18% 18%;background:#514537;opacity:.64}
+.photo::after{left:55%;width:27%;height:70%;bottom:-31%}.photo.solo::after,.photo.detail::before,.photo.detail::after{display:none}
+.head{position:absolute;left:calc(var(--mark,36%) + 10%);top:32%;width:12%;aspect-ratio:1;border-radius:50%;background:#665843;opacity:.72}
+.head + .head{left:62%;top:36%;width:10%}.photo.solo{--mark:33%}
+figcaption{position:absolute;inset:auto 0 0;padding:16px 12px 7px;background:linear-gradient(transparent,#241912a8);font-size:12px}
+.hero-image{margin-left:11%;aspect-ratio:7 / 4;background:radial-gradient(ellipse at 44% 28%,#ffe0b7,#a48883 64%,#5e4b58)}
+.stories{display:grid;gap:clamp(60px,7vw,104px);margin-top:34px}.story{display:grid;grid-template-columns:1.9fr 1fr;gap:14px;align-items:end;width:84%}
+.story:nth-child(even){grid-template-columns:1fr 1.9fr;margin-left:auto}.story:nth-child(even)>.photo{grid-column:2;grid-row:1}.story:nth-child(even) .story-side{grid-column:1;grid-row:1}
+.photos{display:grid;gap:14px}.photos .photo{aspect-ratio:1.8}.story-copy{margin-top:20px}.story h3{margin:8px 0 4px}.story a{display:inline-block;margin-top:12px}
+.plans>p{margin-top:12px}.plan-list{margin-top:26px}.plan{display:grid;grid-template-columns:1fr 3fr minmax(125px,1fr) minmax(140px,1fr);align-items:center;gap:14px;padding:16px;border-top:1px solid var(--line)}.plan:last-child{border-bottom:1px solid var(--line)}.plan.featured{background:#fbede0}.plan strong,.plan small{display:block}.price{font-size:25px;white-space:nowrap}.meter{background:#f2d0b4;border-radius:99px;min-height:32px;padding:5px 10px;width:max(var(--length),100px);font-size:13px;white-space:nowrap}.choose{justify-self:start}
+.process{background:var(--cream)}.process-grid{display:grid;grid-template-columns:1fr 2.5fr;gap:44px;align-items:center}.portrait{border-radius:50% 50% 0 0 / 42% 42% 0 0;aspect-ratio:4 / 5}.process p{margin-top:14px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;list-style:none;padding:0;margin:24px 0 0}.steps li{border-top:1px solid;padding-top:10px}.steps span{display:block;color:var(--muted);font-size:14px}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,6vw,80px)}.contact h2{margin-bottom:22px}details{border-bottom:1px solid var(--line)}summary{list-style:none;display:flex;justify-content:space-between;gap:16px;padding:14px 0}summary::-webkit-details-marker{display:none}summary::after{content:"＋"}details[open] summary::after{content:"－"}details p{margin-bottom:14px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:grid;gap:4px;font-size:14px;font-weight:700}input,select{width:100%;min-height:46px;border:1px solid #a79d91;border-radius:8px;padding:7px 12px;background:#fff;color:var(--ink);font-weight:400}.wide{grid-column:1/-1}.note{font-size:13px}
+footer{background:var(--night);color:white;padding:24px 0;font-size:13px}.sticky{display:none}:focus-visible{outline:3px solid #627fac;outline-offset:3px}
+@media(max-width:760px){
+.wrap{width:calc(100% - 36px)}.section{padding-block:56px}header .wrap{min-height:62px;position:relative}.brand{font-size:21px}
+.menu{display:grid;place-items:center;width:44px;height:44px;border:0;background:none;color:inherit;font-size:24px}
+nav{display:none;position:absolute;right:0;top:100%;z-index:2;background:var(--night);padding:16px;align-items:stretch;gap:12px}nav.open{display:grid}
+.hero-copy{display:block;padding:28px 0 22px}.hero-copy p{margin-top:14px}h1{font-size:clamp(32px,8.7vw,62px);margin-top:13px}.hero-image{margin-left:7%;aspect-ratio:7 / 8}
+.stories{gap:46px;margin-top:24px}.story,.story:nth-child(even){display:flex;flex-direction:column;align-items:stretch;width:100%;gap:10px}.story-side{display:contents}.story-copy{order:-1;margin:0}.story h3{font-size:24px}.story a{margin:8px 0 4px}.photos{grid-template-columns:1fr 1fr;gap:10px}.photos .photo{aspect-ratio:1.5}
+.plan{grid-template-columns:1fr auto;padding:14px 12px;gap:8px 12px}.plan .meter{display:none}.plan .choose{grid-column:1/-1}.plan .button{justify-self:stretch}.price{font-size:23px}
+.process-grid,.contact{grid-template-columns:1fr;gap:26px}.portrait{width:68%;max-width:280px}.steps{grid-template-columns:1fr 1fr}.contact{gap:36px}form{grid-template-columns:1fr}
+footer{padding-bottom:calc(78px + env(safe-area-inset-bottom))}.sticky{display:block;position:fixed;bottom:0;inset-inline:0;z-index:3;background:var(--paper);border-top:1px solid var(--line);padding:10px 18px calc(10px + env(safe-area-inset-bottom))}.sticky .button{width:100%}.sticky[hidden]{display:none}
+}
+</style>
+</head>
+<body>
+<div class="notice">虛構品牌概念提案 · 圖像為構圖示意</div>
+<div class="hero">
+<header><div class="wrap"><a class="brand" href="#">晨間影像</a><button class="menu" type="button" aria-label="開啟選單" aria-controls="navigation" aria-expanded="false">☰</button><nav id="navigation" aria-label="主要導覽"><a href="#work">作品</a><a href="#plans">方案</a><a href="#process">流程</a><a href="#faq">常見問題</a><a class="button" href="#booking">預約拍攝</a></nav></div></header>
+<div class="wrap"><div class="hero-copy"><div><span class="time">05:40</span><h1>天剛亮的時候，<br>人最不會裝。</h1></div><div><p>晨間影像只拍早上。<br>在你熟悉的地方，用自然光拍下伴侶、家庭與個人日常。</p><div class="actions"><a class="button" href="#booking">預約拍攝</a><a href="#work">看作品 ↓</a></div></div></div>
+<figure class="photo hero-image"><i class="head"></i><i class="head"></i><figcaption>窗邊晨光</figcaption></figure></div>
+</div>
+<main>
+<section class="wrap section" id="work"><h2>三個早晨</h2><div class="stories" id="stories"></div></section>
+<section class="wrap section plans" id="plans"><h2>你想留多長的早晨？</h2><p class="muted">實際開始時間依日出與拍攝地點討論。</p><div class="plan-list" id="plan-list"></div></section>
+<section class="section process" id="process"><div class="wrap process-grid"><figure class="photo solo portrait"><i class="head"></i><figcaption>攝影師</figcaption></figure><div><h2>早上的光，比較誠實。</h2><p class="muted">我習慣在窗邊等光，讓你照平常的步調走。不用擺姿勢，需要時我再給一點方向。</p><ol class="steps"><li><strong>01 詢問</strong><span>填寫日期與方案</span></li><li><strong>02 討論</strong><span>確認地點與習慣</span></li><li><strong>03 拍攝</strong><span>照你的步調</span></li><li><strong>04 交件</strong><span>線上相簿下載</span></li></ol></div></div></section>
+<div class="wrap section contact">
+<section id="faq"><h2>常見問題</h2><details><summary>下雨天怎麼辦？</summary><p class="muted">可以討論改期，或改到有自然光的室內拍攝。</p></details><details><summary>多久可以拿到照片？</summary><p class="muted">交付日期會在確認拍攝安排時一併告知。</p></details><details><summary>不會擺姿勢可以嗎？</summary><p class="muted">可以。照平常的步調活動，需要時攝影師會給方向。</p></details><details><summary>可以在我家拍嗎？</summary><p class="muted">可以。確認檔期時可以一起討論家裡的窗光與拍攝空間。</p></details></section>
+<section id="booking"><h2>約個早上見面</h2><form>
+<label>姓名<input name="name" autocomplete="name" required placeholder="王小明"></label>
+<label>Email<input type="email" name="email" autocomplete="email" required placeholder="name@example.com"></label>
+<label>拍攝類型<select name="type" required><option value="">請選擇</option><option>兩個人</option><option>一家人</option><option>一個人</option></select></label>
+<label>方案<select name="plan" required><option value="">請選擇</option><option>輕拍 · 1 小時</option><option>日常 · 2 小時</option><option>紀實半日 · 4 小時</option></select></label>
+<label class="wide">想拍攝的日期<input name="date" type="date" required></label>
+<button class="button wide" type="submit">詢問檔期</button><p class="wide note muted" role="status">表單為互動示意，資料不會傳送。</p>
+</form></section>
+</div>
+</main>
+<footer><div class="wrap">晨間影像（虛構品牌） · Concept by Elio Wei · 價格為展示用</div></footer>
+<div class="sticky"><a class="button" href="#booking">預約拍攝</a></div>
+<script>
+const stories = [
+  ['06:30','兩個人','伴侶紀實','還沒換衣服、還在找杯子，就從這裡開始拍。','一起煮咖啡','杯子特寫','窗邊'],
+  ['07:40','一家人','家庭紀實','孩子醒來的第一個小時，不需要引導。','賴床','早餐桌','穿鞋出門'],
+  ['09:00','一個人','個人形象','在你真正工作的位子，拍一張像自己的形象照。','工作桌前','手部特寫','半身']
+];
+function photo(caption, kind = '') {
+  const heads = kind === 'detail' ? '' : '<i class="head"></i>' + (kind === 'solo' ? '' : '<i class="head"></i>');
+  return '<figure class="photo '+kind+'">'+heads+'<figcaption>'+caption+'</figcaption></figure>';
+}
+document.querySelector('#stories').innerHTML = stories.map(([time,name,type,description,main,detail,medium], index) =>
+  '<article class="story">'+photo(main,index===2?'solo':'')+'<div class="story-side"><div class="photos">'+photo(detail,'detail')+photo(medium,index===2?'solo':'')+'</div><div class="story-copy"><span class="time">'+time+'</span><h3>'+name+'</h3><p class="muted">'+type+' · '+description+'</p><a href="#booking" data-type="'+name+'">預約這類拍攝 →</a></div></div></article>'
+).join('');
+const plans = [['輕拍',1,20,'3,600'],['日常',2,40,'6,800'],['紀實半日',4,80,'12,000']];
+document.querySelector('#plan-list').innerHTML = plans.map(([name,hours,count,price], index) =>
+  '<article class="plan '+(index===1?'featured':'')+'"><div><strong>'+name+'</strong><small>'+hours+' 小時 · 精修 '+count+' 張</small></div><div class="meter" style="--length:'+hours*25+'%" aria-hidden="true"></div><span class="price">NT$'+price+'</span><a class="choose '+(index===1?'button':'')+'" href="#booking" data-plan="'+name+' · '+hours+' 小時">選擇方案'+(index===1?'':' →')+'</a></article>'
+).join('');
+const form = document.querySelector('form');
+for (const link of document.querySelectorAll('[data-type], [data-plan]')) {
+  link.addEventListener('click', () => {
+    for (const [field,value] of Object.entries(link.dataset)) form.elements.namedItem(field).value = value;
+  });
+}
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  form.querySelector('[role=status]').textContent = '已完成詢問示意，資料未傳送。';
+});
+const menu = document.querySelector('.menu');
+const nav = document.querySelector('nav');
+function setMenu(open) {
+  nav.classList.toggle('open', open);
+  menu.setAttribute('aria-expanded', open);
+  menu.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
+}
+menu.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+nav.addEventListener('click', event => { if (event.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menu.focus(); }
+});
+new IntersectionObserver(([entry]) => {
+  document.querySelector('.sticky').hidden = entry.isIntersecting;
+}).observe(document.querySelector('#booking'));
+</script>
+</body>
+</html>

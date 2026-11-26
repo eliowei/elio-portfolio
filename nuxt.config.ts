@@ -73,6 +73,10 @@ export default defineNuxtConfig({
   routeRules: {
     '/**': {
       prerender: true
+    },
+    // Concept demo pages are portfolio samples: keep them out of search results and the sitemap.
+    '/demo/**': {
+      robots: false
     }
   },
   experimental: {

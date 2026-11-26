@@ -11,7 +11,7 @@
           <p>{{ project.description }}</p>
           <ul class="case-tags" aria-label="專案標籤"><li v-for="tag in project.tags" :key="tag">{{ tag }}</li></ul>
           <div class="case-actions">
-            <NuxtLink v-if="project.demo" :to="project.demo" external target="_blank" rel="noopener noreferrer" class="ink-button"><UIcon name="i-lucide-external-link" aria-hidden="true" /> 前往實際網站 ↗</NuxtLink>
+            <NuxtLink v-if="project.demo" :to="project.demo" external target="_blank" rel="noopener noreferrer" class="ink-button"><UIcon name="i-lucide-external-link" aria-hidden="true" /> {{ isConcept ? '前往展示網站' : '前往實際網站' }} ↗</NuxtLink>
             <NuxtLink v-else-if="pricing" to="#case-pricing" class="ink-button">查看導入方案 ↓</NuxtLink>
           </div>
         </div>
@@ -52,7 +52,7 @@
             <img class="case-ridge" src="/images/sketchbook/result-ridge.webp" alt="" width="360" height="65" loading="lazy">
           </div>
           <aside class="paper-note case-scope">
-            <h3 class="tape-label">{{ project.type === 'product' ? '導入範圍' : '合作範圍' }}</h3>
+            <h3 class="tape-label">{{ project.type === 'product' ? '導入範圍' : isConcept ? '製作範圍' : '合作範圍' }}</h3>
             <ul class="case-checklist">
               <li v-for="item in scope" :key="item">
                 <svg viewBox="0 0 23 23" class="case-result-check" fill="none" aria-hidden="true"><path d="m3 6 14-1 1 14-14 1Z" /><path d="m6 11 4 4 10-11" /></svg>{{ item }}
@@ -239,6 +239,8 @@ const resultPreviews = computed(() => {
   const phone = entries.find(item => item.device === 'phone')
   return [laptop, phone].filter(Boolean)
 })
+// A demo hosted on this site is a self-initiated concept, not a client's live website.
+const isConcept = computed(() => props.project.demo?.startsWith('/'))
 const pricing = computed(() => props.project.product?.pricing)
 const offer = computed(() => props.project.product?.cta)
 const scope = computed(() => props.project.caseStudy?.scope ?? props.project.highlights ?? [])
