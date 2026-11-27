@@ -52,7 +52,7 @@
             <img class="case-ridge" src="/images/sketchbook/result-ridge.webp" alt="" width="360" height="65" loading="lazy">
           </div>
           <aside class="paper-note case-scope">
-            <h3 class="tape-label">{{ project.type === 'product' ? '導入範圍' : isConcept ? '製作範圍' : '合作範圍' }}</h3>
+            <h3 class="tape-label">{{ project.type === 'product' ? '導入範圍' : '製作範圍' }}</h3>
             <ul class="case-checklist">
               <li v-for="item in scope" :key="item">
                 <svg viewBox="0 0 23 23" class="case-result-check" fill="none" aria-hidden="true"><path d="m3 6 14-1 1 14-14 1Z" /><path d="m6 11 4 4 10-11" /></svg>{{ item }}
@@ -142,9 +142,21 @@
         </ol>
       </section>
 
+      <section v-if="project.video" class="case-chapter case-spread" aria-labelledby="case-video-title">
+        <div>
+          <p class="note-index"><span>{{ chapterNumber(resultNumber) }}</span> Video</p>
+          <h2 id="case-video-title">{{ project.video.title }}</h2>
+          <p v-if="project.video.description">{{ project.video.description }}</p>
+        </div>
+        <figure class="case-photo case-video">
+          <!-- Nothing but the poster is downloaded until the visitor presses play. -->
+          <video :src="project.video.src" :poster="project.video.poster" :aria-label="project.video.title" controls playsinline preload="none" />
+        </figure>
+      </section>
+
       <section v-if="gallery.length" class="case-chapter case-spread case-result" aria-labelledby="case-result-title">
         <div>
-          <p class="note-index"><span>{{ chapterNumber(sections.length ? sections.length + 2 : 4) }}</span> Result</p>
+          <p class="note-index"><span>{{ chapterNumber(resultNumber + (project.video ? 1 : 0)) }}</span> Result</p>
           <h2 id="case-result-title">實際成果展示</h2>
           <p v-if="project.caseStudy?.result">{{ project.caseStudy.result }}</p>
         </div>
@@ -262,6 +274,8 @@ const resultPreviews = computed(() => {
 const isConcept = computed(() => props.project.demo?.startsWith('/'))
 const sections = computed(() => props.project.sections ?? [])
 const chapterNumber = value => String(value).padStart(2, '0')
+// The chapter after Overview and the story sections; a video takes it and pushes Result one further.
+const resultNumber = computed(() => sections.value.length ? sections.value.length + 2 : 4)
 const pricing = computed(() => props.project.product?.pricing)
 const offer = computed(() => props.project.product?.cta)
 const scope = computed(() => props.project.caseStudy?.scope ?? props.project.highlights ?? [])
