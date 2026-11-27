@@ -5,15 +5,15 @@
 # ============================================================================
 
 title: 遊戲社群揪團平台
-updatedAt: 2026-07-31
+updatedAt: 2026-11-27
 slug: game-together
 type: project
 category: Full Stack Project
 
 year: 2025
-order: 03
+order: 06
 
-description: "把找隊友、申請加入和即時聊天放進同一個揪團流程，讓玩家看完活動就能決定是否參加。"
+description: "把找隊友、加入揪團和即時聊天放進同一個流程，讓玩家看完活動就能決定是否參加。"
 
 highlights:
   - 多條件搜尋與排序
@@ -22,11 +22,11 @@ highlights:
   - 收藏與留言互動
   - 揪團建立與管理
 
-cover: /images/projects/game-together/cover.png
+cover: /images/projects/game-together/cover.jpg
 
 tags:
   - 活動搜尋
-  - 申請管理
+  - 成員管理
   - 即時聊天
 
 github: https://github.com/eliowei/game-together
@@ -48,64 +48,71 @@ card:
 
 overview:
   title: "把分散在貼文和聊天室的揪團資訊整理起來"
-  content: "玩家常需要在貼文、聊天室和社群群組間來回確認日期、缺額和參加方式。我把搜尋、活動詳情、申請與聊天室放進同一個流程，也讓主辦人有地方管理參加狀態。"
+  content: "玩家常需要在貼文、聊天室和社群群組間來回確認日期、缺額和參加方式。我把搜尋、活動詳情、加入揪團與聊天室放進同一個流程，也讓主辦人和管理者各有自己的管理畫面。"
 
 caseStudy:
   label: "社群活動平台"
   scope:
     - "揪團搜尋與篩選"
-    - "活動及申請管理"
+    - "活動建立與成員管理"
     - "即時聊天室"
+    - "會員中心與管理後台"
     - "前後端與資料庫整合"
-  process:
-    - title: "先釐清玩家與主辦人各自要完成什麼"
-      illustration: game-planning
-      description: "把找團、看詳情、申請與管理拆成各自的頁面，讓兩種角色都能很快找到需要的操作。"
-    - title: "讓討論在同一個地方完成"
-      illustration: game-chat
-      description: "把會員、活動與即時聊天串在一起，玩家不必離開網站就能和主辦人討論。"
-  result: "玩家可以從搜尋、看活動、申請一路到聊天；主辦人也有自己的管理畫面。"
+  process: []
+  result: "玩家可以從搜尋、看活動、加入揪團一路到聊天；主辦人與管理者也有各自的管理畫面。展示網站的後端部署在免費主機，第一次開啟可能需要等待約 30 秒；案例畫面中的活動、成員與對話皆為示意資料。"
 
 # ============================================================================
 # Feature Showcase
 # 功能展示
 # ============================================================================
 
-showcase:
+showcase: []
 
-- title: 揪團搜尋系統
-  icon: i-lucide-search
-  description: "玩家可以依遊戲、地區、標籤或日期篩選揪團，再依排序找出合適的場次。"
-
-  features:
-
-  - 關鍵字搜尋
-  - 地區搜尋
-  - 標籤搜尋
-  - 日期搜尋
-  - 排序功能
-
-- title: 揪團管理功能
-  icon: i-lucide-calendar-check
-  description: "主辦人可以建立和編輯活動、管理申請。玩家可以收藏活動，或在留言區先確認細節。"
-
-  features:
-  - 建立揪團
-  - 編輯揪團
-  - 收藏功能
-  - 留言板
-  - 參加申請管理
-
-- title: 即時聊天室
-  icon: i-lucide-messages-square
-  description: "每個活動有自己的即時聊天室，方便隊友在活動前後交換資訊。"
-
-  features:
-
-  - Socket.IO
-  - 即時訊息同步
-  - 聊天紀錄保存
-  - 獨立聊天室
+sections:
+  - label: "Concept"
+    title: "設計理念"
+    lead: "讓找隊友這件事，在同一個地方完成。"
+    paragraphs:
+      - "揪團資訊常分散在社群貼文、聊天室和群組之間，日期、缺額和參加方式需要來回確認。"
+      - "平台把活動整理成一致的欄位，玩家先用條件找到合適的場次，再看詳情決定是否加入。"
+      - "加入之後的討論留在活動的聊天室，主辦人不必另外開群組整理名單。"
+  - label: "Workflow"
+    title: "使用流程"
+    items:
+      - name: "參加者"
+        text: "依關鍵字、地區、標籤或日期搜尋與排序，查看詳情後加入、收藏或留言，再進聊天室交流。"
+      - name: "主辦者"
+        text: "依步驟填寫資訊、標籤與活動內容，預覽後送出；之後可以編輯揪團、回覆留言與管理成員。"
+      - name: "管理者"
+        text: "在管理後台維護揪團、會員與聯絡表單。"
+  - label: "Visual"
+    title: "視覺風格"
+    items:
+      - name: "深色首屏"
+        text: "以深色遊戲情境照片襯托標題與搜尋框，進站第一個動作就是找揪團。"
+      - name: "橘色行動提示"
+        text: "搜尋按鈕、標籤與重點資訊使用橘色，讓可操作與需要注意的內容容易辨認。"
+      - name: "淺色閱讀頁面"
+        text: "列表、詳情與後台以白色和暖米色為底，資訊以卡片和表格分區。"
+  - label: "Color"
+    title: "網站配色"
+    paragraphs:
+      - "黑色用於首屏與聊天室標題列，白色與暖米色承載內容，橘色集中在行動與標籤。"
+    colors:
+      - name: "夜幕黑"
+        value: "#000000"
+      - name: "行動橘"
+        value: "#FF9800"
+      - name: "暖米底"
+        value: "#FFF3E0"
+      - name: "內容白"
+        value: "#FFFFFF"
+  - label: "Experience"
+    title: "使用者體驗"
+    paragraphs:
+      - "首頁提供關鍵字、縣市、標籤與日期四種搜尋入口，並列出最新與即將到來的揪團。"
+      - "列表直接顯示線上或線下、地點、時間與剩餘名額，不用點進詳情就能先篩選。"
+      - "聊天室固定在活動頁右下角，只開放給已加入的成員，邊看活動資訊邊討論。"
 
 # ============================================================================
 # Responsibilities
@@ -237,22 +244,25 @@ challenges:
 
 gallery:
 - title: 揪團首頁
-  image: /images/projects/game-together/03.png
+  image: /images/projects/game-together/03.jpg
 
 - title: 搜尋功能
-  image: /images/projects/game-together/01.png
+  image: /images/projects/game-together/01.jpg
 
 - title: 揪團詳情
-  image: /images/projects/game-together/02.png
+  image: /images/projects/game-together/02.jpg
 
 - title: 聊天室
-  image: /images/projects/game-together/04.png
+  image: /images/projects/game-together/04.jpg
 
 - title: 主辦揪團管理
-  image: /images/projects/game-together/05.png
+  image: /images/projects/game-together/05.jpg
 
 - title: 個人資料管理
-  image: /images/projects/game-together/06.png
+  image: /images/projects/game-together/06.jpg
+
+- title: 管理後台
+  image: /images/projects/game-together/07.jpg
 
 # ============================================================================
 # Layout

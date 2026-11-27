@@ -13,7 +13,7 @@ type: project
 category: AI Knowledge Tool
 
 year: 2026
-order: 08
+order: 05
 
 description: "把網址傳給 LINE Bot，由 AI 產生摘要、分類與標籤，存進自己的 Notion，之後可以在網站上搜尋與瀏覽。"
 

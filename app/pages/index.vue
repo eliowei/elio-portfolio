@@ -57,5 +57,6 @@ const { data } = await useAsyncData(
   () => queryCollection('projects').order('order', 'ASC').all()
 )
 
-const projects = computed(() => [...(data.value ?? [])].sort((a, b) => (a.slug === 'personal-portfolio' ? 0 : a.type === 'product' ? 1 : 2) - (b.slug === 'personal-portfolio' ? 0 : b.type === 'product' ? 1 : 2)))
+// The order field in each project file decides the order on the home page.
+const projects = computed(() => data.value ?? [])
 </script>

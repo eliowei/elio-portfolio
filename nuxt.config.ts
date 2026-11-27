@@ -74,6 +74,9 @@ export default defineNuxtConfig({
     '/**': {
       prerender: true
     },
+    // Retired case pages may still be indexed or linked: send them to the work list.
+    '/projects/personal-portfolio': { prerender: false, redirect: { to: '/#projects', statusCode: 301 } },
+    '/projects/weather-bike-bot': { prerender: false, redirect: { to: '/#projects', statusCode: 301 } },
     // Concept demo pages are portfolio samples: keep them out of search results and the sitemap.
     '/demo/**': {
       robots: false

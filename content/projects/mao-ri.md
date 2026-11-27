@@ -13,7 +13,7 @@ type: project
 category: Concept Website
 
 year: 2026
-order: 07
+order: 02
 
 description: "以日系手作生活美學為核心的寵物美容多頁式品牌網站，整合美容服務、價目資訊、美容成果與線上預約入口。"
 
